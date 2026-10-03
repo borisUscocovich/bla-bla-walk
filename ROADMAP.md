@@ -1,6 +1,6 @@
 # Bla Bla Walk roadmap
 
-This roadmap visualizes the tasks in [the build plan](docs/plan.md). Effort and duration are **rough planning estimates in focused person-hours**, since the plan does not yet estimate task time. Re-estimate after the source and geometry feasibility checks. Calendar dates are omitted because task owners and available build hours are not set.
+This roadmap visualizes the tasks in [the build plan](docs/plan.md). [Pick a task and start](TASK_START.md) gives each slot a copyable prompt and model setting. Effort and duration are **rough planning estimates in focused person-hours**, since the plan does not yet estimate task time. Re-estimate after the source and geometry feasibility checks. Calendar dates are omitted because task owners and available build hours are not set.
 
 ## Tasks, effort, and sequence
 
