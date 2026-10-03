@@ -14,7 +14,7 @@ Done when: one basemap request and representative licensed raster downloads succ
 Notes: existing audit is a starting point, not completion. Accept IWB only within agreed noncommercial terms, omit photos. Tree licence notice is inspected; verify feature access. PET and forecasts are optional; they do not block the core map.
 
 For construction obstacles, inspect dataset 100335 for usable geometry, dates, closure semantics, update frequency and coverage. A worksite is blocked only when authoritative data confirms it; otherwise display a caution or unknown.
-For optional bus and tram alternatives, check the 2026 GTFS timetable for BVB/BLT coverage and stops. Verify operator coverage in GTFS-RT Service Alerts; use alerts as service warnings unless they provide enough detail to route the detour. API access requires a key.
+For optional bus and tram alternatives, check the 2026 GTFS timetable for BVB/BLT coverage, stops, access terms and usable trip times. Verify operator coverage in GTFS-RT Service Alerts; use alerts as service warnings unless they provide enough detail to route the detour. API access requires a key. Keep scheduled timetable evidence separate from live service status. Transit remains unavailable in the app until this admission succeeds.
 
 For broader emergency notices, check Alertswiss separately from MeteoSwiss weather data. MeteoSwiss relays Alertswiss alarm-level messages through its app, but this does not confirm that its open-data feed carries the full Alertswiss stream. Verify whether a machine-readable Alertswiss feed is currently available and reusable before integration.
 
@@ -65,6 +65,18 @@ Needs: T1, T2
 Files: backend/bla_bla_walk/adapters/routes.py, backend/tests/test_routes.py, data/routes/demo.geojson
 Done when: two routes connect the agreed endpoints using licensed, checked walking geometry, with distance/duration and available access restrictions. Store provenance and snapshot date. Routes outside calculation coverage are marked unsupported.
 
+#### T14 Review route modes and verify transit feasibility (proposed)
+Owner: unassigned
+Needs: T0 source admission follow-up; T2 routing proposal
+Files: docs/routing-rules.md, docs/style-guide.md, docs/SOURCES.md, data/source-manifest.json, docs/decisions.md
+Done when: the team reviews Fastest overall, More shade, manual choice and the optional five-minute detour limit. Agree mode ranking and evidence labels. Verify BVB/BLT timetable access, coverage, terms, stop and transfer data, and usable journey times. Separately verify GTFS-RT alert access, key handling, operator coverage and freshness. Decide whether evidence supports scheduled trips, live disruption status, both or neither. Record gaps explicitly. Do not start transit integration unless its required inputs are admitted.
+
+#### T15 Provide a transit-assisted candidate (conditional)
+Owner: unassigned
+Needs: T1, T2, T14 admitted data; T9 for checked walking legs
+Files: backend/bla_bla_walk/adapters/transit.py, backend/tests/test_transit.py, data/fixtures/transit.json
+Done when: a candidate includes checked access/egress walking legs, ride/wait/transfer durations, stop access state, source provenance and a clear scheduled or live label. Waiting shade stays unknown without stop evidence. Confirmed closures and unavailable service cannot appear as usable legs. If T14 does not admit a source, record the unavailable state and leave walking comparison usable.
+
 ### Chunk D — shade after prepared geometry
 
 #### T10 Calculate and serve time-dependent shade
@@ -76,11 +88,11 @@ Notes: sun geometry changes with time; surveyed geometry does not. Benchmark fiv
 
 ### Chunk E — route metrics after shade and routes
 
-#### T5 Compare routes over the walk
+#### T5 Compare eligible trip options
 Owner: unassigned
-Needs: T10, T9, T2
+Needs: T10, T9, T2; T14/T15 only if transit sources pass admission
 Files: backend/bla_bla_walk/evaluation.py, config/routing-rules.json, backend/tests/test_evaluation.py
-Done when: approved examples give shaded/unshaded/unknown metres and explicit percentages, evaluating at departure plus cumulative walking time. Present distance, estimated duration, shade, exposed/unknown sections and fountains side by side; show a recommended winner with editable weights and explain each score contribution; allow manual choice. Unknown coverage cannot gain score by appearing cooler, and known blocked segments cannot be made eligible by weights. Handle ties, all-zero weights and insufficient evidence. Weight changes rescore cached metrics without repeating shade calculations. Keep unknown/blocked handling explicit. A change in departure time can change shade results without altering recorded sensor observations.
+Done when: walking candidates show shaded/unshaded/unknown metres and percentages at departure plus cumulative walking time. Where T15 is admitted, compare complete door-to-door time across walking and transit candidates, keeping walking, waiting, ride, transfer and stop time separate. Provide Fastest overall and More shade choices, preserve manual choice, and explain every recommendation. Do not score transit ride duration as walking time or infer shade for indoor/onboard segments. Unknown coverage cannot gain credit; known blocked paths cannot become eligible. Handle ties and insufficient evidence. Weight changes rescore cached metrics without repeating shade calculations.
 
 ## M3: complete journey and repeatable demonstration
 
@@ -88,9 +100,9 @@ Done when: approved examples give shaded/unshaded/unknown metres and explicit pe
 
 #### T6 Connect and verify the journey
 Owner: unassigned
-Needs: T4, T5, T3
+Needs: T4, T5, T3; T15 only if transit sources pass admission
 Files: src/map.ts, src/main.ts, src/comparison.ts, src/theme.css, backend/bla_bla_walk/main.py, src/journey.test.ts, README.md
-Done when: narrow-screen and keyboard users toggle layers, inspect freshness, compare two routes and change time. Pan and compare across the city; test source failure, calculation failure, tile seams, city-edge unknowns and outside-coverage behaviour; show effective time and route explanation without implying measured cooling.
+Done when: narrow-screen and keyboard users toggle layers, inspect freshness, choose Fastest overall or More shade, compare eligible trip options, and change departure time. If transit is admitted, show door-to-door duration and each trip leg with scheduled/live status. Keep the five-minute detour option clear. Test source failure, calculation failure, tile seams, city-edge unknowns and outside-coverage behaviour; show effective time without implying measured cooling or overall safety.
 
 #### T7 Prepare the three-minute demo and fallback
 Owner: unassigned

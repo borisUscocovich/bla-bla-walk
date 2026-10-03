@@ -1,6 +1,6 @@
 # Map and comparison screen
 
-**Status:** T3 review draft; visual direction A selected by Slot C on 2026-10-03.
+**Status:** T3 review draft; visual direction A selected by Slot C on 2026-10-03. Multimodal journey and visual details below are user proposals for team review.
 **Theme values:** `src/theme.css` (created by T1). Keep visual values there; this guide describes their roles.
 
 ## Screen at a glance
@@ -17,17 +17,17 @@
 │  Route A ─────────────── Route B ══════════════                    │
 │                                                                   │
 ├───────────────────────────────────────────────────────────────────┤
-│ Compare routes                                                    │
-│ ┌ Route A · [time] · [distance]┐ ┌ Route B · [time] · [distance]┐ │
-│ │ Shade [m] · Exposed [m]      │ │ Shade [m] · Exposed [m]      │ │
-│ │ Unknown [m] · [water stops]  │ │ Unknown [m] · [water stops]  │ │
-│ │ [Show on map] [Choose route]│  │ [Show on map] [Choose route]│   │
+│ Destination [Migros search]  [Fastest overall] [More shade]       │
+│ ┌ Walk · [door-to-door time] ┐ ┌ Transit + walk · [time] ───────┐ │
+│ │ Shade · exposed · unknown  │ │ Walk · wait · ride · transfer │ │
+│ │ Bench · fountain · works   │ │ Stops · alerts · evidence     │ │
+│ │ [Show on map] [Choose]     │ │ [Show on map] [Choose]        │ │
 │ └────────────────────────────┘  └────────────────────────────┘      │
 │ Data status: shade incomplete near boundary · fountain data current│
 └───────────────────────────────────────────────────────────────────┘
 ```
 
-On narrow screens, keep the time control and map visible first; route cards stack below the map and remain reachable by scrolling. Map labels and controls must not cover route endpoints or the coverage edge.
+On narrow screens, keep destination search and the map visible first. Stack route cards below; keep Fastest overall and More shade controls easy to reach. Map labels and controls must not cover route endpoints or the coverage edge. Show a transit card only when its source passes admission.
 
 ## Three visual directions
 
@@ -38,6 +38,15 @@ On narrow screens, keep the time control and map visible first; route cards stac
 | **C · Warm outdoor** | Warm neutral surfaces, leaf/sky accents, softer card corners | Feels approachable for a walking tool | Accent colours need strict separation from status meanings |
 
 The structure above works with all three directions. Slot C selected A: use a restrained civic palette, with blue/teal reserved for navigation and route identity, and status colours kept distinct. The actual colour and spacing values belong in `src/theme.css` when T1 creates it.
+
+### Additional visual direction proposed by the user
+
+Use a white background, gray-950 primary buttons, sharp corners, and Teal-600
+accents. Use Lucide for every interface icon. Keep this as a proposal until Slot C reviews it against
+the selected calm-civic direction. Use Teal-600 for icons, outlines and
+highlights; check contrast before using it for text. Keep icon labels visible.
+Use large, clearly separated touch controls for the grocery trip and route
+choice.
 
 ## Principles
 
@@ -57,7 +66,10 @@ The structure above works with all three directions. Slot C selected A: use a re
 - **Layer controls:** labelled toggles for temperature, fountains, and calculated shade. Each toggle exposes its state to assistive technology. A control has a visible focus ring.
 - **Legend:** labels every line, fill, and symbol, including `Unknown / not calculated` and the dashed Basel coverage boundary. Route A and Route B differ by both colour and line pattern/label.
 - **Time control:** `Now` is a direct action and the default. A departure date/time control states the selected local time and the effective shade calculation time; stale saved calculations retain their original time.
-- **Route cards:** show duration, distance, shaded/exposed/unknown metres, and fountain opportunities with evidence status. `Show on map` focuses the route; `Choose route` is explicit and keyboard reachable. Do not imply a winner unless the comparison rules later define one.
+- **Route choices:** offer `Fastest overall` and `More shade`; retain manual selection. Show the extra-time cap, including the proposed five-minute choice.
+- **Walking card:** show door-to-door time, distance, shaded/exposed/unknown metres, bench and fountain opportunities, construction cautions and evidence status.
+- **Transit card:** when admitted, show access/egress walking, wait, ride and transfer time separately. Mark wait shade unknown without stop evidence. Label scheduled versus live data and disclose stale or unavailable service status.
+- **Route selection:** `Show on map` focuses the option; `Choose route` is explicit and keyboard reachable. Never label an option `Safe route`.
 - **Provenance:** feature details show source name, observed/calculated time, freshness, and source link or attribution. Put a short status on the map/card and full details in a keyboard-accessible disclosure.
 - **Coverage and data states:** outline the supported Basel boundary on the map. Inside gaps use `Unknown`; outside the boundary use `Outside coverage`. Stale values show `Stale · [time]`; absent values show `Unavailable`; never silently reuse old values as current.
 
