@@ -15,6 +15,8 @@ This repository contains the source audit, revised design and build plan. The ag
 - [Design and demo proposal](docs/design.md)
 - [Build tasks and acceptance checks](docs/plan.md)
 - [Recorded decisions](docs/decisions.md)
+- [Proposed six-person work split](ROADMAP.md)
+- [Team roles and shared-repository rules](TEAM.md)
 - [Team collaboration guide](TEAMWORK.md)
 - [Original meeting notes](notes/261002-001_Meeting_Heat-_and_Safety-Aware_Routing_Map_App-Summary.md) (historical source; see the design and plan for current proposals)
 
@@ -32,4 +34,4 @@ Official metadata, licences and small data samples have been inspected; integrat
 
 ## Team
 
-Project roles are not assigned yet. Assign contributors by GitHub username in the [build plan](docs/plan.md).
+The six-person work split is proposed in [ROADMAP.md](ROADMAP.md). Contributors still need to choose role slots and add their GitHub usernames in [TEAM.md](TEAM.md).
