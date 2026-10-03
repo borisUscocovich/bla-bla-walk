@@ -2,8 +2,8 @@
 
 ## State
 
-Status: in progress · Slot A · Branch: `feat/t4-observations-fountains`.
-T1 and T0 are merged in main.
+Status: done · Slot A · Branch: `feat/t4-observations-fountains`.
+T1, T0 and latest main are merged.
 
 ## Done
 
@@ -11,17 +11,22 @@ T1 and T0 are merged in main.
 - Added bounded Open Data Basel-Stadt temperature and fountain adapters.
 - Confirmed the Explore API's 100-row page cap; adapters paginate within source limits.
 - Switched temperature history to one bounded 5,000-row JSON export.
+- Live export returned 5,000 rows in 903,383 bytes.
+- Live adapters returned 177 stations and 305 fountains.
+- Temperature: 90 readings; 87 stations missing.
+- Readings included 74 current and 16 stale.
+- Full tests passed: 24 passed, 3 skipped.
+- T4 lint and formatting passed.
+- Existing T9 routes.py lint issues remain on main.
 - Joined observations using station ID; points include reading age.
 - Marked old readings and failed-refresh snapshots visibly stale.
 - Preserved fountain drinking, operating and access status as unknown.
 - Added minimal, dated, rights-labelled source fixtures.
 - Kept API integration with T6 ownership.
 
-## Next
+## Publish
 
-1. Finish live query checks and review.
-2. Run full checks and privacy guard.
-3. Commit, push and open a T4 pull request.
+Push this branch and open its pull request.
 
 ## Limits
 
