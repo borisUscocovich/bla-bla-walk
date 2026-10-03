@@ -60,6 +60,10 @@ Format Python with `python -m ruff format backend scripts/fetch_browser_assets.p
 
 See [docs/SOURCES.md](docs/SOURCES.md).
 
+For local city geometry preparation, resume and verified limitations, see
+[docs/geometry.md](docs/geometry.md). Geometry is prepared separately from the
+map foundation; shade calculation and serving remain T10 work.
+
 ## Limits
 
 Only the basemap is provider data in this foundation. Overlay locations and values are invented, visibly labelled fixtures. No safety claims, route validation or shade accuracy/performance have been established. This prototype is not a navigation or emergency service. Scope, unknowns, and demo fallback are documented in the [design brief](docs/design.md).
