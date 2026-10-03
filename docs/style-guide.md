@@ -1,6 +1,6 @@
 # Map and comparison screen
 
-**Status:** T3 review draft; visual direction A selected by Slot C on 2026-10-03. Multimodal journey and visual details below are user proposals for team review.
+**Status:** T3 accepted by the team on 2026-10-03; visual direction A selected by Slot C.
 **Theme values:** `src/theme.css` (created by T1). Keep visual values there; this guide describes their roles.
 
 ## Screen at a glance
