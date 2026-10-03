@@ -4,7 +4,7 @@ This roadmap visualizes the tasks in [the build plan](docs/plan.md). [Pick a tas
 
 ## Tasks, effort, and sequence
 
-**Completed and merged:** ~~T0~~, ~~T1~~, ~~T2~~ and ~~T9~~. Their task labels stay visible in the chart and plan.
+**Completed and merged:** ~~T0~~, ~~T1~~, ~~T2~~, ~~T3~~, ~~T4~~ and ~~T9~~. Their task labels stay visible in the chart and plan.
 
 ```mermaid
 flowchart LR
@@ -53,6 +53,7 @@ flowchart LR
   T2 -. "routing proposal" .-> T18
   T18 --> T19
   T1 --> T19
+  T2 --> T19
   T9 --> T19
   T19 -. "if admitted" .-> T5
   T19 -. "if admitted" .-> T6
@@ -77,6 +78,7 @@ flowchart LR
   T9 --> T13
   T13 --> T14
   T6 --> T14
+  T7 --> T14
   T1 --> T15
   T2 --> T15
   T15 --> T16
@@ -94,13 +96,15 @@ The conditional transit proposal uses T18/T19; these tasks also remain outside t
 
 ## Estimated development time
 
+These are original total-effort estimates, including completed work; they are not remaining hours. T8 ingestion and provider/offline modes are already merged.
+
 | Roadmap stage | Tasks | Estimated team effort | Dependencies / overlap |
 |---|---|---:|---|
 | Preparation and foundation | T0, T1, T2, T3 | 15–25 h total | Can run in parallel across the team; T1 has no task prerequisite. |
 | Data and route layers | T4, T8, T9 | 14–24 h total | Start after T1 and the relevant T0 or T2 inputs; tasks can run in parallel. |
 | Shade and comparison | T10, T5 | 13–24 h total | T10 follows T8; T5 also needs T9 and T2. |
 | Complete demo | T6, T7 | 6–10 h total | T6 follows T4, T5, and T3; T7 follows T6. |
-| **Whole plan** | **T0–T10** | **48–83 h total** | **About 33–58 focused hours on the critical path if parallel tasks have owners.** |
+| **Core plan** | **T0–T10** | **48–83 h total** | **About 33–58 focused hours on the critical path if parallel tasks have owners.** |
 
 The critical-path estimate is elapsed focused team time with enough contributors to overlap the independent preparation and layer tasks; it is not a calendar promise. With one person doing tasks serially, allow roughly **48–83 focused hours**. The largest uncertainty is whether city-wide geometry preparation and time-dependent shade meet the coverage, performance, and memory checks in T0, T8, and T10.
 
@@ -120,7 +124,7 @@ These are role slots, not assigned people. Replace A–F with contributors' GitH
 ### One repository, parallel work
 
 - Keep one shared GitHub repository. Each contributor uses their own clone and a short-lived task branch named for the work, then opens a pull request. Never have several people edit the same working folder.
-- Start T0, T1, T2, and T3 in parallel. A's source findings feed A's T4 work and E's T8 work; B's route rules feed C's T9 work. D merges the foundation before parallel feature work targets its interfaces.
+- T0, T1, T2, T3, T4 and T9 are merged. Continue T8 spatial/scene/bridge acceptance using the prepared geometry, then T10, T5, T6 and T7 in dependency order. T18/T19 remain conditional proposals; do not repeat completed preparation tasks.
 - Keep file ownership with the slot above. D and F share T6 in sequence: D builds the comparison screen; after that is ready, F connects the API and checks the whole journey. E and F share T10 in sequence: E produces geometry and shade calculations; F adds caching, API connection, and performance checks.
 - Before beginning a dependent task, sync with its owner and use the merged branch as the base. If a change needs another slot's files, agree on the handoff first. Keep `main` runnable.
 - Review every pull request with at least one teammate. Run the repository privacy guard before commit and push. Merge only after explicit approval from the user who owns that pull request.

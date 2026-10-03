@@ -1,6 +1,6 @@
 # Revised build plan: layered map, shade, two routes
 
-Based on [design](design.md). Draft: the team confirmed two-route comparison and current-time shade; city-wide Basel shade coverage is also confirmed; TypeScript/OpenLayers + Python API/worker is selected; exact boundary and rule assumptions remain pending. T0, T1, T2 and T9 are complete and merged. Their original task labels remain and are crossed out below. Owners for remaining tasks are unassigned; agree them by GitHub username. Paths below are planned and will be created in the named tasks. Task state belongs in handoff files.
+Based on [design](design.md). The team confirmed two-route comparison and current-time shade across Basel. The implemented stack is browser-native JavaScript/OpenLayers served by Python FastAPI, with canonical Python contracts and generated TypeScript declarations; no npm/Vite build is required. T0, T1, T2, T3, T4 and T9 are complete and merged; their original task labels remain crossed out below. T8 ingestion is merged, but spatial/scene/bridge acceptance remains open. Boundary and baseline walking rules are recorded in the source register and routing rules; cross-mode ranking and transit admission remain proposals. Owners for remaining tasks are unassigned; agree them by GitHub username. Listed paths may already exist or be created in the named tasks. Detailed task state belongs in handoff files.
 
 ## M1: a map runs early; real layers replace fixtures independently
 
@@ -25,13 +25,13 @@ For rest stops, use Basel-Stadt's official cool-room list as a curated starting 
 #### ~~T2 Agree one walk and comparison rules~~
 Owner: unassigned
 Needs: nothing
-Files: docs/routing-rules.md, data/scenarios.json (proposed)
+Files: docs/routing-rules.md, data/scenarios.json
 Done when: the team selects one demo area/start/destination, explains the current workaround and one domain pitfall, and approves examples for shade-vs-distance, water access, blocked segments, and unknown data. Specify walking-speed/stop assumptions, acceptable detours, metrics and denominator rules. Recommend an eligible route using adjustable preference weights while preserving side-by-side metrics and manual choice. Agree criteria, fixed normalization ranges, default weights and unknown/stale completeness rules; constraints stay outside weights. Include ties, all-zero weights and examples where changing weights changes the winner. Do not invent health thresholds or shade cooling degrees.
 
-#### T3 Define the map and comparison screen
+#### ~~T3 Define the map and comparison screen~~
 Owner: unassigned
 Needs: nothing
-Files: docs/style-guide.md (proposed)
+Files: docs/style-guide.md
 Done when: a reviewable screen includes layer toggles, readable legends, provenance/times, Now/departure time, two route cards, coverage boundary and stale/unknown states; keyboard and non-colour-only explanations are specified.
 
 ### Chunk B — foundation (can begin alongside preparation)
@@ -39,15 +39,15 @@ Done when: a reviewable screen includes layer toggles, readable legends, provena
 #### ~~T1 Build the smallest map foundation~~
 Owner: unassigned
 Needs: nothing (stack decision is recorded; verify the basemap endpoint within T1)
-Files: README.md, docs/decisions.md, package.json, package-lock.json, vite.config.ts, index.html, src/main.ts, src/map.ts, src/theme.css, src/interfaces.ts (generated), backend/pyproject.toml, backend/requirements.txt, backend/bla_bla_walk/main.py, backend/bla_bla_walk/interfaces.py (canonical), backend/tests/test_contracts.py, src/contract.test.ts
+Files: README.md, docs/decisions.md, index.html, src/main.js, src/map.js, src/theme.css, src/interfaces.ts (generated), src/snapshot.schema.json (generated), config/browser-assets.json, scripts/fetch_browser_assets.py, backend/export_contract.py, backend/pyproject.toml, backend/requirements.txt, backend/bla_bla_walk/main.py, backend/bla_bla_walk/interfaces.py (canonical), backend/tests/test_contracts.py, backend/tests/test_browser.py
 Done when: a fresh checkout starts with documented commands, displays a real Basel basemap, toggles two labelled fixture layers, and shows feature provenance and missing/stale states. One shared contract supports later observations, shade and routes; consumers have explicit owned paths before parallel work begins.
-Notes: chosen stack is TypeScript/OpenLayers with Vite and a Python FastAPI API/worker. Keep Python model definitions canonical and generate rather than separately author client types; actual model changes require a decision line. Use npm and a lockfile; propose pixi for reproducible Python setup or use a project virtual environment with pinned requirements. Do not install globally. Record actual interface decisions in the same commit. Fixtures must not masquerade as live data. Adopt T3 styling when available.
+Notes: implemented as browser-native JavaScript/OpenLayers served by FastAPI, replacing the original Vite/npm proposal as recorded in docs/decisions.md. Keep Python models canonical and generate client declarations/schema; actual model changes require a decision line. Use the project virtual environment, pinned Python requirements and checksum-pinned browser assets. Do not install globally. Fixtures must not masquerade as live data. Follow the accepted T3 guide.
 
 ## M2: real layers, calculated shade and route alternatives
 
 ### Chunk C — parallel after T1 (T0/T2 inputs as listed)
 
-#### T4 Connect current observations and fountains
+#### ~~T4 Connect current observations and fountains~~
 Owner: unassigned
 Needs: T1, relevant T0 source admission
 Files: backend/bla_bla_walk/adapters/temperature.py, backend/bla_bla_walk/adapters/fountains.py, backend/tests/test_observations.py, data/fixtures/observations.json, data/fixtures/fountains.json

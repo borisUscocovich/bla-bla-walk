@@ -73,7 +73,7 @@ Before T8/T10 implementation, adopt these engineering acceptance targets:
 
 ## Compact geometry and offline preparation
 
-The T0 inventory and sample timings above describe the original native data and 2m-grid feasibility experiment. They remain historical evidence. Current preparation uses [config/geometry.json](../config/geometry.json), [the ingestion script](../scripts/prepare_geometry.py) and [geometry reader](../backend/bla_bla_walk/geometry.py). Actual completed download counts/sizes and preparation hashes live in [data/preparation-summary.json](../data/preparation-summary.json); per-asset source/output checksums are retained in ignored `data/geometry/manifest.json`.
+The T0 inventory and sample timings above describe the original native data and 2m-grid feasibility experiment. They remain historical evidence. Current preparation uses [config/geometry.json](../config/geometry.json), [the ingestion script](../scripts/prepare_geometry.py) and [geometry reader](../backend/bla_bla_walk/geometry.py). Actual completed download counts/sizes and preparation hashes live in [data/preparation-summary.json](../data/preparation-summary.json); per-asset source/output checksums are retained in ignored data/geometry/manifest.json (generated locally by geometry preparation).
 
 The summary's source-download bytes are the unique input-file sizes, not measured network traffic including retries. Its prepared sizes count compressed rasters separately from manifests, basemap, snapshots and browser assets. Run [the verification script](../scripts/verify_prepared_data.py) to check every prepared/image hash, raster grid/scale and unknown-cell count and regenerate this shareable summary.
 
