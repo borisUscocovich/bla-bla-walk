@@ -1,12 +1,11 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "sources": [
     {
       "id": "basel-vector-grey-wmts",
-      "status": "request_verified_admission_pending",
+      "status": "admitted_basemap",
       "checked_at": "2026-10-03T11:12:26Z",
       "provider": "Kanton Basel-Stadt",
-      "dataset_candidate": "VSBS",
       "metadata_url": "https://api.geo.bs.ch/stac/v1/collections/VSBS",
       "capabilities_url": "https://wmts.geo.bs.ch/EPSG/3857/1.0.0/WMTSCapabilities.xml",
       "layer": "VS_Vektorstadtplan_grau",
@@ -28,8 +27,7 @@
         7.704595246,
         47.607375471
       ],
-      "candidate_license": "CC-BY-4.0",
-      "attribution": "Geodaten Kanton Basel-Stadt",
+      "attribution": "Quelle: Geodaten Kanton Basel-Stadt",
       "verification": {
         "request_url": "https://wmts.geo.bs.ch/mapcache/wmts/1.0.0/VS_Vektorstadtplan_grau/default/3857/16/22900/34149.png",
         "http_status": 200,
@@ -45,16 +43,21 @@
         "browser_check": "Direct PNG rendered in Codex in-app browser; application layer integration remains untested"
       },
       "remaining_checks": [
-        "Confirm exact WMTS layer-to-VSBS dataset mapping and applicable notices",
-        "Verify application embedding and representative edge coverage",
-        "Distinguish tile modification time from underlying survey/update time"
+        "T1 must verify OpenLayers embedding and boundary views; browser PNG and CORS already verified",
+        "Tile modification time is not underlying survey date; cache and monitor service errors"
       ],
       "service_policy_url": "https://www.bs.ch/en/node/28694",
-      "service_policy_finding": "Official WMTS page permits free GIS/web use; no numeric request quota found on inspected page"
+      "service_policy_finding": "Official WMTS page permits free GIS/web use; no numeric request quota found on inspected page",
+      "dataset_id": "VSBS",
+      "license": "CC-BY-4.0",
+      "layer_mapping_evidence": {
+        "url": "https://models.geo.bs.ch/Modellbeschreibungen/VS_Vektorstadtplan_KGDM_V1_0.pdf",
+        "section": "11.3, page 23, grey WMTS layer named under Vektorstadtplan"
+      }
     },
     {
       "id": "swisstopo-surface-sample",
-      "status": "sample_download_verified_city_admission_pending",
+      "status": "historical_download_checkpoint_superseded_by_city_inventory",
       "checked_at": "2026-10-03T11:22:59.996854+00:00",
       "provider": "swisstopo",
       "item_id": "swisssurface3d-raster_2023_2610-1266",
@@ -111,15 +114,12 @@
         }
       },
       "remaining_checks": [
-        "Complete versioned buffered city inventory and missing/cross-border coverage",
-        "Inspect vegetation, tall-building and boundary samples",
-        "Resolve nominal survey mismatch and negative surface-minus-terrain cells",
-        "Benchmark actual shadow processing and agree latency/memory budgets"
+        "See tile-inventory.json and raster_samples for selected current terrain and T8/T10 validation requirements"
       ]
     },
     {
       "id": "swisstopo-terrain-sample",
-      "status": "sample_download_verified_city_admission_pending",
+      "status": "historical_download_checkpoint_superseded_by_city_inventory",
       "checked_at": "2026-10-03T11:22:59.996854+00:00",
       "provider": "swisstopo",
       "item_id": "swissalti3d_2019_2610-1266",
@@ -167,11 +167,262 @@
         "max_height_metres": 282.4234619140625
       },
       "remaining_checks": [
-        "Complete versioned buffered city inventory and missing/cross-border coverage",
-        "Inspect vegetation, tall-building and boundary samples",
-        "Resolve nominal survey mismatch and negative surface-minus-terrain cells",
-        "Benchmark actual shadow processing and agree latency/memory budgets"
+        "See tile-inventory.json and raster_samples for selected current terrain and T8/T10 validation requirements"
       ]
+    },
+    {
+      "id": "observed-air-temperature",
+      "dataset_id": "100009",
+      "status": "admitted_observations",
+      "metadata_url": "https://data.bs.ch/api/explore/v2.1/catalog/datasets/100009",
+      "records_url": "https://data.bs.ch/api/explore/v2.1/catalog/datasets/100009/records",
+      "checked_date": "2026-10-03",
+      "catalog_record_count": 6826277,
+      "catalog_data_processed": "2026-10-03T11:11:15.973000+00:00",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": [
+        "https://www.meteoblue.com/"
+      ],
+      "cadence": "hourly description / daily catalogue",
+      "limitations": "Use reading time, raw quality unknown; latest-per-station query verified, no claim every station active.",
+      "verification": "HTTP 200 metadata and bounded record sample; never imported personal/contact/media fields",
+      "latest_station_sample": {
+        "station_id": "0020F940",
+        "observation_time": "2026-10-03T11:00:01+00:00",
+        "air_temperature_celsius": 19.39,
+        "query_url": "https://data.bs.ch/api/explore/v2.1/catalog/datasets/100009/records?where=name_original%3D%270020F940%27&order_by=dates_max_date+desc&limit=1",
+        "station_catalog_time_matches": true
+      }
+    },
+    {
+      "id": "sensor-locations",
+      "dataset_id": "100082",
+      "status": "admitted_station_catalog",
+      "metadata_url": "https://data.bs.ch/api/explore/v2.1/catalog/datasets/100082",
+      "records_url": "https://data.bs.ch/api/explore/v2.1/catalog/datasets/100082/records",
+      "checked_date": "2026-10-03",
+      "catalog_record_count": 198,
+      "catalog_data_processed": "2026-10-03T11:10:28.764000+00:00",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": [
+        "https://www.meteoblue.com/"
+      ],
+      "cadence": "irregular",
+      "limitations": "Join name_original; regional coverage includes sites outside canton.",
+      "verification": "HTTP 200 metadata and bounded record sample; never imported personal/contact/media fields"
+    },
+    {
+      "id": "iwb-fountains",
+      "dataset_id": "100008",
+      "status": "admitted_noncommercial_locations",
+      "metadata_url": "https://data.bs.ch/api/explore/v2.1/catalog/datasets/100008",
+      "records_url": "https://data.bs.ch/api/explore/v2.1/catalog/datasets/100008/records",
+      "checked_date": "2026-10-03",
+      "catalog_record_count": 305,
+      "catalog_data_processed": "2026-10-02T22:03:23.961000+00:00",
+      "license": "Freie Nutzung. Quellenangabe ist Pflicht. Kommerzielle Nutzung nur mit Bewilligung des Datenlieferanten zulässig.",
+      "license_url": "https://opendata.swiss/de/terms-of-use/",
+      "attribution": [
+        "IWB Industrielle Werke Basel"
+      ],
+      "cadence": "irregular",
+      "limitations": "Names and coordinates only; no structured drinking/operational status. Exclude photos/media/unsanitised free text.",
+      "verification": "HTTP 200 metadata and bounded record sample; never imported personal/contact/media fields"
+    },
+    {
+      "id": "managed-trees",
+      "dataset_id": "100052",
+      "status": "admitted_points_context_only",
+      "metadata_url": "https://data.bs.ch/api/explore/v2.1/catalog/datasets/100052",
+      "records_url": "https://data.bs.ch/api/explore/v2.1/catalog/datasets/100052/records",
+      "checked_date": "2026-10-03",
+      "catalog_record_count": 32378,
+      "catalog_data_processed": "2026-10-03T10:05:11.761000+00:00",
+      "license": "CC BY 4.0 + OpenStreetMap",
+      "license_url": "https://data-bs.ch/stata/dataspot/permalinks/20240822-osm-vektordaten.pdf",
+      "attribution": [
+        "Geodaten Kanton Basel-Stadt"
+      ],
+      "cadence": "daily",
+      "limitations": "Positions/species are not measured canopy height or physical shade; incomplete for private/cross-border trees.",
+      "verification": "HTTP 200 metadata and bounded record sample; never imported personal/contact/media fields"
+    },
+    {
+      "id": "construction-projects",
+      "dataset_id": "100335",
+      "status": "admitted_caution_only",
+      "metadata_url": "https://data.bs.ch/api/explore/v2.1/catalog/datasets/100335",
+      "records_url": "https://data.bs.ch/api/explore/v2.1/catalog/datasets/100335/records",
+      "checked_date": "2026-10-03",
+      "catalog_record_count": 103,
+      "catalog_data_processed": "2026-10-03T06:01:30.783000+00:00",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": null,
+      "cadence": "irregular",
+      "limitations": "No geometry or pedestrian closure field. Join id to permits.begehrenid; dates describe project, not verified blocked walking edges.",
+      "verification": "HTTP 200 metadata and bounded record sample; never imported personal/contact/media fields"
+    },
+    {
+      "id": "construction-permits",
+      "dataset_id": "100018",
+      "status": "admitted_caution_polygons",
+      "metadata_url": "https://data.bs.ch/api/explore/v2.1/catalog/datasets/100018",
+      "records_url": "https://data.bs.ch/api/explore/v2.1/catalog/datasets/100018/records",
+      "checked_date": "2026-10-03",
+      "catalog_record_count": 150799,
+      "catalog_data_processed": "2026-10-03T05:05:19.418000+00:00",
+      "license": "CC BY 4.0 + OpenStreetMap",
+      "license_url": "https://data-bs.ch/stata/dataspot/permalinks/20240822-osm-vektordaten.pdf",
+      "attribution": [
+        "Geodaten Kanton Basel-Stadt"
+      ],
+      "cadence": "daily",
+      "limitations": "100018 polygons verified for project 9139079, two permits. Approved occupancy does not establish pedestrian closure.",
+      "verification": "HTTP 200 metadata and bounded record sample; never imported personal/contact/media fields"
+    },
+    {
+      "id": "tree-canopy",
+      "dataset_id": "100357",
+      "status": "candidate_raster_validation_required",
+      "metadata_url": "https://data.bs.ch/api/explore/v2.1/catalog/datasets/100357",
+      "records_url": "https://data.bs.ch/api/explore/v2.1/catalog/datasets/100357/records",
+      "checked_date": "2026-10-03",
+      "catalog_record_count": 3,
+      "catalog_data_processed": "2025-09-09T13:12:08.312000+00:00",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": null,
+      "cadence": "every three years (next 2027/2030)",
+      "limitations": "2012/2021/2024 snapshots; 2024 worldfile and range access verified. CRS/NoData and full directory decode remain unverified; do not render as time-specific shade.",
+      "verification": "HTTP 200 metadata and bounded record sample; never imported personal/contact/media fields",
+      "raster_access": {
+        "checked_date": "2026-10-03",
+        "raster_url": "https://data-bs.ch/stata/stadtgaertnerei/baumkronenbedeckung/Baumkronenbedeckung_2024.tif",
+        "worldfile": [
+          0.5,
+          0.0,
+          0.0,
+          -0.5,
+          2608306.75,
+          1272278.25
+        ],
+        "worldfile_http_status": 200,
+        "http_status": 206,
+        "content_range": "bytes 0-65535/396060323",
+        "raster_header_status": "TIFF directory not accessible in first 65536 bytes; full CRS/NoData validation deferred",
+        "file_bytes": 396060323
+      }
+    },
+    {
+      "id": "swisstopo-city-geometry",
+      "status": "admitted_for_preparation_with_explicit_gaps",
+      "provider": "swisstopo",
+      "inventory_file": "data/tile-inventory.json",
+      "license": "Swiss federal OGD, reuse for all purposes",
+      "terms_url": "https://www.swisstopo.admin.ch/en/faq-free-geodata",
+      "attribution": "© swisstopo",
+      "horizontal_crs": "EPSG:2056",
+      "vertical_reference": "LN02 / EPSG:5728 per product specification and asset IDs",
+      "units": "metres",
+      "resolution_metres": 0.5,
+      "nodata": -9999,
+      "limitations": "No missing receiver asset URLs, but missing buffered terrain/surface, survey mismatch and sampled negative DSM-DTM values prohibit a blanket full-city known-shade claim."
+    },
+    {
+      "id": "osm-rest-amenities",
+      "status": "admitted_mapped_candidates",
+      "provider": "OpenStreetMap contributors",
+      "endpoint": "https://overpass.osm.ch/api/interpreter",
+      "license": "ODbL 1.0",
+      "terms_url": "https://www.openstreetmap.org/copyright",
+      "attribution": "© OpenStreetMap contributors",
+      "checked_date": "2026-10-03",
+      "sample_bbox_wgs84": [
+        7.55,
+        47.53,
+        7.69,
+        47.61
+      ],
+      "sample_query": "[out:json][timeout:45];(nwr[\"amenity\"=\"bench\"](47.53,7.55,47.61,7.69);nwr[\"leisure\"=\"park\"](47.53,7.55,47.61,7.69);nwr[\"building\"][\"height\"](47.55,7.60,47.57,7.63););out tags center;",
+      "mapped_benches": 2872,
+      "mapped_parks": 223,
+      "bench_optional_fields_present": {
+        "backrest": 2435,
+        "covered": 197,
+        "wheelchair": 0,
+        "check_date": 348
+      },
+      "coverage": "Bounding-box sample, not canton-clipped or completeness-verified; timestamps returned by endpoint are not usable as an ISO snapshot date",
+      "limitations": "Mapped features may be inaccessible, missing, removed or unshaded. Recheck critical stops; centre output is not park geometry. ODbL duties apply to redistributed/derived databases."
+    },
+    {
+      "id": "transit-static",
+      "status": "deferred_download_and_operator_check_blocked",
+      "catalog_url": "https://data.opentransportdata.swiss/en/dataset/timetable-2026-gtfs2020",
+      "release": "GTFS_FP2026_20260930.zip",
+      "resource_id": "fbe67f9e-8827-4b62-af00-804a32f5c51b",
+      "catalog_temporal_coverage": [
+        "2025-12-14",
+        "2026-12-12"
+      ],
+      "catalog_update_interval": "twice weekly",
+      "catalog_file_size": "275.6MB",
+      "terms_url": "https://opentransportdata.swiss/en/terms-of-use/",
+      "permission": "Free reuse subject to provider terms; preserve provider reference",
+      "verification": "Official resource page viewed; direct request HTTP 403, browser download did not complete within 60s. No archive contents or BVB/BLT stops verified. Optional source excluded from prototype adapter until checked."
+    },
+    {
+      "id": "transit-service-alerts",
+      "status": "deferred_key_and_operator_coverage_required",
+      "documentation_url": "https://opentransportdata.swiss/de/cookbook/event-cookbook/gtfs-sa/",
+      "endpoint": "https://api.opentransportdata.swiss/la/gtfs-sa",
+      "operator_catalog_url": "https://data.opentransportdata.swiss/en/dataset/go-siri-sx",
+      "operator_resource_id": "a8312f3a-18a6-4e92-9906-bbb623a24369",
+      "rate_limit_requests_per_minute": 2,
+      "api_key_required": true,
+      "verification": "Documentation checked; no key supplied, live payload not queried. Operator CSV download unavailable in this audit; BVB/BLT alert coverage unknown. Text alerts do not imply detour geometry."
+    },
+    {
+      "id": "alertswiss",
+      "status": "link_only_no_documented_public_feed_verified",
+      "website_url": "https://www.alert.swiss/en/home.html",
+      "faq_url": "https://www.alert.swiss/en/faq.html",
+      "terms_url": "https://www.alert.swiss/de/home/meta/rechtliches.html",
+      "license": "CC BY-NC-SA 2.5 Switzerland for website content; free forwarding with source, framing needs written permission",
+      "attribution": "Quelle: www.alert.swiss",
+      "specification_url": "https://www.babs.admin.ch/dam/de/sd-web/H6vSh6NHF65G/Spezifikation%20CAP%20Suisse%201-1.pdf",
+      "limitations": "CAP Suisse specification and planned API are not proof of an available public Alertswiss feed. MeteoSwiss app relay does not establish full stream in MeteoSwiss open data. No integration admitted."
+    },
+    {
+      "id": "cool-room-candidates",
+      "status": "manual_curated_facts_only",
+      "catalog_url": "https://www.bs.ch/it/node/31069",
+      "feed_status": "No reusable machine-readable feed identified on inspected official page",
+      "permission": "Small factual summaries with links; do not assume website prose/photos are CC BY or permission for bulk scraping",
+      "checked_date": "2026-10-03",
+      "examples": [
+        {
+          "name": "Theater Basel Foyer Public",
+          "url": "https://www.theater-basel.ch/de/foyerpublic",
+          "standard_hours": "Tuesday–Sunday 11:00–18:00; Monday closed",
+          "access": "Free, no purchase required; own food permitted",
+          "current_exceptions": "Week 2026-09-29 to 2026-10-04: Tuesday closed, Wednesday closes 17:00, Friday 17:30, Sunday 15:00",
+          "accessibility": "unknown",
+          "air_conditioning": "not verified"
+        },
+        {
+          "name": "Stadtbibliothek Schmiedenhof",
+          "url": "https://www.stadtbibliothekbasel.ch/de/schmiedenhof.html",
+          "staffed_hours": "Monday 12:00–19:00; Tuesday–Friday 10:00–19:00; Saturday 10:00–17:00; Sunday 13:00–17:00",
+          "access": "Open Library 07:00–22:00 is restricted to registered customers aged 16+; do not treat as unrestricted visitor hours",
+          "accessibility": "Operator lists wheelchair access",
+          "air_conditioning": "Canton list says no air conditioning; lower floors relatively cool"
+        }
+      ],
+      "limitations": "Recheck operator hours/exceptions before suggestion. No measured temperature or guarantee of safe cooling. Kunstmuseum linked cool-room page returned 404; other list entries not automatically admitted."
     }
   ],
   "raster_pair_checkpoint": {
@@ -197,5 +448,282 @@
       "one_float32_array_and_two_inputs_bytes": 48000000
     },
     "limits": "Array sizes exclude decoder buffers, masks, temporary copies and runtime overhead. Local decode time is not shadow-processing latency. One tile cannot support a full-city workload estimate."
-  }
+  },
+  "checked_date": "2026-10-03",
+  "task_status": "audit_complete_conditional_geometry_feasibility",
+  "raster_samples": {
+    "samples": [
+      {
+        "environment": "urban_centre",
+        "tile": "2610-1266",
+        "assets": [
+          {
+            "label": "urban_centre",
+            "tile": "2610-1266",
+            "product": "surface",
+            "item_id": "swisssurface3d-raster_2023_2610-1266",
+            "bytes": 13337851,
+            "sha256": "7e2f118c72b6b3813a0342fcc276b5842f894673be913d7a37e64d353dc01d03",
+            "acquisition_or_local_reverification_seconds": 0.09861029999956372,
+            "catalog_checksum_matches": true
+          },
+          {
+            "label": "urban_centre",
+            "tile": "2610-1266",
+            "product": "terrain",
+            "item_id": "swissalti3d_2025_2610-1266",
+            "bytes": 15970348,
+            "sha256": "bb59e26e6adcddb165274415c7b4f73368cf40a127705316ee1729e1a3ee8bbe",
+            "acquisition_or_local_reverification_seconds": 0.12625459999981103,
+            "catalog_checksum_matches": true
+          }
+        ],
+        "decode_seconds": {
+          "surface": 0.09402820000104839,
+          "terrain": 0.0706201000011788
+        },
+        "valid_pair_cells": 4000000,
+        "nodata_pair_cells": 0,
+        "relative_height_range_metres": [
+          -10.902557373046875,
+          60.009429931640625
+        ],
+        "surface_below_terrain_over_1m_cells": 3106,
+        "relative_height_above_200m_cells": 0,
+        "benchmark": {
+          "shape": [
+            500,
+            500
+          ],
+          "resolution_metres": 2,
+          "azimuth_degrees": 135,
+          "elevation_degrees": 30,
+          "max_ray_distance_metres": 1500,
+          "runs_seconds": [
+            0.16172550000010233,
+            0.1420575000011013,
+            0.1349301000009291
+          ],
+          "median_seconds": 0.1420575000011013,
+          "known_shadow_cells": 207820,
+          "unknown_cells": 42163,
+          "limitations": "Single-tile rays leave the raster and are unknown unless a known blocker was found. Max-pooled DSM with nearest terrain is only a feasibility kernel, not accepted walk-level shade. Canopy receivers and mixed survey scenes require T8/T10 validation."
+        }
+      },
+      {
+        "environment": "vegetation_lange_erlen",
+        "tile": "2613-1269",
+        "assets": [
+          {
+            "label": "vegetation_lange_erlen",
+            "tile": "2613-1269",
+            "product": "surface",
+            "item_id": "swisssurface3d-raster_2023_2613-1269",
+            "bytes": 13231216,
+            "sha256": "045ab2f707d0519addd12863db315a9ee07b04a9dc18bf8ceb8a699126ed72c6",
+            "acquisition_or_local_reverification_seconds": 0.09129759999996168,
+            "catalog_checksum_matches": true
+          },
+          {
+            "label": "vegetation_lange_erlen",
+            "tile": "2613-1269",
+            "product": "terrain",
+            "item_id": "swissalti3d_2025_2613-1269",
+            "bytes": 15555157,
+            "sha256": "02423d98857b18365d3c44e29065dab37550d1c75ca230fb32409c88c3fb42da",
+            "acquisition_or_local_reverification_seconds": 0.11673779999910039,
+            "catalog_checksum_matches": true
+          }
+        ],
+        "decode_seconds": {
+          "surface": 0.07997029999933147,
+          "terrain": 0.06980939999994007
+        },
+        "valid_pair_cells": 4000000,
+        "nodata_pair_cells": 0,
+        "relative_height_range_metres": [
+          -5.7400970458984375,
+          41.987945556640625
+        ],
+        "surface_below_terrain_over_1m_cells": 4563,
+        "relative_height_above_200m_cells": 0,
+        "benchmark": {
+          "shape": [
+            500,
+            500
+          ],
+          "resolution_metres": 2,
+          "azimuth_degrees": 135,
+          "elevation_degrees": 30,
+          "max_ray_distance_metres": 1500,
+          "runs_seconds": [
+            0.10963269999956538,
+            0.10927790000096138,
+            0.11494390000007115
+          ],
+          "median_seconds": 0.10963269999956538,
+          "known_shadow_cells": 182507,
+          "unknown_cells": 67368,
+          "limitations": "Single-tile rays leave the raster and are unknown unless a known blocker was found. Max-pooled DSM with nearest terrain is only a feasibility kernel, not accepted walk-level shade. Canopy receivers and mixed survey scenes require T8/T10 validation."
+        }
+      },
+      {
+        "environment": "tall_building_roche",
+        "tile": "2612-1267",
+        "assets": [
+          {
+            "label": "tall_building_roche",
+            "tile": "2612-1267",
+            "product": "surface",
+            "item_id": "swisssurface3d-raster_2023_2612-1267",
+            "bytes": 10861680,
+            "sha256": "b59e159c3d0096a8e1e28afcd9f05c3a7c86c9068c1b1f05f33ec631ce71b46e",
+            "acquisition_or_local_reverification_seconds": 5.679125499998918,
+            "catalog_checksum_matches": true
+          },
+          {
+            "label": "tall_building_roche",
+            "tile": "2612-1267",
+            "product": "terrain",
+            "item_id": "swissalti3d_2025_2612-1267",
+            "bytes": 14906539,
+            "sha256": "40f663cf4f1dcfa3015887afcac5f3df3b89634059cfc6a5f89cb28472a5d3b7",
+            "acquisition_or_local_reverification_seconds": 6.710162699999273,
+            "catalog_checksum_matches": true
+          }
+        ],
+        "decode_seconds": {
+          "surface": 0.07831380000061472,
+          "terrain": 0.07709920000161219
+        },
+        "valid_pair_cells": 4000000,
+        "nodata_pair_cells": 0,
+        "relative_height_range_metres": [
+          -4.7265625,
+          205.13018798828125
+        ],
+        "surface_below_terrain_over_1m_cells": 1383,
+        "relative_height_above_200m_cells": 2571,
+        "benchmark": {
+          "shape": [
+            500,
+            500
+          ],
+          "resolution_metres": 2,
+          "azimuth_degrees": 135,
+          "elevation_degrees": 30,
+          "max_ray_distance_metres": 1500,
+          "runs_seconds": [
+            0.1198216999982833,
+            0.11613080000097398,
+            0.11381790000086767
+          ],
+          "median_seconds": 0.11613080000097398,
+          "known_shadow_cells": 181089,
+          "unknown_cells": 68877,
+          "limitations": "Single-tile rays leave the raster and are unknown unless a known blocker was found. Max-pooled DSM with nearest terrain is only a feasibility kernel, not accepted walk-level shade. Canopy receivers and mixed survey scenes require T8/T10 validation."
+        }
+      },
+      {
+        "environment": "border_kleinhuningen",
+        "tile": "2611-1270",
+        "assets": [
+          {
+            "label": "border_kleinhuningen",
+            "tile": "2611-1270",
+            "product": "surface",
+            "item_id": "swisssurface3d-raster_2023_2611-1270",
+            "bytes": 9099486,
+            "sha256": "f7c7308e2b8aca3be820d6f429d52ec6b275f7e77e8ed88646ea95f4309041cb",
+            "acquisition_or_local_reverification_seconds": 0.056643800000529154,
+            "catalog_checksum_matches": true
+          },
+          {
+            "label": "border_kleinhuningen",
+            "tile": "2611-1270",
+            "product": "terrain",
+            "item_id": "swissalti3d_2025_2611-1270",
+            "bytes": 13146979,
+            "sha256": "299e77f0dd119db4c1ef45ea38d9a53c01c3c76201ecbf89a566b19545344676",
+            "acquisition_or_local_reverification_seconds": 0.07224180000048364,
+            "catalog_checksum_matches": true
+          }
+        ],
+        "decode_seconds": {
+          "surface": 0.06891499999983353,
+          "terrain": 0.06813729999885254
+        },
+        "valid_pair_cells": 4000000,
+        "nodata_pair_cells": 0,
+        "relative_height_range_metres": [
+          -11.404586791992188,
+          84.48310852050781
+        ],
+        "surface_below_terrain_over_1m_cells": 3515,
+        "relative_height_above_200m_cells": 0,
+        "benchmark": {
+          "shape": [
+            500,
+            500
+          ],
+          "resolution_metres": 2,
+          "azimuth_degrees": 135,
+          "elevation_degrees": 30,
+          "max_ray_distance_metres": 1500,
+          "runs_seconds": [
+            0.1163434000009147,
+            0.1092408999993495,
+            0.11781329999939771
+          ],
+          "median_seconds": 0.1163434000009147,
+          "known_shadow_cells": 122673,
+          "unknown_cells": 127306,
+          "limitations": "Single-tile rays leave the raster and are unknown unless a known blocker was found. Max-pooled DSM with nearest terrain is only a feasibility kernel, not accepted walk-level shade. Canopy receivers and mixed survey scenes require T8/T10 validation."
+        }
+      }
+    ],
+    "runtime": {
+      "python": "3.12.14",
+      "numpy": "2.3.5"
+    },
+    "benchmark_method": "Three runs per sample, monotonic wall-clock timings, local files; decode measured separately; 2m conservative-max DSM and nearest terrain; fixed angle to measure a simple ray kernel, not ephemeris validation. Peak process memory and concurrency checked separately."
+  },
+  "processing_cost": {
+    "four_pair_decode_and_three_kernels_each_seconds": 2.5723213000001124,
+    "two_concurrent_kernels_wall_seconds": [
+      0.23308090000136872,
+      0.20735740000054648,
+      0.18296170000030543
+    ],
+    "peak_working_set_bytes": 149274624,
+    "method": "Windows GetProcessMemoryInfo peak working set in one Python process, including four full pair decodes and two threaded 500x500 kernels. Local warmed file cache; not API latency or separate worker memory. Python and NumPy versions recorded with samples."
+  },
+  "city_workload": {
+    "available_compressed_bytes": 3311403377,
+    "available_decoded_float32_bytes": 3600000000,
+    "estimated_single_time_receiver_tile_kernel_seconds": 7.555411500061382,
+    "estimated_single_time_all_buffered_tile_kernel_seconds": 16.156956900131263,
+    "method": "Linear sum of warmed single-tile 2m kernels at elevation 30 degrees. Excludes halos, seams, network, ephemeris, resampling, masking, IO and cache. Cost planning only, not valid full-city shade or a latency prediction. Lower sun/halos may cost much more. Native 0.5m output quadruples linear dimension relative to 2m and must be benchmarked separately.",
+    "full_buffered_two_metre_status_grid_bytes_per_time_bucket": 69500000
+  },
+  "acceptance_budget": {
+    "status": "engineering_targets_for_T8_T10_not_measured_API_results",
+    "geometry_disk_gib": 8,
+    "shade_cache_disk_gib": 2,
+    "maximum_worker_peak_mib": 768,
+    "maximum_concurrent_workers": 2,
+    "total_worker_peak_mib": 1536,
+    "viewport_target": "1km x 1km receiver footprint with required halo; output resolution 2m is a candidate pending accuracy validation",
+    "cold_uncached_target_seconds": 5,
+    "warm_cached_target_seconds": 0.5,
+    "measurement": "Measure p95 for 20 distinct representative centre/vegetation/tall-building/border requests, then 20 repeated requests; repeat with two simultaneous requests. Cold means empty shade cache with prepared local geometry, not network download. Include halo processing, serialization and memory. Storage includes compressed files, prepared arrays and metadata.",
+    "failure_policy": "If limits or geometry/accuracy acceptance fail, optimise or retain explicit unknown/unsupported results and revisit budgets with team. No whole-city recomputation in request path; cache time bucket/resolution only after T10 validates accuracy."
+  },
+  "downstream_checks": [
+    "T1: real OpenLayers embedding and boundary reference points",
+    "T4: bounded latest-per-station retrieval, stale handling, sanitised fountain fields",
+    "T8: all cell validity/seams, nominal survey mismatch, real terrain relief/occluder reach, rendered alignment and missing buffer provenance",
+    "T10: full halo kernel, solar conventions/independent reference, canopy/bridge receivers, cold/warm p95 budgets and concurrent worker memory",
+    "Optional transit stays excluded until static BVB/BLT stops and live operator coverage verified; cool room hours remain manual/dated"
+  ]
 }
