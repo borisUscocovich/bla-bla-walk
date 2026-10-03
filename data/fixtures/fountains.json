@@ -1,0 +1,22 @@
+{
+  "fixture": true,
+  "source": "data.bs.ch dataset 100008",
+  "provider": "Industrielle Werke Basel (IWB)",
+  "license": "Noncommercial use with attribution; commercial use requires supplier permission.",
+  "attribution": "IWB Industrielle Werke Basel",
+  "source_url": "https://data.bs.ch/explore/dataset/100008/",
+  "limitation": "The source has no structured drinking-water, operational-status, or access field.",
+  "features": [
+    {
+      "label": "Sevogel-Brunnen",
+      "coordinates": [
+        7.5887686,
+        47.5587034
+      ],
+      "drinking_water": "unknown",
+      "operational_status": "unknown",
+      "access": "unknown"
+    }
+  ],
+  "capture_date": "2026-10-03"
+}
