@@ -12,7 +12,7 @@ People who are more affected by heat, including older adults, children, pregnant
 - Start with a mobile-friendly web map focused on heat in Basel.
 - Explore routes to cooler destinations using shade, fountains, and known closures or accessibility barriers.
 - Investigate public and aggregated data before committing to live integrations.
-- Preserve access for people without smartphones as a design concern; a phone interface needs further scoping.
+- Preserve access for people without smartphones; the phone-access concept and demo direction are captured in [future features](future-features.md), with implementation deferred until the core web-app demo is ready.
 - Treat volunteer accompaniment and community assistance as a later phase, with operating and vetting arrangements still unresolved.
 
 ## Proposed first demo
