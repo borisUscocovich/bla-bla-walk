@@ -1,0 +1,2469 @@
+{
+  "schema_version": 1,
+  "inventory_sha256": "969f2db9e775a65f665ecc12955fd9d587becb3791abbf92f246f05b570b981e",
+  "status": "planned_not_prepared",
+  "prepared_tiles": 0,
+  "horizontal_crs": "EPSG:2056",
+  "vertical_reference": "LN02 / EPSG:5728; inspect per-asset header metadata",
+  "resolution_metres": 0.5,
+  "nodata": -9999,
+  "boundary_release": "swissboundaries3d_2026-01",
+  "buffer_policy": {
+    "metres": 1500,
+    "selection": "Tiles intersecting the canton or a conservative L-infinity expansion; includes every tile intersecting the Euclidean buffer",
+    "planning_max_relative_height_metres": 250,
+    "minimum_supported_solar_elevation_degrees": 10,
+    "shadow_distance_metres": 1417.8204549044274,
+    "height_and_low_sun_policy": "250m is a planning envelope, not a verified city maximum. T8/T10 must account for terrain relief along rays as well as object height; extend coverage or mark unknown when actual ray reach exceeds available geometry. Below 10 degrees, mark unsupported/unknown; night is a separate state.",
+    "missing_buffer_policy": "Receiver cells whose sunward ray reaches absent or NoData geometry remain unknown"
+  },
+  "counts": {
+    "required_tile_squares": 139,
+    "receiver_tiles": 65,
+    "buffer_only_tiles": 74,
+    "paired_tiles": 96,
+    "paired_nominal_year_mismatches": 96,
+    "available_assets": 225,
+    "missing_receiver_assets": 0,
+    "missing_tiles": {
+      "surface": [
+        "2608-1271",
+        "2609-1272",
+        "2613-1273",
+        "2614-1273",
+        "2615-1273",
+        "2616-1273",
+        "2620-1266",
+        "2620-1267",
+        "2620-1268",
+        "2620-1269"
+      ],
+      "terrain": [
+        "2607-1268",
+        "2607-1269",
+        "2607-1270",
+        "2608-1270",
+        "2608-1271",
+        "2609-1270",
+        "2609-1271",
+        "2609-1272",
+        "2610-1271",
+        "2610-1272",
+        "2611-1272",
+        "2612-1271",
+        "2612-1272",
+        "2613-1271",
+        "2613-1272",
+        "2613-1273",
+        "2614-1272",
+        "2614-1273",
+        "2615-1272",
+        "2615-1273",
+        "2616-1272",
+        "2616-1273",
+        "2617-1266",
+        "2617-1267",
+        "2617-1272",
+        "2617-1273",
+        "2618-1266",
+        "2618-1267",
+        "2618-1273",
+        "2619-1266",
+        "2619-1267",
+        "2619-1268",
+        "2619-1269",
+        "2619-1270",
+        "2619-1273",
+        "2620-1266",
+        "2620-1267",
+        "2620-1268",
+        "2620-1269",
+        "2620-1270",
+        "2620-1271",
+        "2620-1272",
+        "2620-1273"
+      ]
+    },
+    "compressed_bytes": {
+      "surface": 1722456383,
+      "terrain": 1588946994
+    }
+  },
+  "storage_estimate": {
+    "compressed_and_native_float32_bytes": 6911403377,
+    "remaining_budget_bytes": 1678531215,
+    "scope": "Excludes metadata, temporary files and derived grids"
+  },
+  "batch_policy": {
+    "max_tiles_in_memory": 1,
+    "native_pair_float32_bytes": 32000000,
+    "worker_budget_bytes": 805306368,
+    "order": "Representative scenes, remaining receivers, then buffer assets",
+    "resume": "Skip only checksum-verified and cell-validated local outputs"
+  },
+  "tiles": [
+    {
+      "tile": "2607-1264",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2607000,
+        1264000,
+        2608000,
+        1265000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2607-1265",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2607000,
+        1265000,
+        2608000,
+        1266000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2607-1266",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2607000,
+        1266000,
+        2608000,
+        1267000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2607-1267",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2607000,
+        1267000,
+        2608000,
+        1268000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2607-1268",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2607000,
+        1268000,
+        2608000,
+        1269000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2607-1269",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2607000,
+        1269000,
+        2608000,
+        1270000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2607-1270",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2607000,
+        1270000,
+        2608000,
+        1271000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2608-1264",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2608000,
+        1264000,
+        2609000,
+        1265000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2608-1265",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2608000,
+        1265000,
+        2609000,
+        1266000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2608-1266",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2608000,
+        1266000,
+        2609000,
+        1267000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2608-1267",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2608000,
+        1267000,
+        2609000,
+        1268000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2608-1268",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2608000,
+        1268000,
+        2609000,
+        1269000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2608-1269",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2608000,
+        1269000,
+        2609000,
+        1270000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2608-1270",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2608000,
+        1270000,
+        2609000,
+        1271000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2608-1271",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2608000,
+        1271000,
+        2609000,
+        1272000
+      ],
+      "assets": {
+        "surface": "catalog_gap",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2609-1261",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2609000,
+        1261000,
+        2610000,
+        1262000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2609-1262",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2609000,
+        1262000,
+        2610000,
+        1263000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2609-1263",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2609000,
+        1263000,
+        2610000,
+        1264000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2609-1264",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2609000,
+        1264000,
+        2610000,
+        1265000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2609-1265",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2609000,
+        1265000,
+        2610000,
+        1266000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2609-1266",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2609000,
+        1266000,
+        2610000,
+        1267000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2609-1267",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2609000,
+        1267000,
+        2610000,
+        1268000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2609-1268",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2609000,
+        1268000,
+        2610000,
+        1269000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2609-1269",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2609000,
+        1269000,
+        2610000,
+        1270000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2609-1270",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2609000,
+        1270000,
+        2610000,
+        1271000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2609-1271",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2609000,
+        1271000,
+        2610000,
+        1272000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2609-1272",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2609000,
+        1272000,
+        2610000,
+        1273000
+      ],
+      "assets": {
+        "surface": "catalog_gap",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2610-1261",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2610000,
+        1261000,
+        2611000,
+        1262000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2610-1262",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2610000,
+        1262000,
+        2611000,
+        1263000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2610-1263",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2610000,
+        1263000,
+        2611000,
+        1264000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2610-1264",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2610000,
+        1264000,
+        2611000,
+        1265000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2610-1265",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2610000,
+        1265000,
+        2611000,
+        1266000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2610-1266",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2610000,
+        1266000,
+        2611000,
+        1267000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2610-1267",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2610000,
+        1267000,
+        2611000,
+        1268000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2610-1268",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2610000,
+        1268000,
+        2611000,
+        1269000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2610-1269",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2610000,
+        1269000,
+        2611000,
+        1270000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2610-1270",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2610000,
+        1270000,
+        2611000,
+        1271000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2610-1271",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2610000,
+        1271000,
+        2611000,
+        1272000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2610-1272",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2610000,
+        1272000,
+        2611000,
+        1273000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2611-1261",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2611000,
+        1261000,
+        2612000,
+        1262000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2611-1262",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2611000,
+        1262000,
+        2612000,
+        1263000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2611-1263",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2611000,
+        1263000,
+        2612000,
+        1264000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2611-1264",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2611000,
+        1264000,
+        2612000,
+        1265000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2611-1265",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2611000,
+        1265000,
+        2612000,
+        1266000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2611-1266",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2611000,
+        1266000,
+        2612000,
+        1267000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2611-1267",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2611000,
+        1267000,
+        2612000,
+        1268000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2611-1268",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2611000,
+        1268000,
+        2612000,
+        1269000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2611-1269",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2611000,
+        1269000,
+        2612000,
+        1270000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2611-1270",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2611000,
+        1270000,
+        2612000,
+        1271000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2611-1271",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2611000,
+        1271000,
+        2612000,
+        1272000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2611-1272",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2611000,
+        1272000,
+        2612000,
+        1273000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2612-1261",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2612000,
+        1261000,
+        2613000,
+        1262000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2612-1262",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2612000,
+        1262000,
+        2613000,
+        1263000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2612-1263",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2612000,
+        1263000,
+        2613000,
+        1264000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2612-1264",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2612000,
+        1264000,
+        2613000,
+        1265000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2612-1265",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2612000,
+        1265000,
+        2613000,
+        1266000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2612-1266",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2612000,
+        1266000,
+        2613000,
+        1267000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2612-1267",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2612000,
+        1267000,
+        2613000,
+        1268000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2612-1268",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2612000,
+        1268000,
+        2613000,
+        1269000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2612-1269",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2612000,
+        1269000,
+        2613000,
+        1270000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2612-1270",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2612000,
+        1270000,
+        2613000,
+        1271000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2612-1271",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2612000,
+        1271000,
+        2613000,
+        1272000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2612-1272",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2612000,
+        1272000,
+        2613000,
+        1273000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2613-1261",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2613000,
+        1261000,
+        2614000,
+        1262000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2613-1262",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2613000,
+        1262000,
+        2614000,
+        1263000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2613-1263",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2613000,
+        1263000,
+        2614000,
+        1264000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2613-1264",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2613000,
+        1264000,
+        2614000,
+        1265000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2613-1265",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2613000,
+        1265000,
+        2614000,
+        1266000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2613-1266",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2613000,
+        1266000,
+        2614000,
+        1267000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2613-1267",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2613000,
+        1267000,
+        2614000,
+        1268000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2613-1268",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2613000,
+        1268000,
+        2614000,
+        1269000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2613-1269",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2613000,
+        1269000,
+        2614000,
+        1270000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2613-1270",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2613000,
+        1270000,
+        2614000,
+        1271000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2613-1271",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2613000,
+        1271000,
+        2614000,
+        1272000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2613-1272",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2613000,
+        1272000,
+        2614000,
+        1273000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2613-1273",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2613000,
+        1273000,
+        2614000,
+        1274000
+      ],
+      "assets": {
+        "surface": "catalog_gap",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2614-1262",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2614000,
+        1262000,
+        2615000,
+        1263000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2614-1263",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2614000,
+        1263000,
+        2615000,
+        1264000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2614-1264",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2614000,
+        1264000,
+        2615000,
+        1265000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2614-1265",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2614000,
+        1265000,
+        2615000,
+        1266000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2614-1266",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2614000,
+        1266000,
+        2615000,
+        1267000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2614-1267",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2614000,
+        1267000,
+        2615000,
+        1268000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2614-1268",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2614000,
+        1268000,
+        2615000,
+        1269000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2614-1269",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2614000,
+        1269000,
+        2615000,
+        1270000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2614-1270",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2614000,
+        1270000,
+        2615000,
+        1271000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2614-1271",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2614000,
+        1271000,
+        2615000,
+        1272000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2614-1272",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2614000,
+        1272000,
+        2615000,
+        1273000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2614-1273",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2614000,
+        1273000,
+        2615000,
+        1274000
+      ],
+      "assets": {
+        "surface": "catalog_gap",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2615-1263",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2615000,
+        1263000,
+        2616000,
+        1264000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2615-1264",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2615000,
+        1264000,
+        2616000,
+        1265000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2615-1265",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2615000,
+        1265000,
+        2616000,
+        1266000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2615-1266",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2615000,
+        1266000,
+        2616000,
+        1267000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2615-1267",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2615000,
+        1267000,
+        2616000,
+        1268000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2615-1268",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2615000,
+        1268000,
+        2616000,
+        1269000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2615-1269",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2615000,
+        1269000,
+        2616000,
+        1270000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2615-1270",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2615000,
+        1270000,
+        2616000,
+        1271000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2615-1271",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2615000,
+        1271000,
+        2616000,
+        1272000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2615-1272",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2615000,
+        1272000,
+        2616000,
+        1273000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2615-1273",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2615000,
+        1273000,
+        2616000,
+        1274000
+      ],
+      "assets": {
+        "surface": "catalog_gap",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2616-1266",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2616000,
+        1266000,
+        2617000,
+        1267000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2616-1267",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2616000,
+        1267000,
+        2617000,
+        1268000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2616-1268",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2616000,
+        1268000,
+        2617000,
+        1269000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2616-1269",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2616000,
+        1269000,
+        2617000,
+        1270000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2616-1270",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2616000,
+        1270000,
+        2617000,
+        1271000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2616-1271",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2616000,
+        1271000,
+        2617000,
+        1272000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2616-1272",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2616000,
+        1272000,
+        2617000,
+        1273000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2616-1273",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2616000,
+        1273000,
+        2617000,
+        1274000
+      ],
+      "assets": {
+        "surface": "catalog_gap",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2617-1266",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2617000,
+        1266000,
+        2618000,
+        1267000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2617-1267",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2617000,
+        1267000,
+        2618000,
+        1268000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2617-1268",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2617000,
+        1268000,
+        2618000,
+        1269000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2617-1269",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2617000,
+        1269000,
+        2618000,
+        1270000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2617-1270",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2617000,
+        1270000,
+        2618000,
+        1271000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2617-1271",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2617000,
+        1271000,
+        2618000,
+        1272000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2617-1272",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2617000,
+        1272000,
+        2618000,
+        1273000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2617-1273",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2617000,
+        1273000,
+        2618000,
+        1274000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2618-1266",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2618000,
+        1266000,
+        2619000,
+        1267000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2618-1267",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2618000,
+        1267000,
+        2619000,
+        1268000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2618-1268",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2618000,
+        1268000,
+        2619000,
+        1269000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2618-1269",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2618000,
+        1269000,
+        2619000,
+        1270000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2618-1270",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2618000,
+        1270000,
+        2619000,
+        1271000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2618-1271",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2618000,
+        1271000,
+        2619000,
+        1272000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2618-1272",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2618000,
+        1272000,
+        2619000,
+        1273000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2618-1273",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2618000,
+        1273000,
+        2619000,
+        1274000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2619-1266",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2619000,
+        1266000,
+        2620000,
+        1267000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2619-1267",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2619000,
+        1267000,
+        2620000,
+        1268000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2619-1268",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2619000,
+        1268000,
+        2620000,
+        1269000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2619-1269",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2619000,
+        1269000,
+        2620000,
+        1270000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2619-1270",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2619000,
+        1270000,
+        2620000,
+        1271000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2619-1271",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2619000,
+        1271000,
+        2620000,
+        1272000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2619-1272",
+      "role": "receiver",
+      "bounds_epsg2056": [
+        2619000,
+        1272000,
+        2620000,
+        1273000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "pending"
+      },
+      "nominal_year_mismatch": true,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2619-1273",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2619000,
+        1273000,
+        2620000,
+        1274000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2620-1266",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2620000,
+        1266000,
+        2621000,
+        1267000
+      ],
+      "assets": {
+        "surface": "catalog_gap",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2620-1267",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2620000,
+        1267000,
+        2621000,
+        1268000
+      ],
+      "assets": {
+        "surface": "catalog_gap",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2620-1268",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2620000,
+        1268000,
+        2621000,
+        1269000
+      ],
+      "assets": {
+        "surface": "catalog_gap",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2620-1269",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2620000,
+        1269000,
+        2621000,
+        1270000
+      ],
+      "assets": {
+        "surface": "catalog_gap",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2620-1270",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2620000,
+        1270000,
+        2621000,
+        1271000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2620-1271",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2620000,
+        1271000,
+        2621000,
+        1272000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2620-1272",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2620000,
+        1272000,
+        2621000,
+        1273000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    },
+    {
+      "tile": "2620-1273",
+      "role": "occluder_buffer",
+      "bounds_epsg2056": [
+        2620000,
+        1273000,
+        2621000,
+        1274000
+      ],
+      "assets": {
+        "surface": "pending",
+        "terrain": "catalog_gap"
+      },
+      "nominal_year_mismatch": null,
+      "cell_validation": "pending",
+      "scene_validation": "pending"
+    }
+  ]
+}
