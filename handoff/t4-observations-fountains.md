@@ -26,7 +26,7 @@ T1, T0 and latest main are merged.
 
 ## Publish
 
-Push this branch and open its pull request.
+Pull request #19: https://github.com/danielbarmaimon/bla-bla-walk/pull/19
 
 ## Limits
 
@@ -34,6 +34,6 @@ The observation export caps at 5,000 recent records. Stations absent from that w
 
 The adapters are not yet called by `main.py`; T6 owns API integration. No model contract changed.
 
-## Continue prompt
+## Next owner
 
-Continue T4 on `feat/t4-observations-fountains`. Read this handoff and T4 in `docs/plan.md`. Finish checks and source manifest updates, then commit and open the PR.
+T6 owns API wiring. Preserve the adapter freshness states.
