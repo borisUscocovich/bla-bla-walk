@@ -158,7 +158,7 @@ fi
 
 # ---------- 5. .gitignore must protect local files ----------
 for must in '.env' '.hack/'; do
-  grep -Fxq "$must" .gitignore 2>/dev/null || add ".gitignore is missing the line: $must"
+  grep -Fxq "$must" <(tr -d '\r' < .gitignore) 2>/dev/null || add ".gitignore is missing the line: $must"
 done
 
 # ---------- result ----------

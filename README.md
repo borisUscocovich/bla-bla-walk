@@ -16,6 +16,7 @@ This repository contains the source audit, revised design and build plan. The ag
 - [Build tasks and acceptance checks](docs/plan.md)
 - [Pick a task and start](TASK_START.md)
 - [Recorded decisions](docs/decisions.md)
+- [Future features](docs/future-features.md)
 - [Proposed six-person work split](ROADMAP.md)
 - [Team roles and shared-repository rules](TEAM.md)
 - [Team collaboration guide](TEAMWORK.md)
