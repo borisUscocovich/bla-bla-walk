@@ -1,0 +1,19 @@
+{
+  "fixture": true,
+  "source": "data.bs.ch dataset 100009",
+  "provider": "meteoblue AG via Open Data Basel-Stadt",
+  "license": "CC BY 4.0",
+  "attribution": "meteoblue AG via Open Data Basel-Stadt",
+  "source_url": "https://data.bs.ch/explore/dataset/100009/",
+  "retrieved_at": "2026-10-03T11:12:00Z",
+  "limitation": "One recorded point; raw, uncorrected; old timestamps must remain stale.",
+  "features": [
+    {
+      "station_id": "0020F940",
+      "label": "Syngenta",
+      "coordinates": [7.604605, 47.566564],
+      "observed_at": "2026-10-03T11:00:01Z",
+      "air_temperature_celsius": 19.39
+    }
+  ]
+}
