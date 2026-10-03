@@ -16,6 +16,7 @@ This repository currently contains the project brief and a proposed implementati
 - [Build tasks and acceptance checks](docs/plan.md)
 - [Recorded decisions](docs/decisions.md)
 - [Team collaboration guide](TEAMWORK.md)
+- [Original meeting notes](notes/261002-001_Meeting_Heat-_and_Safety-Aware_Routing_Map_App-Summary.md) (historical source; see the design and plan for current proposals)
 
 ## How to run it
 
