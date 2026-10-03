@@ -3,7 +3,6 @@
 #  Enforced by scripts/hack-guard.sh. Do not remove these lines.
 # ==============================================================
 .hack/
-notes/
 .env
 .env.*
 !.env.example
