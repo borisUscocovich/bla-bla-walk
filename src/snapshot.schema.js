@@ -449,6 +449,16 @@ export const snapshotSchema = {
       },
       "title": "Layers",
       "type": "array"
+    },
+    "mode": {
+      "default": "fixture",
+      "enum": [
+        "fixture",
+        "online",
+        "offline"
+      ],
+      "title": "Mode",
+      "type": "string"
     }
   },
   "required": [

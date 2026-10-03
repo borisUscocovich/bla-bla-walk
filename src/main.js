@@ -9,30 +9,31 @@ const app = document.querySelector('#app');
 app.innerHTML = `
   <header>
     <div><p class="eyebrow">Bla Bla Walk</p><h1>Explore Basel</h1></div>
-    <p>Map foundation · synthetic overlays</p>
+    <div><p id="mode-title">Map foundation</p>
+    <nav aria-label="Data mode"><a href="/?mode=online">Online</a> · <a href="/?mode=offline">Offline</a> · <a href="/">Fixtures</a></nav></div>
   </header>
   <main>
     <aside aria-label="Map layers and feature information">
       <section>
         <h2>Layers</h2>
-        <p class="notice">Fixture mode: invented locations and values. Not current conditions.</p>
+        <p class="notice" id="mode-notice">Loading selected data mode…</p>
         <p id="api-status" role="status">Loading fixture API…</p>
         <button id="reload" type="button">Reload layers</button>
         <div id="layers"></div>
       </section>
       <section aria-labelledby="features-title">
         <h2 id="features-title">Inspect a feature</h2>
-        <p>Click a marker, or choose a sample below.</p>
+        <p>Click a marker, or choose a feature below.</p>
         <div id="features"></div>
       </section>
       <section id="details" aria-label="Selected feature" aria-live="polite">
-        <p>Select a sample to see its source and timestamps.</p>
+        <p>Select a feature to see its source and timestamps.</p>
       </section>
     </aside>
     <section class="map-panel" aria-label="Basel map">
       <div id="map" tabindex="0" role="region" aria-label="Interactive Basel map. Arrow keys pan; plus and minus zoom."></div>
       <p id="basemap-status" role="status">Loading Basel basemap…</p>
-      <p class="map-note">Squares: sample sensors · Circles: sample fountains.<br>Shade, routes and calculation coverage are not connected yet.</p>
+      <p class="map-note">Squares: temperature sensors · Circles: fountains.<br>Shade, routes and calculation coverage are not connected yet.</p>
     </section>
   </main>`;
 
@@ -136,16 +137,24 @@ async function refresh() {
   status.textContent = 'Loading fixture API…';
   try {
     const snapshot = await loadSnapshot();
+    const messages = {
+      fixture: 'Fixture mode: invented locations and values. Not current conditions.',
+      offline: 'Offline mode: saved provider data. Observations are historical; no live refresh.',
+      online: 'Online mode: provider data with source timestamps. Missing and stale values remain explicit.',
+    };
+    document.querySelector('#mode-title').textContent = `${snapshot.mode} data mode`;
+    document.querySelector('#mode-notice').textContent = messages[snapshot.mode];
     map.replaceLayers(snapshot.layers);
     renderLayers(snapshot.layers);
-    details.textContent = 'Select a sample to see its source and timestamps.';
-    status.textContent = `Fixture API connected · snapshot ${formatTime(snapshot.generated_at)}`;
+    details.textContent = 'Select a feature to see its source and timestamps.';
+    const label = snapshot.mode === 'fixture' ? 'Fixture API' : snapshot.mode === 'offline' ? 'Saved data API' : 'Provider API';
+    status.textContent = `${label} connected · snapshot ${formatTime(snapshot.generated_at)}`;
   } catch {
     map.replaceLayers([]);
     layerControls.replaceChildren();
     featureList.replaceChildren();
     details.textContent = 'No overlay data available. The basemap can still be used.';
-    status.textContent = 'Layers missing: API unavailable or invalid. Start the API, then reload layers.';
+    status.textContent = 'Layers missing: API unavailable, saved data missing, or invalid response. Check setup, then reload layers.';
   } finally {
     reload.disabled = false;
   }

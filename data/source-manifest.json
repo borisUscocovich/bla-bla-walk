@@ -855,5 +855,13 @@
     "failed_refresh_retry_seconds": 60,
     "cold_source_failure": "missing layer",
     "api_integration_owner": "T6"
+  },
+  "compact_preparation": {
+    "configuration": "config/geometry.json",
+    "summary": "data/preparation-summary.json",
+    "geometry_manifest": "data/geometry/manifest.json (local, ignored)",
+    "basemap_manifest": ".cache/basemap/manifest.json (local, ignored)",
+    "provider_snapshot": ".cache/provider-snapshot.json (local, ignored)",
+    "note": "T0 native 0.5m inventory and 2m-grid cost evidence are historical; selected native 2m terrain pins and compact outputs are recorded separately. Shade accuracy/performance remain unvalidated."
   }
 }

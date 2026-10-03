@@ -26,10 +26,13 @@ const {
   Style
 } = window.ol.style;
 
-// Official 3857_17 matrix set has the standard XYZ grid, levels 0–17.
-const BASEMAP_URL =
-  'https://wmts.geo.bs.ch/mapcache/wmts/1.0.0/VS_Vektorstadtplan_grau/default/3857/{z}/{y}/{x}.png';
-const BASEMAP_EXTENT = [7.544814498, 47.508699688, 7.704595246, 47.607375471];
+// Official 3857 matrix set uses standard XYZ coordinates.
+const configResponse = await fetch('/config/basemap.json');
+if (!configResponse.ok) throw new Error('Basemap configuration unavailable.');
+const basemapConfig = await configResponse.json();
+const offline = new URLSearchParams(location.search).get('mode') === 'offline';
+const BASEMAP_URL = offline ? '/tiles/{z}/{x}/{y}.png' : basemapConfig.url;
+const BASEMAP_EXTENT = basemapConfig.bounds_wgs84;
 const BASEL_CENTRE = [7.5886, 47.5596];
 
 /** Build the real basemap; fixture layers can be replaced independently. */
@@ -40,18 +43,19 @@ export function createMap(
 ) {
   const source = new XYZ({
     url: BASEMAP_URL,
-    maxZoom: 17,
+    maxZoom: basemapConfig.max_zoom,
+    minZoom: basemapConfig.min_zoom,
     crossOrigin: 'anonymous',
     wrapX: false,
     attributions: '<a href="https://api.geo.bs.ch/stac/v1/collections/VSBS">Geodaten Kanton Basel-Stadt</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>',
   });
   let hadTileError = false;
   source.on('tileloadend', () => {
-    if (!hadTileError) onBasemapStatus('Basel basemap loaded · live tile service');
+    if (!hadTileError) onBasemapStatus(offline ? 'Basel basemap loaded · downloaded offline map' : 'Basel basemap loaded · live tile service');
   });
   source.on('tileloaderror', () => {
     hadTileError = true;
-    onBasemapStatus('Basemap partly unavailable. Check your connection and reload.');
+    onBasemapStatus(offline ? 'Offline basemap partly unavailable: tiles not downloaded or outside saved coverage.' : 'Basemap partly unavailable. Check your connection and reload.');
   });
   const map = new Map({
     target,
@@ -64,8 +68,10 @@ export function createMap(
     view: new View({
       center: fromLonLat(BASEL_CENTRE),
       zoom: 14,
-      minZoom: 12,
-      maxZoom: 17,
+      minZoom: basemapConfig.min_zoom,
+      maxZoom: basemapConfig.max_zoom,
+      extent: offline ? transformExtent(BASEMAP_EXTENT, 'EPSG:4326', 'EPSG:3857') : undefined,
+      constrainOnlyCenter: true,
     }),
   });
   const layers = new globalThis.Map();
