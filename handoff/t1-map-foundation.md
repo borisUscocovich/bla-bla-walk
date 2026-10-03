@@ -16,15 +16,16 @@ Branch: feat/t1-map-foundation. The user requested committing and pushing all ta
 - Wrote layer toggles, keyboard feature inspection, provenance panel and explicit API/tile failures. Generated files and dependency pins are still pending.
 - All authored Python files passed syntax parsing. Application startup, formatting, lint and contract tests have not run because project dependencies are not installed.
 - README describes the incomplete startup state; recorded the initial canonical-contract decision.
+- Integrated main at e547346: Git merged without manual conflicts, preserving T3's style guide, future-feature documentation and Windows hook fixes.
 
 ## Next
 1. Obtain the pending installation answer, install project dependencies and pin backend/requirements.txt; use npm's package manager to record exact versions and generate its lockfile.
 2. Generate client types/schema and fix any compiler or contract failures.
 3. Verify documented startup, contracts, browser toggles, provenance and failure states.
-4. Record the actual package-manager decision, update README with verified commands, and publish a completed checkpoint to this branch. Create the WIP PR from the prepared browser page if it has not been submitted. Merge requires explicit approval and completion of T1's acceptance check.
+4. Apply the merged T3 style guide to the foundation theme, record the actual package-manager decision, update README with verified commands, and publish a completed checkpoint to this branch. Merge requires explicit approval and completion of T1's acceptance check.
 
 ## Ownership for consumers
-Follow [ROADMAP.md](../ROADMAP.md) for owned adapter, geometry, route, evaluation and screen paths. Slot D owns foundation setup and the canonical contract during T1; after T1 merges, additive model changes belong to the feature task and must regenerate src/interfaces.ts and append a decision. Slot F owns API integration after foundation. T3's style guide is not available yet; foundation uses neutral theme defaults.
+Follow [ROADMAP.md](../ROADMAP.md) for owned adapter, geometry, route, evaluation and screen paths. Slot D owns foundation setup and the canonical contract during T1; after T1 merges, additive model changes belong to the feature task and must regenerate src/interfaces.ts and append a decision. Slot F owns API integration after foundation. T3's style guide is now merged; foundation still uses neutral theme defaults pending adoption.
 
 ## Resume prompt
 Continue T1 on feat/t1-map-foundation. Read this handoff, TASK_START.md and T1 in docs/plan.md; start at Next and respect the roadmap ownership.

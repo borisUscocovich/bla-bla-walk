@@ -15,6 +15,11 @@ A mobile-friendly Basel map with independent data layers, city-wide calculated s
 3. Choose Now or another departure time. Recalculate shade along the walk; adjust preference weights and see the recommendation and explanation change.
 4. Disconnect a source: show retained observations as stale and saved shade results with their original effective time.
 
+- Start with a mobile-friendly web map focused on heat in Basel.
+- Explore routes to cooler destinations using shade, fountains, and known closures or accessibility barriers.
+- Investigate public and aggregated data before committing to live integrations.
+- Preserve access for people without smartphones; the phone-access concept and demo direction are captured in [future features](future-features.md), with implementation deferred until the core web-app demo is ready.
+- Treat volunteer accompaniment and community assistance as a later phase, with operating and vetting arrangements still unresolved.
 Coverage includes all Basel, rather than one neighbourhood. Pin the administrative boundary in T0; default interpretation is Basel city. Inventory city-wide geometry plus surrounding shadow-casting objects. Calculate requested map tiles and route corridors on demand. The first demo uses two checked walking alternatives; arbitrary-endpoint route generation is a later decision.
 
 ## Data
