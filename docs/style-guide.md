@@ -1,0 +1,73 @@
+# Map and comparison screen
+
+**Status:** T3 review draft; visual direction A selected by Slot C on 2026-10-03.
+**Theme values:** `src/theme.css` (created by T1). Keep visual values there; this guide describes their roles.
+
+## Screen at a glance
+
+```text
+┌ Basel walk                                      [Now ▾] [Layers ▾] ┐
+│ Depart now · shade calculated for 14:32 · Updated 14:31           │
+├───────────────────────────────────────────────────────────────────┤
+│                                                                   │
+│  MAP                                                              │
+│  [temperature] [fountains] [shade]     Legend: shade / unknown     │
+│                                                                   │
+│  ┄ ┄ Basel coverage boundary ┄ ┄                                 │
+│  Route A ─────────────── Route B ══════════════                    │
+│                                                                   │
+├───────────────────────────────────────────────────────────────────┤
+│ Compare routes                                                    │
+│ ┌ Route A · [time] · [distance]┐ ┌ Route B · [time] · [distance]┐ │
+│ │ Shade [m] · Exposed [m]      │ │ Shade [m] · Exposed [m]      │ │
+│ │ Unknown [m] · [water stops]  │ │ Unknown [m] · [water stops]  │ │
+│ │ [Show on map] [Choose route]│  │ [Show on map] [Choose route]│   │
+│ └────────────────────────────┘  └────────────────────────────┘      │
+│ Data status: shade incomplete near boundary · fountain data current│
+└───────────────────────────────────────────────────────────────────┘
+```
+
+On narrow screens, keep the time control and map visible first; route cards stack below the map and remain reachable by scrolling. Map labels and controls must not cover route endpoints or the coverage edge.
+
+## Three visual directions
+
+| Direction | Feel | Strength | Tradeoff |
+|---|---|---|---|
+| **A · Calm civic (selected)** | Quiet blue/teal accents, pale neutral surfaces, clear spacing | Keeps the map and evidence easy to scan | Less compact on a small screen |
+| **B · Map-first utility** | Neutral panels, compact controls, strong route line patterns | Leaves more room for the map | Denser cards need careful type sizing |
+| **C · Warm outdoor** | Warm neutral surfaces, leaf/sky accents, softer card corners | Feels approachable for a walking tool | Accent colours need strict separation from status meanings |
+
+The structure above works with all three directions. Slot C selected A: use a restrained civic palette, with blue/teal reserved for navigation and route identity, and status colours kept distinct. The actual colour and spacing values belong in `src/theme.css` when T1 creates it.
+
+## Principles
+
+1. **The map is the shared reference.** Toggling a layer changes the map and its legend together.
+2. **Show evidence beside the claim.** Every feature and route metric exposes its source, observation or calculation time, and coverage status.
+3. **Unknown stays visible.** Missing, stale, unsupported, and outside-coverage data never looks like confirmed sun, shade, water, or access.
+
+## Visual roles
+
+- **Colour:** `surface` and `surface-raised` for panels; `text-primary` and `text-muted` for type; `accent` for selected controls; separate `route-a` and `route-b` tokens for route identity; `shade`, `exposed`, and `unknown` for layer meaning; `status-current`, `status-stale`, and `status-missing` for data state. Statuses always include words or symbols as well as colour.
+- **Type:** use the system sans-serif stack. `text-body` for controls and metrics, `text-label` for compact metadata, and `text-heading` for screen and card headings. Keep route metrics tabular and aligned.
+- **Spacing and shape:** use the shared spacing scale (`space-1` through `space-6`); reserve `radius-card` for cards and `radius-control` for buttons and inputs. Controls need touch-sized targets on mobile.
+- **Theme home:** `src/theme.css`; components must use its tokens rather than local colour, type, or spacing values.
+
+## Components and behaviour
+
+- **Layer controls:** labelled toggles for temperature, fountains, and calculated shade. Each toggle exposes its state to assistive technology. A control has a visible focus ring.
+- **Legend:** labels every line, fill, and symbol, including `Unknown / not calculated` and the dashed Basel coverage boundary. Route A and Route B differ by both colour and line pattern/label.
+- **Time control:** `Now` is a direct action and the default. A departure date/time control states the selected local time and the effective shade calculation time; stale saved calculations retain their original time.
+- **Route cards:** show duration, distance, shaded/exposed/unknown metres, and fountain opportunities with evidence status. `Show on map` focuses the route; `Choose route` is explicit and keyboard reachable. Do not imply a winner unless the comparison rules later define one.
+- **Provenance:** feature details show source name, observed/calculated time, freshness, and source link or attribution. Put a short status on the map/card and full details in a keyboard-accessible disclosure.
+- **Coverage and data states:** outline the supported Basel boundary on the map. Inside gaps use `Unknown`; outside the boundary use `Outside coverage`. Stale values show `Stale · [time]`; absent values show `Unavailable`; never silently reuse old values as current.
+
+## Accessibility and language
+
+- Meet WCAG AA contrast: at least 4.5:1 for normal text and 3:1 for large text and meaningful graphical controls. Check the actual token pairs in `src/theme.css` when T1 creates it.
+- Never use colour alone: pair shade/exposure with text or patterns; pair freshness colours with labels and icons; distinguish routes with names and line styles.
+- All actions work with Tab, Shift+Tab, Enter/Space, and arrow keys where the control pattern calls for them. Keep focus visible and in a predictable order: time, layers, map controls, then route cards. The map must have equivalent keyboard-accessible layer and route controls outside the map canvas.
+- Use short, factual labels: “Shade calculated 14:32”, “Stale · 13:50”, “Unknown · no coverage”, “Outside Basel coverage”. Avoid “safe”, “cool”, or “best” unless the data and agreed rules support that claim.
+
+## Reference images
+
+No visual references were supplied for this draft. If the team adds examples later, use cropped, non-personal images; record the specific element to borrow and do not copy a whole branded interface.
