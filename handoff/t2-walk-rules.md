@@ -1,64 +1,78 @@
 # Handoff: T2 walk and comparison rules
 
-Status: in progress · Updated: 2026-10-03 · Branch: feat/t2-walk-rules · Last owner: @danielbarmaimon (Slot B)
+Status: done · Updated: 2026-10-03 · Branch: feat/t2-walk-rules · Last owner: @danielbarmaimon (Slot B)
 
 ## Goal
 
-Agree one real demo walk and the comparison rules required by T2 in the
-[build plan](../docs/plan.md#t2-agree-one-walk-and-comparison-rules).
+Specify one real public-place demo walk and the comparison rules required by
+T2 in the [build plan](../docs/plan.md#t2-agree-one-walk-and-comparison-rules).
 
 ## State
 
-Started from fetched origin/main at 8af65ba; T2 has no task prerequisites and no
-existing active T2 ownership was found. This checkpoint is a discussion draft,
-not completed T2. Team input on the real walk, workaround and domain pitfall is
-pending. No application, shared interface or production configuration changed.
+T2's domain specification and acceptance fixtures are complete on this branch.
+The user delegated the remaining demo choices by instructing Codex to continue
+until the task was finished. Defaults and scenarios are recorded under that
+delegation; the current workaround is an explicit demo assumption, not an
+interview finding. The completion PR needs review and an explicit merge yes.
+Downstream tasks must still wait for T2 to merge into main.
 
 ## Done
 
-- Read the shared metaprompt, plan, design, decisions and team file ownership.
-- Confirmed privacy hooks are configured and executable.
-- Prepared a public endpoint candidate with official place references.
-- Added a synthetic shade/time/water comparison with two preference sets that
-  change the winner. Real endpoint coordinates and route geometry remain unset.
-- Formatted and parsed the JSON with Node; checked length partitions,
-  percentages, walking times, detours and every score contribution. Shade-focused
-  scores are A=0.325, B=0.55; time-focused scores are A=0.475, B=0.3975.
-- Ran the repository documentation check: passed. There is no application test
-  suite or formatter setup yet; T1 owns that foundation.
+- Selected Basel SBB/Centralbahnplatz → Marktplatz, with public-place references,
+  a scenario workaround and the construction-versus-closure domain pitfall.
+- Specified adjustable walking speed/stops, distance/time detour constraints,
+  fixed shade/duration/water normalization and default preference weights.
+- Specified full-length denominators, conservative unknown/stale evidence,
+  access/coverage eligibility, water qualification and active-criterion checks.
+- Added ties, zero/invalid weights, no eligible route, manual choice and
+  cached-metric rescoring without repeating shadow calculations.
+- Added 39 synthetic acceptance examples. Verified expected metrics,
+  contributions, winners, completeness and detour boundaries, including
+  independence from route order and the equal-distance reference stop plan.
+- Updated design references and appended decisions without changing the plan,
+  the shared interface, production scoring/config or other slots' owned files.
+- Added a dependency-free Node acceptance checker and formatted its JSON.
 
-## Next (in order, concrete)
+## Next
 
-1. Get the team's real public start/destination, purpose, current workaround and
-   one domain pitfall; replace or confirm the candidate.
-2. Agree speed/stops, acceptable detours, access constraints, scoring criteria,
-   fixed ranges/default weights and unknown/stale completeness rules.
-3. Add and approve water, blocked, unknown, tie, all-zero and insufficient-evidence
-   cases. Record accepted choices in the decision log in the same checkpoint.
-4. Verify the fixture arithmetic, JSON formatting, documentation and privacy;
-   commit/push checkpoints. Open the completion PR only when T2's literal
-   acceptance check passes; ask before merging that PR.
+1. Review the completion PR for feat/t2-walk-rules; merge only after an explicit
+   yes for that PR. No application or live route calculation is claimed by T2.
+2. T9: after T1/T2 merge, pin exact public endpoints and checked licensed walking
+   geometry. Numerical route examples here are synthetic, not that geometry.
+3. T5: after T10/T9/T2 merge, port the examples to production tests/config and
+   implement the authored shared contract. Preserve active-criterion evidence
+   gating, constraint reasons and route-order invariance.
 
 ## Files
 
-- [Routing rules](../docs/routing-rules.md): discussion example and open decisions.
-- [Scenario fixture](../data/scenarios.json): synthetic metrics and expected results.
-- This handoff: task ownership and current progress.
+- [Routing rules](../docs/routing-rules.md): domain specification and formulas.
+- [Scenario fixture](../data/scenarios.json): one home for numeric defaults and cases.
+- [Acceptance checker](../scripts/check-routing-scenarios.mjs): run with Node.
+- [Design](../docs/design.md): points to the completed domain rules.
+- [Decisions](../docs/decisions.md): appended selected walk and scoring policies.
 
-## Decisions made
+## Validation
 
-No new domain defaults or demo endpoints have been approved. Follow the existing
-weighted-recommendation design; constraints stay outside weights. T0 owns source
-admission, T1 owns interfaces, T9 owns walking geometry, T5 owns production
-scoring/configuration. Do not edit their files or the build plan for this task.
+Run `node scripts/check-routing-scenarios.mjs` for all 39 examples, route-order
+invariance and JSON format. Add `--format` to format the scenario file.
+Run `node --check scripts/check-routing-scenarios.mjs` and the repository
+documentation/privacy checks. T1 has not provided an application test suite
+or formatter manifest on the merged foundation yet; no packages were installed.
+The 39 examples, JSON format, Node syntax, staged whitespace and privacy check
+passed. The strict documentation check reports one inherited T3 warning:
+the style guide names src/theme.css, which T1 has not created yet. That warning
+also exists in origin/main; this task introduces no missing documentation paths.
 
-## Open questions / problems
+## Limits / decisions
 
-- Real team walk, workaround and domain pitfall are awaiting user input.
-- Illustrative assumptions are proposals, not health thresholds or observations.
-- Remaining acceptance examples and defaults are not yet agreed; T9/T5 stay gated.
+Numeric defaults are editable demo choices, not health thresholds. The scenario
+workaround is assumed. Source references identify public places/a construction
+caution; no exact endpoint coordinates, walking geometry, actual shade, fountain
+operation or participant habits were fabricated. T0 owns source admission;
+T9 supplies geometry; T1 owns the shared interface; T5 owns production evaluation.
 
 ## Resume prompt
 
-> Continue T2 for Slot B using $hack-build. Read handoff/t2-walk-rules.md on
-> feat/t2-walk-rules. Start with the team's real walk example and Next step 1.
+> Review completed T2 for Slot B on feat/t2-walk-rules. Read this handoff and
+> docs/routing-rules.md; run node scripts/check-routing-scenarios.mjs. Check the
+> completion PR, and ask for an explicit yes before merging it.

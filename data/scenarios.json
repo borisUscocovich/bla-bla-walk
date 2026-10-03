@@ -1,94 +1,137 @@
 {
-  "status": "draft_awaiting_team_input",
-  "purpose": "T2 discussion fixture; not a shared application contract",
+  "format_version": 1,
+  "status": "selected_for_demo_under_delegated_completion",
+  "purpose": "T2 domain rules and acceptance examples; not a shared application contract or production evaluator",
+  "selection": {
+    "date": "2026-10-03",
+    "by": "@danielbarmaimon",
+    "basis": "User instructed Codex to continue until T2 is finished; demo defaults selected under that delegation, without a separate domain interview"
+  },
   "walk": {
-    "status": "candidate_not_selected",
+    "area": "Basel city centre",
     "start": "Basel SBB, Centralbahnplatz",
     "destination": "Marktplatz",
-    "proposed_purpose": "Reach the city market",
-    "team_confirmed_purpose": null,
-    "current_workaround": null,
-    "team_domain_pitfall": null,
-    "geometry_status": "not_checked",
-    "endpoint_coordinates": null
+    "purpose": "Walk from the railway station to the city market",
+    "current_workaround": "Demo baseline: use a shortest-walk navigator, then manually inspect shade and water opportunities. This is a stated scenario assumption, not an observed participant habit.",
+    "domain_pitfall": "A construction notice does not identify a closed pedestrian segment; an access check must distinguish a caution from a confirmed closure. Shade and water also require evidence for the planned arrival time.",
+    "geometry_status": "T9 must pin exact public endpoints and licensed walking geometry",
+    "endpoint_coordinates": null,
+    "references_checked_on": "2026-10-03",
+    "references": [
+      "https://company.sbb.ch/content/dam/infrastruktur/trafimage/bahnhofplaene/plan-basel-sbb-a4.pdf",
+      "https://www.bs.ch/en/verwaltung/prasidialdepartement/amter-und-bereiche/external-affairs-and-marketing/fairs-and-markets/basel-markets/basel-city-market"
+    ]
   },
-  "comparison": {
-    "id": "shade-versus-walking-time",
-    "evidence": "synthetic_not_measured_on_candidate_walk",
-    "approval": "pending",
-    "assumptions": {
-      "walking_speed_m_per_s": 1,
-      "planned_stop_minutes": 0,
-      "water_detour_metres": 0,
-      "eligibility": "Assume both fictional routes pass all constraints for this arithmetic example only",
-      "completeness": "Assume all fictional shade and access evidence is current and complete",
-      "default_status": "Illustrative values only; no approved route-planning defaults"
-    },
-    "fixed_benefit_ranges": {
-      "shade_fraction": [
-        0,
-        1
-      ],
-      "walking_duration_minutes": [
-        0,
-        40
-      ],
-      "water_opportunity": [
-        0,
-        1
-      ]
-    },
-    "routes": [
-      {
-        "id": "A",
-        "label": "Shorter illustrative route",
-        "distance_metres": 1200,
-        "shaded_metres": 300,
-        "unshaded_metres": 900,
-        "unknown_metres": 0,
-        "water_evidence": "synthetic_verified_absence",
-        "expected": {
-          "walking_minutes": 20,
-          "shade_fraction": 0.25,
-          "unshaded_fraction": 0.75,
-          "unknown_fraction": 0,
-          "duration_benefit": 0.5,
-          "water_benefit": 0
-        }
-      },
-      {
-        "id": "B",
-        "label": "Longer illustrative route with more shade",
-        "distance_metres": 1500,
-        "shaded_metres": 900,
-        "unshaded_metres": 600,
-        "unknown_metres": 0,
-        "water_evidence": "synthetic_fresh_accessible_drinking_water",
-        "expected": {
-          "walking_minutes": 25,
-          "shade_fraction": 0.6,
-          "unshaded_fraction": 0.4,
-          "unknown_fraction": 0,
-          "duration_benefit": 0.375,
-          "water_benefit": 1
-        }
-      }
+  "rules": {
+    "walking_speed_m_per_s": 1,
+    "default_planned_stop_minutes": 0,
+    "selected_water_stop_minutes": 2,
+    "max_extra_distance_fraction": 0.3,
+    "max_extra_duration_minutes": 10,
+    "duration_benefit_range_minutes": [
+      0,
+      40
     ],
-    "expected_detour": {
-      "extra_metres": 300,
-      "extra_walking_minutes": 5,
-      "extra_distance_fraction_of_shorter_route": 0.25,
-      "acceptability": "pending_team_agreement"
+    "shade_benefit_range_fraction": [
+      0,
+      1
+    ],
+    "water_benefit_range": [
+      0,
+      1
+    ],
+    "default_weights": {
+      "shade": 0.5,
+      "duration": 0.4,
+      "water": 0.1
     },
-    "preference_examples": [
-      {
-        "id": "more_shade",
-        "weights": {
-          "shade": 0.5,
-          "duration": 0.4,
-          "water": 0.1
+    "minimum_known_shade_fraction": 0.8,
+    "water_evidence_max_age_hours": 24,
+    "water_max_extra_distance_metres": 100,
+    "tie_tolerance": 0.000001,
+    "arithmetic_tolerance": 1e-9
+  },
+  "base_routes": [
+    {
+      "id": "A",
+      "distance_metres": 1200,
+      "shaded_metres": 300,
+      "unshaded_metres": 900,
+      "unknown_metres": 0,
+      "planned_stop_minutes": 0,
+      "access_state": "checked_open",
+      "inside_calculation_coverage": true,
+      "construction_caution": false,
+      "shade_state": "current",
+      "shade_time_matches_request": true,
+      "shade_geometry_matches_request": true,
+      "water": {
+        "state": "fresh_absent",
+        "evidence_complete": true,
+        "age_hours": 0,
+        "drinking": true,
+        "accessible": true,
+        "operational": true,
+        "extra_distance_metres": 0,
+        "extra_distance_included": true
+      }
+    },
+    {
+      "id": "B",
+      "distance_metres": 1500,
+      "shaded_metres": 900,
+      "unshaded_metres": 600,
+      "unknown_metres": 0,
+      "planned_stop_minutes": 0,
+      "access_state": "checked_open",
+      "inside_calculation_coverage": true,
+      "construction_caution": false,
+      "shade_state": "current",
+      "shade_time_matches_request": true,
+      "shade_geometry_matches_request": true,
+      "water": {
+        "state": "fresh_available",
+        "evidence_complete": true,
+        "age_hours": 0,
+        "drinking": true,
+        "accessible": true,
+        "operational": true,
+        "extra_distance_metres": 0,
+        "extra_distance_included": true
+      }
+    }
+  ],
+  "cases": [
+    {
+      "id": "shade-versus-distance",
+      "evidence": "synthetic",
+      "route_patches": {},
+      "expected": {
+        "status": "recommended",
+        "winner": "B",
+        "route_statuses": {
+          "A": "eligible",
+          "B": "eligible"
         },
-        "expected_contributions": {
+        "scores": {
+          "A": 0.325,
+          "B": 0.55
+        },
+        "metrics": {
+          "A": {
+            "walking_minutes": 20,
+            "shade_fraction": 0.25,
+            "unshaded_fraction": 0.75,
+            "unknown_fraction": 0
+          },
+          "B": {
+            "walking_minutes": 25,
+            "shade_fraction": 0.6,
+            "unshaded_fraction": 0.4,
+            "unknown_fraction": 0
+          }
+        },
+        "contributions": {
           "A": {
             "shade": 0.125,
             "duration": 0.2,
@@ -100,37 +143,920 @@
             "water": 0.1
           }
         },
-        "expected_scores": {
-          "A": 0.325,
-          "B": 0.55
-        },
-        "expected_winner_in_example": "B"
-      },
-      {
-        "id": "less_walking_time",
-        "weights": {
-          "shade": 0.1,
-          "duration": 0.9,
-          "water": 0
-        },
-        "expected_contributions": {
-          "A": {
-            "shade": 0.025,
-            "duration": 0.45,
-            "water": 0
-          },
+        "detour": {
           "B": {
-            "shade": 0.06,
-            "duration": 0.3375,
-            "water": 0
+            "extra_metres": 300,
+            "extra_minutes": 5,
+            "extra_distance_fraction": 0.25
           }
+        }
+      }
+    },
+    {
+      "id": "weights-change-winner",
+      "evidence": "synthetic",
+      "route_patches": {},
+      "weights": {
+        "shade": 0.1,
+        "duration": 0.9,
+        "water": 0
+      },
+      "expected": {
+        "status": "recommended",
+        "winner": "A",
+        "route_statuses": {
+          "A": "eligible",
+          "B": "eligible"
         },
-        "expected_scores": {
+        "scores": {
           "A": 0.475,
           "B": 0.3975
-        },
-        "expected_winner_in_example": "A"
+        }
       }
-    ]
-  }
+    },
+    {
+      "id": "weight-scale-invariance",
+      "evidence": "synthetic",
+      "route_patches": {},
+      "weights": {
+        "shade": 10,
+        "duration": 8,
+        "water": 2
+      },
+      "expected": {
+        "status": "recommended",
+        "winner": "B",
+        "route_statuses": {
+          "A": "eligible",
+          "B": "eligible"
+        },
+        "scores": {
+          "A": 0.325,
+          "B": 0.55
+        }
+      }
+    },
+    {
+      "id": "water-access-changes-winner",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "shaded_metres": 450,
+          "unshaded_metres": 1050
+        }
+      },
+      "expected": {
+        "status": "recommended",
+        "winner": "B",
+        "route_statuses": {
+          "A": "eligible",
+          "B": "eligible"
+        },
+        "scores": {
+          "A": 0.325,
+          "B": 0.4
+        }
+      }
+    },
+    {
+      "id": "verified-no-water",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "shaded_metres": 450,
+          "unshaded_metres": 1050,
+          "water": {
+            "state": "fresh_absent"
+          }
+        }
+      },
+      "expected": {
+        "status": "recommended",
+        "winner": "A",
+        "route_statuses": {
+          "A": "eligible",
+          "B": "eligible"
+        },
+        "scores": {
+          "A": 0.325,
+          "B": 0.3
+        }
+      }
+    },
+    {
+      "id": "unknown-water",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "water": {
+            "state": "unknown",
+            "evidence_complete": false,
+            "age_hours": null
+          }
+        }
+      },
+      "expected": {
+        "status": "insufficient_evidence",
+        "winner": null,
+        "route_statuses": {
+          "A": "eligible",
+          "B": "eligible"
+        },
+        "scores": {
+          "A": 0.325,
+          "B": 0.45
+        }
+      }
+    },
+    {
+      "id": "stale-water",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "water": {
+            "age_hours": 25
+          }
+        }
+      },
+      "expected": {
+        "status": "insufficient_evidence",
+        "winner": null,
+        "route_statuses": {
+          "A": "eligible",
+          "B": "eligible"
+        },
+        "scores": {
+          "A": 0.325,
+          "B": 0.45
+        }
+      }
+    },
+    {
+      "id": "water-at-freshness-limit",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "water": {
+            "age_hours": 24
+          }
+        }
+      },
+      "expected": {
+        "status": "recommended",
+        "winner": "B",
+        "route_statuses": {
+          "A": "eligible",
+          "B": "eligible"
+        },
+        "scores": {
+          "A": 0.325,
+          "B": 0.55
+        }
+      }
+    },
+    {
+      "id": "water-detour-not-accounted",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "water": {
+            "extra_distance_metres": 80,
+            "extra_distance_included": false
+          }
+        }
+      },
+      "expected": {
+        "status": "insufficient_evidence",
+        "winner": null,
+        "route_statuses": {
+          "A": "eligible",
+          "B": "eligible"
+        },
+        "scores": {
+          "A": 0.325,
+          "B": 0.45
+        }
+      }
+    },
+    {
+      "id": "water-stop-included",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "distance_metres": 1560,
+          "unshaded_metres": 660,
+          "planned_stop_minutes": 2,
+          "water": {
+            "extra_distance_metres": 60
+          }
+        }
+      },
+      "expected": {
+        "status": "recommended",
+        "winner": "B",
+        "route_statuses": {
+          "A": "eligible",
+          "B": "eligible"
+        },
+        "scores": {
+          "A": 0.325,
+          "B": 0.5084615384615385
+        },
+        "metrics": {
+          "B": {
+            "walking_minutes": 26,
+            "duration_minutes": 28
+          }
+        }
+      }
+    },
+    {
+      "id": "blocked-cannot-win",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "access_state": "confirmed_blocked"
+        }
+      },
+      "weights": {
+        "shade": 1,
+        "duration": 0,
+        "water": 0
+      },
+      "expected": {
+        "status": "recommended",
+        "winner": "A",
+        "route_statuses": {
+          "A": "eligible",
+          "B": "blocked"
+        },
+        "scores": {
+          "A": 0.25
+        }
+      }
+    },
+    {
+      "id": "unknown-access",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "access_state": "unknown"
+        }
+      },
+      "expected": {
+        "status": "recommended",
+        "winner": "A",
+        "route_statuses": {
+          "A": "eligible",
+          "B": "needs_verification"
+        },
+        "scores": {
+          "A": 0.325
+        }
+      }
+    },
+    {
+      "id": "construction-is-caution",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "construction_caution": true
+        }
+      },
+      "expected": {
+        "status": "recommended",
+        "winner": "B",
+        "route_statuses": {
+          "A": "eligible",
+          "B": "eligible"
+        },
+        "scores": {
+          "A": 0.325,
+          "B": 0.55
+        }
+      }
+    },
+    {
+      "id": "outside-calculation-coverage",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "inside_calculation_coverage": false
+        }
+      },
+      "expected": {
+        "status": "recommended",
+        "winner": "A",
+        "route_statuses": {
+          "A": "eligible",
+          "B": "unsupported"
+        },
+        "scores": {
+          "A": 0.325
+        }
+      }
+    },
+    {
+      "id": "unknown-full-denominator",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "shaded_metres": 300,
+          "unshaded_metres": 900,
+          "unknown_metres": 300
+        }
+      },
+      "weights": {
+        "shade": 0.5,
+        "duration": 0.5,
+        "water": 0
+      },
+      "expected": {
+        "status": "recommended",
+        "winner": "A",
+        "route_statuses": {
+          "A": "eligible",
+          "B": "eligible"
+        },
+        "scores": {
+          "A": 0.375,
+          "B": 0.2875
+        },
+        "metrics": {
+          "B": {
+            "shade_fraction": 0.2,
+            "unshaded_fraction": 0.6,
+            "unknown_fraction": 0.2,
+            "known_shade_fraction": 0.8
+          }
+        }
+      }
+    },
+    {
+      "id": "same-score-without-unknown",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "shaded_metres": 300,
+          "unshaded_metres": 1200
+        }
+      },
+      "weights": {
+        "shade": 0.5,
+        "duration": 0.5,
+        "water": 0
+      },
+      "expected": {
+        "status": "recommended",
+        "winner": "A",
+        "route_statuses": {
+          "A": "eligible",
+          "B": "eligible"
+        },
+        "scores": {
+          "A": 0.375,
+          "B": 0.2875
+        }
+      }
+    },
+    {
+      "id": "insufficient-shade-coverage",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "shaded_metres": 300,
+          "unshaded_metres": 600,
+          "unknown_metres": 600
+        }
+      },
+      "expected": {
+        "status": "insufficient_evidence",
+        "winner": null,
+        "route_statuses": {
+          "A": "eligible",
+          "B": "eligible"
+        },
+        "scores": {
+          "A": 0.325,
+          "B": 0.35
+        }
+      }
+    },
+    {
+      "id": "stale-shade",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "shade_state": "stale"
+        }
+      },
+      "expected": {
+        "status": "insufficient_evidence",
+        "winner": null,
+        "route_statuses": {
+          "A": "eligible",
+          "B": "eligible"
+        },
+        "scores": {
+          "A": 0.325,
+          "B": 0.25
+        }
+      }
+    },
+    {
+      "id": "wrong-effective-time",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "shade_time_matches_request": false
+        }
+      },
+      "expected": {
+        "status": "insufficient_evidence",
+        "winner": null,
+        "route_statuses": {
+          "A": "eligible",
+          "B": "eligible"
+        },
+        "scores": {
+          "A": 0.325,
+          "B": 0.25
+        }
+      }
+    },
+    {
+      "id": "wrong-geometry-version",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "shade_geometry_matches_request": false
+        }
+      },
+      "expected": {
+        "status": "insufficient_evidence",
+        "winner": null,
+        "route_statuses": {
+          "A": "eligible",
+          "B": "eligible"
+        },
+        "scores": {
+          "A": 0.325,
+          "B": 0.25
+        }
+      }
+    },
+    {
+      "id": "inactive-criteria-do-not-veto",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "shade_state": "failed",
+          "water": {
+            "state": "unknown",
+            "evidence_complete": false,
+            "age_hours": null
+          }
+        }
+      },
+      "weights": {
+        "shade": 0,
+        "duration": 1,
+        "water": 0
+      },
+      "expected": {
+        "status": "recommended",
+        "winner": "A",
+        "route_statuses": {
+          "A": "eligible",
+          "B": "eligible"
+        },
+        "scores": {
+          "A": 0.5,
+          "B": 0.375
+        }
+      }
+    },
+    {
+      "id": "tie",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "distance_metres": 1200,
+          "shaded_metres": 300,
+          "unshaded_metres": 900,
+          "water": {
+            "state": "fresh_absent"
+          }
+        }
+      },
+      "expected": {
+        "status": "tie",
+        "winner": null,
+        "route_statuses": {
+          "A": "eligible",
+          "B": "eligible"
+        },
+        "scores": {
+          "A": 0.325,
+          "B": 0.325
+        }
+      }
+    },
+    {
+      "id": "tie-within-tolerance",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "distance_metres": 1200,
+          "shaded_metres": 300.0012,
+          "unshaded_metres": 899.9988,
+          "water": {
+            "state": "fresh_absent"
+          }
+        }
+      },
+      "expected": {
+        "status": "tie",
+        "winner": null,
+        "route_statuses": {
+          "A": "eligible",
+          "B": "eligible"
+        },
+        "scores": {
+          "A": 0.325,
+          "B": 0.3250005
+        }
+      }
+    },
+    {
+      "id": "all-zero-weights",
+      "evidence": "synthetic",
+      "route_patches": {},
+      "weights": {
+        "shade": 0,
+        "duration": 0,
+        "water": 0
+      },
+      "expected": {
+        "status": "no_preferences",
+        "winner": null,
+        "route_statuses": {
+          "A": "eligible",
+          "B": "eligible"
+        },
+        "scores": {
+          "A": 0,
+          "B": 0
+        }
+      }
+    },
+    {
+      "id": "invalid-negative-weight",
+      "evidence": "synthetic",
+      "route_patches": {},
+      "weights": {
+        "shade": -1,
+        "duration": 1,
+        "water": 0
+      },
+      "expected": {
+        "status": "invalid_preferences",
+        "winner": null,
+        "route_statuses": {
+          "A": "eligible",
+          "B": "eligible"
+        },
+        "scores": {}
+      }
+    },
+    {
+      "id": "no-eligible-routes",
+      "evidence": "synthetic",
+      "route_patches": {
+        "A": {
+          "access_state": "confirmed_blocked"
+        },
+        "B": {
+          "access_state": "confirmed_blocked"
+        }
+      },
+      "expected": {
+        "status": "no_eligible_routes",
+        "winner": null,
+        "route_statuses": {
+          "A": "blocked",
+          "B": "blocked"
+        },
+        "scores": {}
+      }
+    },
+    {
+      "id": "detour-at-distance-limit",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "distance_metres": 1560,
+          "shaded_metres": 936,
+          "unshaded_metres": 624
+        }
+      },
+      "expected": {
+        "status": "recommended",
+        "winner": "B",
+        "route_statuses": {
+          "A": "eligible",
+          "B": "eligible"
+        },
+        "scores": {
+          "A": 0.325,
+          "B": 0.54
+        }
+      }
+    },
+    {
+      "id": "detour-over-distance-limit",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "distance_metres": 1561,
+          "unshaded_metres": 661
+        }
+      },
+      "expected": {
+        "status": "recommended",
+        "winner": "A",
+        "route_statuses": {
+          "A": "eligible",
+          "B": "detour_limit"
+        },
+        "scores": {
+          "A": 0.325
+        }
+      }
+    },
+    {
+      "id": "detour-over-time-limit",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "planned_stop_minutes": 6
+        }
+      },
+      "expected": {
+        "status": "recommended",
+        "winner": "A",
+        "route_statuses": {
+          "A": "eligible",
+          "B": "detour_limit"
+        },
+        "scores": {
+          "A": 0.325
+        }
+      }
+    },
+    {
+      "id": "detour-at-time-limit",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "planned_stop_minutes": 5
+        }
+      },
+      "expected": {
+        "status": "recommended",
+        "winner": "B",
+        "route_statuses": {
+          "A": "eligible",
+          "B": "eligible"
+        },
+        "scores": {
+          "A": 0.325,
+          "B": 0.5
+        }
+      }
+    },
+    {
+      "id": "invalid-zero-length",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "distance_metres": 0,
+          "shaded_metres": 0,
+          "unshaded_metres": 0
+        }
+      },
+      "expected": {
+        "status": "recommended",
+        "winner": "A",
+        "route_statuses": {
+          "A": "eligible",
+          "B": "invalid_data"
+        },
+        "scores": {
+          "A": 0.325
+        }
+      }
+    },
+    {
+      "id": "invalid-length-partition",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "unknown_metres": 1
+        }
+      },
+      "expected": {
+        "status": "recommended",
+        "winner": "A",
+        "route_statuses": {
+          "A": "eligible",
+          "B": "invalid_data"
+        },
+        "scores": {
+          "A": 0.325
+        }
+      }
+    },
+    {
+      "id": "water-disabled-unknown",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "water": {
+            "state": "unknown",
+            "evidence_complete": false,
+            "age_hours": null
+          }
+        }
+      },
+      "weights": {
+        "shade": 0.5,
+        "duration": 0.5,
+        "water": 0
+      },
+      "expected": {
+        "status": "recommended",
+        "winner": "B",
+        "route_statuses": {
+          "A": "eligible",
+          "B": "eligible"
+        },
+        "scores": {
+          "A": 0.375,
+          "B": 0.4875
+        }
+      }
+    },
+    {
+      "id": "broken-water-not-credited",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "shaded_metres": 450,
+          "unshaded_metres": 1050,
+          "water": {
+            "operational": false
+          }
+        }
+      },
+      "expected": {
+        "status": "recommended",
+        "winner": "A",
+        "route_statuses": {
+          "A": "eligible",
+          "B": "eligible"
+        },
+        "scores": {
+          "A": 0.325,
+          "B": 0.3
+        }
+      }
+    },
+    {
+      "id": "non-drinking-water-not-credited",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "shaded_metres": 450,
+          "unshaded_metres": 1050,
+          "water": {
+            "drinking": false
+          }
+        }
+      },
+      "expected": {
+        "status": "recommended",
+        "winner": "A",
+        "route_statuses": {
+          "A": "eligible",
+          "B": "eligible"
+        },
+        "scores": {
+          "A": 0.325,
+          "B": 0.3
+        }
+      }
+    },
+    {
+      "id": "water-too-far-not-credited",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "shaded_metres": 450,
+          "unshaded_metres": 1050,
+          "water": {
+            "extra_distance_metres": 101
+          }
+        }
+      },
+      "expected": {
+        "status": "recommended",
+        "winner": "A",
+        "route_statuses": {
+          "A": "eligible",
+          "B": "eligible"
+        },
+        "scores": {
+          "A": 0.325,
+          "B": 0.3
+        }
+      }
+    },
+    {
+      "id": "fixed-duration-range-clamps",
+      "evidence": "synthetic",
+      "route_patches": {
+        "A": {
+          "distance_metres": 2400,
+          "shaded_metres": 600,
+          "unshaded_metres": 1800
+        },
+        "B": {
+          "distance_metres": 3000,
+          "shaded_metres": 1800,
+          "unshaded_metres": 1200
+        }
+      },
+      "expected": {
+        "status": "recommended",
+        "winner": "B",
+        "route_statuses": {
+          "A": "eligible",
+          "B": "eligible"
+        },
+        "scores": {
+          "A": 0.125,
+          "B": 0.4
+        }
+      }
+    },
+    {
+      "id": "equal-distance-reference-stops",
+      "evidence": "synthetic",
+      "route_patches": {
+        "B": {
+          "distance_metres": 1200,
+          "shaded_metres": 900,
+          "unshaded_metres": 300,
+          "planned_stop_minutes": 11
+        }
+      },
+      "expected": {
+        "status": "recommended",
+        "winner": "A",
+        "route_statuses": {
+          "A": "eligible",
+          "B": "detour_limit"
+        },
+        "scores": {
+          "A": 0.325
+        }
+      }
+    },
+    {
+      "id": "equal-distance-shorter-stop-reference",
+      "evidence": "synthetic",
+      "route_patches": {
+        "A": {
+          "planned_stop_minutes": 11
+        },
+        "B": {
+          "distance_metres": 1200,
+          "shaded_metres": 900,
+          "unshaded_metres": 300
+        }
+      },
+      "expected": {
+        "status": "recommended",
+        "winner": "B",
+        "route_statuses": {
+          "A": "detour_limit",
+          "B": "eligible"
+        },
+        "scores": {
+          "B": 0.675
+        }
+      }
+    }
+  ]
 }
