@@ -12,7 +12,7 @@ Replace each `TBD` with the contributor's GitHub username after the team chooses
 | B | TBD | T2, T5 · Domain rules and route evaluation |
 | C | TBD | T3, T9 · Screen design and checked walking routes |
 | D | TBD | T1, T6 screen · Map foundation and comparison screen |
-| E | TBD | T8, T10 calculation · City geometry and shade calculation |
+| E | @danielbarmaimon | T8, T10 calculation · City geometry and shade calculation |
 | F | TBD | T10 cache/API, T6 integration, T7 · Integration and demo |
 
 Demo and end-to-end integration owner: TBD (slot F). Timekeeper: the team can assign one if useful.
