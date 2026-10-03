@@ -286,7 +286,7 @@
     {
       "id": "tree-canopy",
       "dataset_id": "100357",
-      "status": "candidate_raster_validation_required",
+      "status": "admitted_canopy_context_pending_value_validation",
       "metadata_url": "https://data.bs.ch/api/explore/v2.1/catalog/datasets/100357",
       "records_url": "https://data.bs.ch/api/explore/v2.1/catalog/datasets/100357/records",
       "checked_date": "2026-10-03",
@@ -296,7 +296,7 @@
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "attribution": null,
       "cadence": "every three years (next 2027/2030)",
-      "limitations": "2012/2021/2024 snapshots; 2024 worldfile and range access verified. CRS/NoData and full directory decode remain unverified; do not render as time-specific shade.",
+      "limitations": "2012/2021/2024 snapshots; 2024 bounded TIFF directory ranges verified EPSG:2056, 0.5m, 21767x18189 uint8, NoData 0. Full cell/class semantics still need validation; NoData 0 must not be silently interpreted as confirmed absence of canopy or sunshine.",
       "verification": "HTTP 200 metadata and bounded record sample; never imported personal/contact/media fields",
       "raster_access": {
         "checked_date": "2026-10-03",
@@ -312,8 +312,77 @@
         "worldfile_http_status": 200,
         "http_status": 206,
         "content_range": "bytes 0-65535/396060323",
-        "raster_header_status": "TIFF directory not accessible in first 65536 bytes; full CRS/NoData validation deferred",
-        "file_bytes": 396060323
+        "raster_header_status": "Verified TIFF directory using bounded byte ranges at advertised offset",
+        "file_bytes": 396060323,
+        "tags": {
+          "256": [
+            21767
+          ],
+          "257": [
+            18189
+          ],
+          "258": [
+            8
+          ],
+          "259": [
+            1
+          ],
+          "33550": [
+            0.5,
+            0.5,
+            0.0
+          ],
+          "33922": [
+            0.0,
+            0.0,
+            0.0,
+            2608306.5,
+            1272278.5,
+            0.0
+          ],
+          "34735": [
+            1,
+            1,
+            0,
+            7,
+            1024,
+            0,
+            1,
+            1,
+            1025,
+            0,
+            1,
+            1,
+            1026,
+            34737,
+            15,
+            0,
+            2049,
+            34737,
+            8,
+            15,
+            2054,
+            0,
+            1,
+            9102,
+            3072,
+            0,
+            1,
+            2056,
+            3076,
+            0,
+            1,
+            9001
+          ],
+          "42113": "0"
+        },
+        "shape": [
+          21767,
+          18189
+        ],
+        "directory_byte_offset": 8,
+        "crs_epsg": 2056,
+        "nodata": "0"
       }
     },
     {
@@ -724,6 +793,6 @@
     "T4: bounded latest-per-station retrieval, stale handling, sanitised fountain fields",
     "T8: all cell validity/seams, nominal survey mismatch, real terrain relief/occluder reach, rendered alignment and missing buffer provenance",
     "T10: full halo kernel, solar conventions/independent reference, canopy/bridge receivers, cold/warm p95 budgets and concurrent worker memory",
-    "Optional transit stays excluded until static BVB/BLT stops and live operator coverage verified; cool room hours remain manual/dated"
+    "Optional transit stays excluded until static BVB/BLT stops and live operator coverage verified; cool room hours remain manual/dated; canopy header is verified, but full raster value/class semantics remain to validate."
   ]
 }
