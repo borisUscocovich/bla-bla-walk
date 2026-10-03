@@ -10,7 +10,7 @@ The shortest walk may involve exposed streets, few places to rest, or inaccessib
 
 ## Project status
 
-This repository currently contains the project brief and a proposed implementation plan. There is no runnable application yet.
+This repository contains the source audit, revised design and build plan. The agreed direction is a layered Basel map, city-wide calculated shade and two-route comparison with adjustable recommendation weights. The selected stack is TypeScript/OpenLayers plus a Python API/worker. There is no runnable application yet.
 
 - [Design and demo proposal](docs/design.md)
 - [Build tasks and acceptance checks](docs/plan.md)
@@ -28,7 +28,7 @@ See [docs/SOURCES.md](docs/SOURCES.md).
 
 ## Limits
 
-No routes, datasets, or safety claims have been validated. This is a planning-stage prototype, not a navigation or emergency service. Proposed scope, unknowns, and demo fallback are documented in the [design brief](docs/design.md).
+Official metadata, licences and small data samples have been inspected; integration, route validation and shade accuracy/performance remain untested. No safety claims have been validated. This is a planning-stage prototype, not a navigation or emergency service. Proposed scope, unknowns, and demo fallback are documented in the [design brief](docs/design.md).
 
 ## Team
 

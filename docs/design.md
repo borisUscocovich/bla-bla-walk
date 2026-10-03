@@ -1,10 +1,10 @@
 # Bla Bla Walk
 
 Track: Social impact · Updated: 2026-10-03
-Status: revised design draft. The team selected two-route comparison with time-dependent shade and accepted IWB fountains for noncommercial use. City-wide shade coverage and a recommended route with user-adjustable weights are confirmed. Demo endpoints, implementation approach and domain rules still need agreement.
+Status: revised design draft. The team selected two-route comparison with time-dependent shade and accepted IWB fountains for noncommercial use. City-wide shade coverage and a recommended route with user-adjustable weights are confirmed. The implementation stack is selected. Demo endpoints, domain rules and performance settings remain T0/T2 build prerequisites.
 
 ## Problem
-People affected by heat, and caregivers planning on their behalf, need to understand shade, water and walking distance together. A short route can leave someone exposed; a longer shaded route may still be impractical. The current workaround and a concrete domain pitfall need confirmation with the team.
+People affected by heat, and caregivers planning on their behalf, need to understand shade, water and walking distance together. A short route can leave someone exposed; a longer shaded route may still be impractical. The current workaround and a concrete domain pitfall must be confirmed in T2; those examples set acceptable detours and recommendation defaults.
 
 ## What we build
 A mobile-friendly Basel map with independently selectable data layers and two walking routes compared side by side. Show walking time/distance, shade at the time of the walk, exposed and unknown sections, and fountains; recommend a route using user-adjustable weights while keeping every underlying metric visible. The user may choose either eligible route.
@@ -36,12 +36,9 @@ Proposed interface concepts: layer provenance and licence, geometry/coordinate s
 
 Process geometry in LV95 metres; display geographic features with explicit conversion and checked alignment. A proposed shadow calculation tests direct sunlight from terrain-level receivers against surface heights. It must include off-screen occluders, mask missing coverage and account for solar-angle conventions. Sample routes at time of arrival along the walk; show unknown length separately. Test canopy, low sun and bridges/underpasses. Store geometry once and cache timestamped calculation outputs; five-minute buckets are a proposal to benchmark.
 
-Two implementation options remain for team choice. Both use OpenLayers (BSD-2-Clause) for the map and a separate Python raster-processing worker (Rasterio, BSD-3-Clause) with cached tile/corridor results. Rasterio windowed reads support chunked processing, not automatic shadow calculation; the algorithm still needs validation and benchmarking.
+Chosen stack: TypeScript + OpenLayers for the browser UI and a Python API/worker for source ingestion and shade calculations. Use a small Vite app and FastAPI service; pin packages and check their licences in T1. Rasterio supplies chunked raster access, not the shadow algorithm. Process/cache geometry outside the browser; benchmark computation before promising latency. Deployment needs a running worker and persistent geometry cache.
 
-- Option A (recommended for map integration simplicity): TypeScript + OpenLayers UI, Python API/worker. The map and sliders use one browser-language ecosystem. Keep the UI small; no account system, database server or extra frontend framework is required initially. Deployment must support a worker and geometry cache, not only static hosting.
-- Option B: Leptos UI with an isolated OpenLayers JavaScript bridge, the same Python API/worker. Suitable if the team wants Rust for the app; adds Rust/WASM-to-JavaScript integration and another build toolchain. Keep map DOM ownership isolated from Leptos. An all-Rust GIS/shadow engine is not part of this option.
-
-This is a documentation-based comparison, not a performance result. Deployment and package versions remain to select. No paid shade API is required.
+Folder responsibilities: browser/map controls under src; server adapters, geometry, shade and evaluation under backend/bla_bla_walk; domain settings under config; versioned licensed data manifests under data. Keep large rasters and generated caches out of Git. The Python interface module is the single authored contract; generate the browser types and verify cross-language fixtures against it in T1. Detailed paths and file ownership live in the plan.
 
 ## Recommendation rules (draft)
 
