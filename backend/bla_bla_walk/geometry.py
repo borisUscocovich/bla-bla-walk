@@ -14,6 +14,7 @@ PRODUCTS = ("surface", "terrain")
 FLOAT32_BYTES = 4
 MIB = 1024**2
 GIB = 1024**3
+PIPELINE_VERSION = "native-0.5m-v1"
 
 
 def _validate_asset(asset: dict, bounds: list, resolution: float) -> int:

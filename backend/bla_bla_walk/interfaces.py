@@ -1,13 +1,43 @@
-"""Canonical wire models. Generate browser types; never edit client copies.
+"""Canonical wire and worker models. Generate browser types; never edit copies.
 
 Coordinates are WGS84 longitude/latitude (GeoJSON), not LV95 processing metres.
 Unknown values stay null. Source times are distinct from calculation times.
 Feature tasks extend these models with a decision line before regeneration.
+Worker GeometryWindow uses LV95 metres and native raster arrays, not GeoJSON.
 """
 
-from typing import Annotated, Literal
+from dataclasses import dataclass
+from typing import TYPE_CHECKING, Annotated, Literal
 
 from pydantic import AwareDatetime, BaseModel, ConfigDict, Field
+
+if TYPE_CHECKING:
+    import numpy as np
+    from numpy.typing import NDArray
+
+
+@dataclass(frozen=True)
+class GeometryWindow:
+    """A bounded native tile window for T10, never a shade coverage promise.
+
+    Arrays are north-first at 0.5m in EPSG:2056; heights are LN02/EPSG:5728
+    metres. Missing elevations are -9999. Valid masks describe samples only.
+    Mixed survey years and negative relative heights retain scene uncertainty.
+    Receiver elevations on bridges, under canopy or in tunnels are unknown.
+    Halo/ray reach must be checked separately; stream neighbouring tiles.
+    """
+
+    geometry_version: str
+    bounds_epsg2056: tuple[float, float, float, float]
+    surface: "NDArray[np.float32]"
+    terrain: "NDArray[np.float32]"
+    surface_valid: "NDArray[np.bool_]"
+    terrain_valid: "NDArray[np.bool_]"
+    receiver_valid: "NDArray[np.bool_]"
+    nominal_year_mismatch: bool | None
+    resolution_m: float = 0.5
+    vertical_reference: str = "LN02 / EPSG:5728"
+
 
 Longitude = Annotated[float, Field(ge=-180, le=180)]
 Latitude = Annotated[float, Field(ge=-90, le=90)]
