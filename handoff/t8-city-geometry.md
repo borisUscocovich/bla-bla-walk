@@ -1,10 +1,10 @@
 # T8 — reusable city geometry
 
-Status: done (acceptance) · Slot E / @Derriick · PR branch: feat/t8-city-geometry-complete
+Status: in progress (upstream compact integration) · Slot E / @Derriick · PR: #25
 
 ## State
 
-T8's literal geometry acceptance passed: all 65 receiver pairs and all 225
+Original native geometry acceptance passed: all 65 receiver pairs and all 225
 available assets prepared; every selected tile has a prepared or documented gap
 record. Checkpoints 08114c9 and 4848aaf were checked before changes. Bounded
 pipeline checkpoint 14b31b3 is pushed; full acceptance is saved as e6c1ec0.
@@ -14,8 +14,12 @@ names fail local push checks. Shared history was left intact: the exact verified
 T8 diff is carried on feat/t8-city-geometry-complete, based on main 1e043f5.
 Original feat/t8-city-geometry and pushed checkpoint 14b31b3 remain available.
 Completed branch is committed/pushed as 80bf175; both privacy hooks passed.
-The filled browser PR form was opened successfully. Browser-authenticated
-creation remains pending; ask before merging once the PR exists.
+Completed PR #25 is open: https://github.com/danielbarmaimon/bla-bla-walk/pull/25.
+Head 1facda2; GitHub guard passed. Main advanced to d8393eb via compact/offline
+PR #24 while this work was being verified. PR #25 now conflicts. Main's T8
+acceptance now specifies 1m horizontal / 2m height steps and native 2m terrain.
+Do not mark revised T8 complete or ask to merge until compact integration and
+acceptance pass. Native reference preparation/evidence remains useful.
 Never merge without the user's explicit yes.
 
 ## Done
@@ -76,17 +80,27 @@ platform-neutral. No background preparation writer remains running.
 
 ## Next
 
-1. Open the completed PR using the prepared browser form. GitHub CLI/hub and
-   API tokens are absent in this clone;
-   authenticated SSH permits pushes but cannot create GitHub PRs by itself.
-   the exact body is saved locally in .hack/t8/pull-request.md. The form targets
-   main...feat/t8-city-geometry-complete. Select Create pull request in an authenticated
-   browser, or obtain approval to install/authenticate GitHub CLI. Public API
-   confirmed there is no open T8 PR yet. Never claim creation until confirmed.
-2. Ask before merging the specific created PR. T10 starts only after T8 merges.
+1. Integrate current main d8393eb without rewriting shared history. A squash
+   update from main can avoid bringing existing upstream author-name violations
+   into the old-branch push range; retain both pipelines, do not weaken hooks.
+2. Keep main's compact geometry.py and test_geometry.py. Move our inventory
+   planner/tests to geometry_inventory.py and test_geometry_inventory.py; update
+   imports. Move local native raw/arrays/manifest into data/geometry/native-reference
+   before running main's compact script: both currently use manifest.json!
+3. Keep compact config/production default; native data is validation evidence,
+   not a replacement for main's agreed reduced-resource representation. Add
+   compact scaled-window consumer and scene/seam/border/bridge alignment checks.
+4. Reuse checksum-verified native surface TIFFs when preparing compact outputs;
+   resolve/download the pinned 2m terrain as main does. Verify revised acceptance,
+   update docs/evidence/handoff, check all new offline/browser tests, commit/push.
+5. PR creation required the authenticated browser because CLI/token absent.
+   Update PR #25's description in browser if needed; ask before merging only
+   when conflicts and acceptance are resolved. T10 starts after T8 merges.
 
 ## Continue prompt
 
-T8 acceptance is done on feat/t8-city-geometry-complete. Read this handoff and
-TASK_START.md. Verify final branch upload, finish creating the completed PR and
-ask before merging. Dependencies are approved. Keep critical T10 limits.
+Continue T8 on feat/t8-city-geometry-complete and PR #25. Read this handoff,
+TASK_START.md and main's new compact geometry/offline changes from PR #24.
+Finish integrating and validating the configured compact representation while
+retaining native references; commit/push and ask before merging. Dependencies
+are approved; no extra install is needed. Keep critical T10 unknowns explicit.
