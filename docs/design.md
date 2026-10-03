@@ -1,7 +1,7 @@
 # Bla Bla Walk
 
 Track: Social impact · Updated: 2026-10-03
-Status: scope and T2 demo endpoints/rules are agreed. The T1 foundation is complete on `feat/t1-map-foundation` and awaits merge; geometry admission and performance settings remain prerequisites for later tasks.
+Status: agreed direction and scope; [demo endpoints and domain defaults](routing-rules.md) are specified for T2. T1's runnable map foundation and T0's source/geometry inventory are merged to `main`. Geometry processing, shade accuracy and performance remain to validate in later tasks. See task handoffs for implementation state.
 
 ## Problem
 People affected by heat, and caregivers planning on their behalf, need to understand shade, drinking water and walking effort together. A short route can leave someone exposed; a shaded detour may be impractical. The [routing rules](routing-rules.md) describe the selected demo walk, assumed current workaround and one concrete domain pitfall; the workaround is a scenario assumption rather than an observed participant habit.

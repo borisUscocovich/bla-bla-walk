@@ -13,7 +13,7 @@ Branch: feat/t1-map-foundation; PR #14. T1's foundation acceptance check is comp
 - Verified executable privacy hooks and created the task branch.
 - Checked the WMTS capabilities, VSBS CC-BY-4.0 collection metadata and one real tile (14/5725/8537).
 - Wrote canonical models, fixture endpoint, generation script, client runtime validation and contract checks.
-- Wrote layer toggles, keyboard feature inspection, provenance panel and explicit API/tile failures. Generated files and dependency pins are still pending.
+- Wrote layer toggles, keyboard feature inspection, provenance panel and explicit API/tile failures.
 - Installed Python dependencies in a local .venv and pinned direct/transitive versions; browser assets and licence notices have a checksum manifest.
 - Generated TypeScript declarations and validation schema from canonical Python models; no JavaScript build is required.
 - Applied T3's civic palette, shared theme roles and touch-sized controls.
@@ -21,6 +21,7 @@ Branch: feat/t1-map-foundation; PR #14. T1's foundation acceptance check is comp
 - Python lint and browser formatting passed. README now documents the one-server setup.
 - Fresh-copy setup passed with a new .venv and empty asset cache. Theme text/graphic contrast checks passed. Basel attribution is always visible.
 - Integrated main at e547346: Git merged without manual conflicts, preserving T3's style guide, future-feature documentation and Windows hook fixes.
+- Integrated main at a224011 with T0's source/geometry audit and T2's routing rules; resolved the design status conflict by keeping the completed T2 references and the runnable T1 foundation. Preserved the Python-only setup and all decision lines.
 
 ## Next
 1. Review PR #14 and replace its WIP title/body with the completed implementation summary.
