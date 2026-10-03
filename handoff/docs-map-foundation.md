@@ -6,7 +6,7 @@ Status: in progress
 Improve the design and plan around a Basel map with prioritised data layers, current observations and defensible approximations, before application code.
 
 ## State
-Branch: docs/design. Source audit saved in docs/SOURCES.md; design and plan are revised drafts with a map foundation followed by geometry, time-dependent shade and route metrics. No implementation or PR yet. Documentation checkpoint is being saved; scope/stack remain draft where marked. The team chose two-route comparison and requested current-time shade. The team confirmed shade across all Basel and side-by-side tradeoffs with user choice rather than a ranked recommendation; administrative boundary and implementation approach remain pending.
+Branch: docs/design. Source audit saved in docs/SOURCES.md; design and plan are revised drafts with a map foundation followed by geometry, time-dependent shade and route metrics. No implementation or PR yet. Documentation checkpoints are saved locally; scope/stack remain draft where marked. The team chose two-route comparison and requested current-time shade. The team confirmed shade across all Basel and a weighted route recommendation with editable weights, visible tradeoffs and manual choice; administrative boundary and implementation approach remain pending.
 
 ## Done
 - Official metadata and current small samples checked for temperature 100009; station metadata 100082 also checked (both CC BY 4.0).
@@ -18,7 +18,7 @@ Branch: docs/design. Source audit saved in docs/SOURCES.md; design and plan are 
 
 ## Next
 - City-wide coverage is agreed. Pin the exact boundary and confirm one concrete domain pitfall and the walking example.
-- Present two or three approaches, agree map-first scope and stack (Leptos is a participant suggestion, not yet a team decision).
+- Stack choice pending: TypeScript/OpenLayers + Python worker (recommended for integration simplicity), or Leptos/OpenLayers JS bridge + the same worker. No packages installed or code written.
 - Review the revised design/plan with the team and settle stack. Source STAC queries returned 2023 surface and 2019 terrain examples; exact tile selection and raster tests remain.
 - Complete layer admission checks, then record decisions, run doc and privacy checks, commit and open a PR. Ask before merging.
 
