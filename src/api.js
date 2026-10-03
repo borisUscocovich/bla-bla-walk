@@ -18,13 +18,17 @@ export function parseSnapshot(value) {
   if (!isSnapshot(value)) {
     throw new Error('The map API returned data that does not match its contract.');
   }
-  return value;
+  return {
+    ...value,
+    mode: value.mode ?? 'fixture'
+  };
 }
 
 /** Fetch one snapshot with bounded waiting; callers show a visible failure. */
 export async function loadSnapshot() {
-  const response = await fetch('/api/map', {
-    signal: AbortSignal.timeout(10_000),
+  const mode = new URLSearchParams(location.search).get('mode') ?? 'fixture';
+  const response = await fetch(`/api/map?mode=${encodeURIComponent(mode)}`, {
+    signal: AbortSignal.timeout(mode === 'online' ? 90_000 : 10_000),
   });
   if (!response.ok) throw new Error('The map API is unavailable.');
   return parseSnapshot(await response.json());

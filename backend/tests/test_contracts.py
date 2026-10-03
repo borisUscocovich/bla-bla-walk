@@ -4,13 +4,12 @@ import json
 from pathlib import Path
 
 import pytest
-from fastapi.testclient import TestClient
-from pydantic import ValidationError
-
 from bla_bla_walk.contract_types import typescript_contract
 from bla_bla_walk.demo_fixture import fixture_snapshot
 from bla_bla_walk.interfaces import MapFeature, MapSnapshot
 from bla_bla_walk.main import app
+from fastapi.testclient import TestClient
+from pydantic import ValidationError
 
 ROOT = Path(__file__).resolve().parents[2]
 

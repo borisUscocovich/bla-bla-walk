@@ -44,8 +44,8 @@ def load_demo_routes(
         distance = float(properties["distance_m"])
         path = ", ".join(properties["path_names"])
         explanation = (
-            f"Walking path via {path}. Geometry snapshot retrieved "
-            f"{metadata['snapshot_date']}. "
+            f"Walking path via {path}. "
+            f"Geometry snapshot retrieved {metadata['snapshot_date']}. "
             f"Walking duration uses T2's {speed:g} m/s assumption. "
             f"{properties['access_note']} {properties['coverage_note']}"
         )
@@ -71,11 +71,12 @@ def load_demo_routes(
         explanation=(
             "Two FOSSGIS foot-profile alternatives from "
             f"{metadata['start']['name']} to {metadata['end']['name']}; "
-            "OSM network snapshot retrieved "
-            f"{metadata['snapshot_date']}. The exact routing-graph build timestamp "
-            "is not exposed, and the service has no temporary-closure feed or "
-            "per-segment access audit. Treat access as unverified; outside "
-            "shade-calculation coverage, route support must be marked unsupported."
+            f"OSM network snapshot retrieved {metadata['snapshot_date']}. "
+            "The exact routing-graph build timestamp is not exposed, "
+            "and the service has no temporary-closure feed "
+            "or per-segment access audit. "
+            "Treat access as unverified; outside shade-calculation coverage, "
+            "route support must be marked unsupported."
         ),
         features=mapped,
     )

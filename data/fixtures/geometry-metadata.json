@@ -12,7 +12,9 @@
   },
   "source_manifest": {
     "path": "data/source-manifest.json",
-    "sha256": "8ab85faed50732955a95ae05d77d39189c9bd8799a04cea7d01d15c26f60f44b"
+    "sha256": "5e78732e10db31ea35ba506a47bed67670d6070d8866e8bd574b124e1684dd5b",
+    "prepared_against_sha256": "8ab85faed50732955a95ae05d77d39189c9bd8799a04cea7d01d15c26f60f44b",
+    "rehash_reason": "main appended only the compact_preparation pointer block; no raster asset, checksum or inventory entry used by T8 changed"
   },
   "boundary": {
     "name": "Basel-Stadt canton",

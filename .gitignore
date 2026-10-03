@@ -69,6 +69,7 @@ node_modules/
 .netlify/
 out/
 .cache/
+data/geometry/
 .parcel-cache/
 npm-debug.log*
 yarn-debug.log*

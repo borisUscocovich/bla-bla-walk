@@ -1,0 +1,9 @@
+{
+  "url": "https://wmts.geo.bs.ch/mapcache/wmts/1.0.0/VS_Vektorstadtplan_grau/default/3857/{z}/{y}/{x}.png",
+  "bounds_wgs84": [7.544814498, 47.508699688, 7.704595246, 47.607375471],
+  "min_zoom": 12,
+  "max_zoom": 17,
+  "attribution": "Geodaten Kanton Basel-Stadt",
+  "licence": "CC BY 4.0",
+  "metadata_url": "https://api.geo.bs.ch/stac/v1/collections/VSBS"
+}

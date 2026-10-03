@@ -1,6 +1,6 @@
 # Revised build plan: layered map, shade, two routes
 
-Based on [design](design.md). Draft: the team confirmed two-route comparison and current-time shade; city-wide Basel shade coverage is also confirmed; TypeScript/OpenLayers + Python API/worker is selected; exact boundary and rule assumptions remain pending. T0, T1, T2 and T9 are complete and merged. Their original task labels remain and are crossed out below. Owners for remaining tasks are unassigned; agree them by GitHub username. Paths below are planned and will be created in the named tasks. Task state belongs in handoff files.
+Based on [design](design.md). The team confirmed two-route comparison and current-time shade across Basel. The implemented stack is browser-native JavaScript/OpenLayers served by Python FastAPI, with canonical Python contracts and generated TypeScript declarations; no npm/Vite build is required. T0, T1, T2, T3, T4 and T9 are complete and merged; their original task labels remain crossed out below. T8 ingestion is merged, but spatial/scene/bridge acceptance remains open. Boundary and baseline walking rules are recorded in the source register and routing rules; cross-mode ranking and transit admission remain proposals. Owners for remaining tasks are unassigned; agree them by GitHub username. Listed paths may already exist or be created in the named tasks. Detailed task state belongs in handoff files.
 
 ## M1: a map runs early; real layers replace fixtures independently
 
@@ -25,13 +25,13 @@ For rest stops, use Basel-Stadt's official cool-room list as a curated starting 
 #### ~~T2 Agree one walk and comparison rules~~
 Owner: unassigned
 Needs: nothing
-Files: docs/routing-rules.md, data/scenarios.json (proposed)
+Files: docs/routing-rules.md, data/scenarios.json
 Done when: the team selects one demo area/start/destination, explains the current workaround and one domain pitfall, and approves examples for shade-vs-distance, water access, blocked segments, and unknown data. Specify walking-speed/stop assumptions, acceptable detours, metrics and denominator rules. Recommend an eligible route using adjustable preference weights while preserving side-by-side metrics and manual choice. Agree criteria, fixed normalization ranges, default weights and unknown/stale completeness rules; constraints stay outside weights. Include ties, all-zero weights and examples where changing weights changes the winner. Do not invent health thresholds or shade cooling degrees.
 
-#### T3 Define the map and comparison screen
+#### ~~T3 Define the map and comparison screen~~
 Owner: unassigned
 Needs: nothing
-Files: docs/style-guide.md (proposed)
+Files: docs/style-guide.md
 Done when: a reviewable screen includes layer toggles, readable legends, provenance/times, Now/departure time, two route cards, coverage boundary and stale/unknown states; keyboard and non-colour-only explanations are specified.
 
 ### Chunk B — foundation (can begin alongside preparation)
@@ -39,15 +39,15 @@ Done when: a reviewable screen includes layer toggles, readable legends, provena
 #### ~~T1 Build the smallest map foundation~~
 Owner: unassigned
 Needs: nothing (stack decision is recorded; verify the basemap endpoint within T1)
-Files: README.md, docs/decisions.md, package.json, package-lock.json, vite.config.ts, index.html, src/main.ts, src/map.ts, src/theme.css, src/interfaces.ts (generated), backend/pyproject.toml, backend/requirements.txt, backend/bla_bla_walk/main.py, backend/bla_bla_walk/interfaces.py (canonical), backend/tests/test_contracts.py, src/contract.test.ts
+Files: README.md, docs/decisions.md, index.html, src/main.js, src/map.js, src/theme.css, src/interfaces.ts (generated), src/snapshot.schema.json (generated), config/browser-assets.json, scripts/fetch_browser_assets.py, backend/export_contract.py, backend/pyproject.toml, backend/requirements.txt, backend/bla_bla_walk/main.py, backend/bla_bla_walk/interfaces.py (canonical), backend/tests/test_contracts.py, backend/tests/test_browser.py
 Done when: a fresh checkout starts with documented commands, displays a real Basel basemap, toggles two labelled fixture layers, and shows feature provenance and missing/stale states. One shared contract supports later observations, shade and routes; consumers have explicit owned paths before parallel work begins.
-Notes: chosen stack is TypeScript/OpenLayers with Vite and a Python FastAPI API/worker. Keep Python model definitions canonical and generate rather than separately author client types; actual model changes require a decision line. Use npm and a lockfile; propose pixi for reproducible Python setup or use a project virtual environment with pinned requirements. Do not install globally. Record actual interface decisions in the same commit. Fixtures must not masquerade as live data. Adopt T3 styling when available.
+Notes: implemented as browser-native JavaScript/OpenLayers served by FastAPI, replacing the original Vite/npm proposal as recorded in docs/decisions.md. Keep Python models canonical and generate client declarations/schema; actual model changes require a decision line. Use the project virtual environment, pinned Python requirements and checksum-pinned browser assets. Do not install globally. Fixtures must not masquerade as live data. Follow the accepted T3 guide.
 
 ## M2: real layers, calculated shade and route alternatives
 
 ### Chunk C — parallel after T1 (T0/T2 inputs as listed)
 
-#### T4 Connect current observations and fountains
+#### ~~T4 Connect current observations and fountains~~
 Owner: unassigned
 Needs: T1, relevant T0 source admission
 Files: backend/bla_bla_walk/adapters/temperature.py, backend/bla_bla_walk/adapters/fountains.py, backend/tests/test_observations.py, data/fixtures/observations.json, data/fixtures/fountains.json
@@ -56,8 +56,9 @@ Done when: recent values join stations by ID, each point displays observation ag
 #### T8 Prepare reusable surface/terrain geometry
 Owner: unassigned
 Needs: T1, T0 city boundary and inventory
-Files: backend/bla_bla_walk/geometry.py, backend/tests/test_geometry.py, data/geometry/ (local generated rasters), data/fixtures/geometry-metadata.json
-Done when: every tile intersecting the city boundary is prepared or has an explicitly documented data gap; geometry renders aligned at centre and boundary reference points. Include buffered occluders, versioned geometry, coordinate/vertical system, resolution and NoData. Test seams, survey mismatch, border gaps and bridges. Document resumable tile preparation and storage/memory budgets; subdivide ingestion into separately verified batches if needed.
+Files: backend/bla_bla_walk/geometry.py, backend/tests/test_geometry.py, scripts/prepare_geometry.py, config/geometry.json, data/geometry/ (local generated rasters), data/preparation-summary.json
+Done when: every tile intersecting the city boundary is prepared or has an explicitly documented data gap; geometry renders aligned at centre and boundary reference points. Use the configured 1m horizontal cells and 2m elevation steps, apply the stored band scale before interpreting heights, and preserve NoData. Include buffered occluders, versioned geometry, coordinate/vertical system and native source resolution. Test seams, survey mismatch, border gaps and bridges. Document resumable tile preparation and storage/memory budgets; subdivide ingestion into separately verified batches if needed.
+Notes: the compact ingestion/mode preparation handoff records implementation and downloaded evidence. Complete spatial/scene/bridge acceptance separately; do not mark the parent T8 complete solely because all available files downloaded. Native 2m terrain is resampled onto the 1m storage grid without adding detail; surface max aggregation and height quantization need scene validation.
 
 #### ~~T9 Provide two checked walking alternatives~~
 Owner: unassigned
@@ -65,17 +66,17 @@ Needs: T1, T2
 Files: backend/bla_bla_walk/adapters/routes.py, backend/tests/test_routes.py, data/routes/demo.geojson
 Done when: two routes connect the agreed endpoints using licensed, checked walking geometry, with distance/duration and available access restrictions. Store provenance and snapshot date. Routes outside calculation coverage are marked unsupported.
 
-#### T14 Review route modes and verify transit feasibility (proposed)
+#### T18 Review route modes and verify transit feasibility (proposed)
 Owner: unassigned
 Needs: T0 source admission follow-up; T2 routing proposal
 Files: docs/routing-rules.md, docs/style-guide.md, docs/SOURCES.md, data/source-manifest.json, docs/decisions.md
 Done when: the team reviews Fastest overall, More shade, manual choice and the optional five-minute detour limit. Agree mode ranking and evidence labels. Verify BVB/BLT timetable access, coverage, terms, stop and transfer data, and usable journey times. Separately verify GTFS-RT alert access, key handling, operator coverage and freshness. Decide whether evidence supports scheduled trips, live disruption status, both or neither. Record gaps explicitly. Do not start transit integration unless its required inputs are admitted.
 
-#### T15 Provide a transit-assisted candidate (conditional)
+#### T19 Provide a transit-assisted candidate (conditional)
 Owner: unassigned
-Needs: T1, T2, T14 admitted data; T9 for checked walking legs
+Needs: T1, T2, T18 admitted data; T9 for checked walking legs
 Files: backend/bla_bla_walk/adapters/transit.py, backend/tests/test_transit.py, data/fixtures/transit.json
-Done when: a candidate includes checked access/egress walking legs, ride/wait/transfer durations, stop access state, source provenance and a clear scheduled or live label. Waiting shade stays unknown without stop evidence. Confirmed closures and unavailable service cannot appear as usable legs. If T14 does not admit a source, record the unavailable state and leave walking comparison usable.
+Done when: a candidate includes checked access/egress walking legs, ride/wait/transfer durations, stop access state, source provenance and a clear scheduled or live label. Waiting shade stays unknown without stop evidence. Confirmed closures and unavailable service cannot appear as usable legs. If T18 does not admit a source, record the unavailable state and leave walking comparison usable.
 
 ### Chunk D — shade after prepared geometry
 
@@ -84,15 +85,15 @@ Owner: unassigned
 Needs: T8
 Files: backend/bla_bla_walk/shade.py, backend/bla_bla_walk/shade_cache.py, backend/tests/test_shade.py
 Done when: current/selected timestamps produce direct-sun shadow masks for requested viewports and route corridors anywhere within Basel with requested/effective time and geometry version. Simple known-object cases verify direction/length, and spot checks compare with an independent reference. Measure cold/warm-cache latency, concurrency and tile-seam consistency across representative city views; test low sun/night, missing cells, occluder boundaries and canopy receivers. Unsupported cells stay unknown.
-Notes: sun geometry changes with time; surveyed geometry does not. Benchmark five-minute buckets and lazy tile/corridor calculation before adopting them; version cache keys by geometry, resolution and effective time. New requests must not wait for a full-city recomputation. Do not use relief hillshade or tree buffers as actual walking shade.
+Notes: sun geometry changes with time; surveyed geometry does not. Consume scaled geometry through the geometry reader, not raw int16 codes. Validate the configured 1m grid and 2m height steps against unquantized known-object and independent real-scene references, including changed shadow edges and route-score sensitivity; the earlier 2m-grid kernel timings are historical and cannot establish the new pipeline's performance. Benchmark five-minute buckets and lazy tile/corridor calculation before adopting them; version cache keys by geometry/preparation version, cell spacing, height step and effective time. Measure cache size at 1m (four times the cells of the former 2m output). New requests must not wait for a full-city recomputation. Offline shade requests use local geometry and ephemerides without external calls; unavailable inputs remain unknown. Do not use relief hillshade or tree buffers as actual walking shade.
 
 ### Chunk E — route metrics after shade and routes
 
 #### T5 Compare eligible trip options
 Owner: unassigned
-Needs: T10, T9, T2; T14/T15 only if transit sources pass admission
+Needs: T10, T9, T2; T18/T19 only if transit sources pass admission
 Files: backend/bla_bla_walk/evaluation.py, config/routing-rules.json, backend/tests/test_evaluation.py
-Done when: walking candidates show shaded/unshaded/unknown metres and percentages at departure plus cumulative walking time. Where T15 is admitted, compare complete door-to-door time across walking and transit candidates, keeping walking, waiting, ride, transfer and stop time separate. Provide Fastest overall and More shade choices, preserve manual choice, and explain every recommendation. Do not score transit ride duration as walking time or infer shade for indoor/onboard segments. Unknown coverage cannot gain credit; known blocked paths cannot become eligible. Handle ties and insufficient evidence. Weight changes rescore cached metrics without repeating shade calculations.
+Done when: walking candidates show shaded/unshaded/unknown metres and percentages at departure plus cumulative walking time. Where T19 is admitted, compare complete door-to-door time across walking and transit candidates, keeping walking, waiting, ride, transfer and stop time separate. Provide Fastest overall and More shade choices, preserve manual choice, and explain every recommendation. Do not score transit ride duration as walking time or infer shade for indoor/onboard segments. Unknown coverage cannot gain credit; known blocked paths cannot become eligible. Handle ties and insufficient evidence. Weight changes rescore cached metrics without repeating shade calculations.
 
 ## M3: complete journey and repeatable demonstration
 
@@ -100,15 +101,16 @@ Done when: walking candidates show shaded/unshaded/unknown metres and percentage
 
 #### T6 Connect and verify the journey
 Owner: unassigned
-Needs: T4, T5, T3; T15 only if transit sources pass admission
-Files: src/map.ts, src/main.ts, src/comparison.ts, src/theme.css, backend/bla_bla_walk/main.py, src/journey.test.ts, README.md
-Done when: narrow-screen and keyboard users toggle layers, inspect freshness, choose Fastest overall or More shade, compare eligible trip options, and change departure time. If transit is admitted, show door-to-door duration and each trip leg with scheduled/live status. Keep the five-minute detour option clear. Test source failure, calculation failure, tile seams, city-edge unknowns and outside-coverage behaviour; show effective time without implying measured cooling or overall safety.
+Needs: T4, T5, T3; T19 only if transit sources pass admission
+Files: src/map.js, src/main.js, src/comparison.js, src/theme.css, backend/bla_bla_walk/main.py, backend/bla_bla_walk/snapshots.py, backend/tests/test_browser.py, README.md
+Done when: narrow-screen and keyboard users toggle layers, inspect freshness, choose Fastest overall or More shade, compare eligible trip options, and change departure time. If transit is admitted, show door-to-door duration and each trip leg with scheduled/live status. Keep the five-minute detour option clear. Pan and compare across the city; test source failure, calculation failure, tile seams, city-edge unknowns and outside-coverage behaviour; show effective time and route explanation without implying measured cooling or overall safety. Verify the complete journey in online external-server mode and local offline mode with downloaded geometry/imagery and dated provider snapshots. Offline makes zero external requests; missing downloads are explicit. Keep source observation times separate from locally calculated shade time; transit needs a saved timetable/candidate or an explicit unavailable state offline.
+Notes: provider-layer modes and offline basemap preparation are already implemented in the compact preparation work; this task still connects shade/evaluation/time controls and verifies the complete journey. Do not infer that the full route/shade flow works offline yet.
 
-#### T7 Prepare the three-minute demo and fallback
+#### T7 Prepare the five-minute pitch, 42-second hackathon reflection and demo fallback
 Owner: unassigned
 Needs: T6
-Files: docs/demo.md; media kept locally
-Done when: the presenter shows map layers, two routes and changing shade, explains source licences/approximations, and repeats the story with a dated saved scenario offline. Saved output never appears as a successful live calculation.
+Files: docs/pitch.md, docs/demo.md; media kept locally
+Done when: prepare a presentation timed to exactly 5 minutes for the solution plus exactly 42 seconds for the team's HackAmRhein experience. The five-minute story covers the problem, what was built, how it works, what makes the approach interesting, and a live demo where possible. Include concise sources/licences, AI assistance, and limitations; distinguish measured, synthetic, saved, unavailable and unvalidated behaviour. Keep the final 42 seconds for what the team learned, what surprised them, what broke, or what they will remember. Provide likely jury questions with short evidence-based answers and a tested fallback for any live-demo failure. Rehearse the whole 5:42 twice with a timer, decide who speaks and clicks, and trim after the first run. Verify the team submission form is completed before the build cutoff, 14:59 on Sunday 4 October 2026. The venue is FHNW Dreispitz, Dornacherstrasse 394, Basel; doors open 13:30, building ends at 14:59, the introduction runs 15:00–15:30, presentations start at 15:30 in random order, and doors close at approximately 17:00. Record the final presentation file and backup location in the runbook. Do not imply the live shade and route journey works until T6 acceptance passes; a dated saved scenario or recording is a fallback, not a live calculation.
 
 ## M4: people without smartphones can follow a prepared route in a transparent phone simulation
 
