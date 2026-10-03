@@ -39,8 +39,11 @@ Build the basemap and a fixture API round trip first; add verified observations,
 ## Recommendation rules
 Expose preferences for shade/exposure, walking duration and water access. T2 defines measurable criteria, fixed normalization ranges and defaults; raw minutes and percentages cannot simply be added. Show raw metrics and each criterion's score contribution. Known access/blocking constraints remain outside weights. Define evidence-completeness rules; missing shade or stale fountain status must not improve a score. Handle ties, all-zero weights and insufficient evidence. Weight changes rescore existing metrics without repeating shadow calculations.
 
+## Later extension: shared user reports
+Let users report a broken fountain, a temporarily closed place, or a blocked path. Reports appear as shared map alerts with a category, location, submission time and status; a short note is optional. Users can confirm, resolve or flag reports. Show report age and confirmation state so unverified reports are clear. Define expiry, moderation and rate limits before launch. Start without accounts or stored reporter identities. Do not label any reported place as safe. Choose persistent storage and abuse controls when this extension is designed; it is outside the core demo.
+
 ## Out of scope and approximations
-No accounts, health profiles or stored location histories. Current-time shade is calculated from surveyed geometry, not observed cloud shadows or live canopy measurements. Foliage and gaps are approximate; unsupported areas stay unknown. Do not turn shade fraction into temperature/PET degrees. Historical PET remains a summer 14:00 scenario. City-wide shade is in scope; alerts, volunteer matching and phone service remain extensions.
+No health profiles or stored location histories. Current-time shade is calculated from surveyed geometry, not observed cloud shadows or live canopy measurements. Foliage and gaps are approximate; unsupported areas stay unknown. Do not turn shade fraction into temperature/PET degrees. Historical PET remains a summer 14:00 scenario. City-wide shade is in scope; shared reports, volunteer matching and phone service remain extensions.
 
 ## Team and domain input
 Owners remain unassigned until contributors choose tasks by GitHub username. Domain examples determine walking constraints, acceptable detours and water interpretation. Explore the look together with hack-design before or after the first map works.

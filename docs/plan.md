@@ -97,3 +97,27 @@ Owner: unassigned
 Needs: T6
 Files: docs/demo.md; media kept locally
 Done when: the presenter shows map layers, two routes and changing shade, explains source licences/approximations, and repeats the story with a dated saved scenario offline. Saved output never appears as a successful live calculation.
+
+## M4: people can share timely map reports
+
+### Chunk G — define the report rules
+
+#### T11 Define shared-report rules and storage
+Owner: unassigned
+Needs: T1, T2
+Files: docs/reporting-rules.md, docs/decisions.md
+Done when: the team approves report categories, optional note limits, anonymous-by-default handling, confirmation/resolution and flagging behaviour, expiry, moderation, rate limits, and a persistent-storage approach. Examples cover a broken fountain, a closed place and a blocked path. Rules show report age and uncertainty without calling places safe.
+
+### Chunk H — build the API and map experience (in order)
+
+#### T12 Store and serve shared reports
+Owner: unassigned
+Needs: T11, T1
+Files: backend/bla_bla_walk/reporting.py, backend/bla_bla_walk/main.py, backend/tests/test_reporting.py
+Done when: reports persist across reloads, validate their category and location, receive server timestamps, expire by the agreed rule, and support confirmation, resolution and flagging. Apply the agreed rate limits; reporter identity is not collected by default.
+
+#### T13 Add reports to the map
+Owner: unassigned
+Needs: T12, T6
+Files: src/map.ts, src/main.ts, src/reporting.ts, src/reporting.test.ts
+Done when: a person can submit a map report, see current reports with age and status, confirm or resolve one, and flag a questionable report. Closed or broken items are visibly reports, not verified safe-stop data.
