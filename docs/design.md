@@ -1,67 +1,48 @@
-# Bla Bla Walk: design brief
+# Bla Bla Walk
 
-Updated: 2026-10-03. Synthesized from the team's 2026-10-02 meeting notes.
-The meeting established the direction; the demo scope below is a proposal for review, not a completed product or a final scope decision.
+Track: Social impact · Updated: 2026-10-03
+Status: revised design draft. The team selected two-route comparison with time-dependent shade and accepted IWB fountains for noncommercial use. City-wide shade coverage is confirmed. Demo endpoints, implementation approach and domain rules still need agreement.
 
-## Problem and users
+## Problem
+People affected by heat, and caregivers planning on their behalf, need to understand shade, water and walking distance together. A short route can leave someone exposed; a longer shaded route may still be impractical. The current workaround and a concrete domain pitfall need confirmation with the team.
 
-People who are more affected by heat, including older adults, children, pregnant people, and people with chronic illnesses, may need help planning a walk. Caregivers may plan on their behalf. A useful route needs to account for exposure, water, places to cool down, and barriers, rather than distance alone.
+## What we build
+A mobile-friendly Basel map with independently selectable data layers, followed by a comparison of two walking routes that accounts for shade at the time of the walk.
 
-## Direction recorded in the meeting
+### Demo flow (three minutes)
+1. Open Basel, toggle temperature observations, fountains and computed shade; inspect a feature's source, age and uncertainty.
+2. Select one agreed start/destination pair and see two real walking alternatives, with distance, estimated duration, nearby water, and shaded/unshaded/unknown metres.
+3. Choose Now or change departure time. Recalculate shade and route comparison; explain the effective time, changing shadow geometry and tradeoff without promising a safest route.
+4. Disconnect a source: retained data is visibly stale; a saved shade scenario is labelled with its original time.
 
-- Start with a mobile-friendly web map focused on heat in Basel.
-- Explore routes to cooler destinations using shade, fountains, and known closures or accessibility barriers.
-- Investigate public and aggregated data before committing to live integrations.
-- Preserve access for people without smartphones as a design concern; a phone interface needs further scoping.
-- Treat volunteer accompaniment and community assistance as a later phase, with operating and vetting arrangements still unresolved.
+Confirmed coverage: all Basel, rather than a single neighbourhood. Default interpretation is Basel city; the exact administrative boundary is to be pinned in the source manifest. Prepare a city-wide surface/terrain tile inventory plus surrounding shadow-casting geometry. Calculate visible tiles and route corridors on demand instead of recomputing the entire city on every time change. This execution approach is proposed and must pass performance checks. The initial demonstration still uses two checked walking alternatives; arbitrary endpoint route generation remains a separate decision.
 
-## Proposed first demo
+## Data
+The [source register](SOURCES.md) holds exact endpoints, verified licences, access status and remaining checks.
 
-Use one small Basel demonstration area and a fixed pair of route alternatives, with clearly labelled sample data where sources have not been verified.
+| Input | Source | Terms and meaning |
+|---|---|---|
+| Air-temperature observations and stations | Basel 100009 and 100082 | CC BY 4.0; raw timestamped points, not a continuous heat-risk map |
+| Fountains | IWB via Basel 100008 | Noncommercial reuse with IWB attribution; commercial use requires permission; preserve drinking/type unknowns |
+| Surface and terrain heights | swisstopo swissSURFACE3D Raster + swissALTI3D | OGD terms, © swisstopo; static surveyed geometry for calculated time-dependent shade |
+| Tree context | Basel 100052 | CC BY 4.0 + OpenStreetMap notice pending review; points do not establish shade |
+| Basemap and walking alternatives | Basel map service; checked OSM walking geometry candidate | Exact basemap mapping/access still to verify; OSM ODbL with attribution and applicable database obligations |
+| Optional heat/weather context | Historical Basel PET; MeteoSwiss point forecasts | PET admission checks remain; MeteoSwiss CC BY 4.0. Keep scenario, prediction and observation separate |
 
-1. Choose a sample start and a cooler destination.
-2. See two walking alternatives on a map, with distance, modelled daytime heat stress (PET), water, and obstacle information; use labelled synthetic PET if data access is not verified.
-3. Compare the tradeoffs and see why one route is suggested under the demonstrated rules.
-4. Inspect source labels, update times, missing information, and the demo's limitations.
+## How it is built
+Separate the map screen, source adapters, reusable data storage/cache, shadow calculation and route evaluation. The first foundation starts with a real basemap and small source-labelled fixtures; it does not wait for route scoring or a complete shadow engine. Then independently replace fixtures with checked data and attach calculations through one shared interface.
 
-The proposal demonstrates route comparison before attempting city-wide route generation. Whether to use precomputed alternatives or a routing service remains a technical decision for the foundation task.
+Proposed interface concepts: layer provenance and licence, geometry/coordinate system, units, observed time, forecast validity, scenario/effective calculation time, retrieval time, geometry version, coverage and unknown states; route geometry and per-segment arrival time. These are design concepts, not an implemented contract. Record any actual interface change in the same commit as its decision line.
 
-## Data and components
+Process geometry in LV95 metres; display geographic features with explicit conversion and checked alignment. A proposed shadow calculation tests direct sunlight from terrain-level receivers against surface heights. It must include off-screen occluders, mask missing coverage and account for solar-angle conventions. Sample routes at time of arrival along the walk; show unknown length separately. Test canopy, low sun and bridges/underpasses. Store geometry once and cache timestamped calculation outputs; five-minute buckets are a proposal to benchmark.
 
-The [source register](SOURCES.md) is the home for candidate providers, availability checks, licences, and attribution. No dataset has been downloaded or validated as part of this documentation update.
+Leptos is a participant suggestion, not yet the team stack decision. Choose the map renderer, GIS processing runtime and deployment together after the city-wide shade feasibility check. No paid shade API is required by the proposal.
 
-Recommend Basel-Stadt Geoportal daytime PET for the initial heat comparison, pending T0's endpoint, licence, and data-access checks. The source register documents the evidence that PET includes shade effects, its 14:00 summer scenario, and its limitations. Compare routes within that scenario; do not apply another assumed shade cooling adjustment to PET. Time-specific shadow modelling is deferred, and PET aggregation rules still need team agreement in T2.
+## Out of scope and approximations
+No accounts, health profiles or stored location histories. No live geometry or observed cloud shadows. Canopy is an approximate occluding surface with uncertain foliage and gaps. No conversion from shade fraction to temperature/PET degrees. Historical PET stays a summer 14:00 scenario; no extra guessed shade cooling is applied. Arbitrary-endpoint route generation, alerts, volunteer matching and phone service remain extensions. City-wide shade coverage is in scope.
 
-Expected components are a map and route-comparison screen, data adapters, and route evaluation rules. The foundation task will choose the stack and define a single shared interface for locations, route segments, observations, timestamps, and missing-data states. Data adapters must handle coordinate systems explicitly, including LV95 to WGS84 conversion when required by a source.
-
-No application stack, deployment platform, routing weights, or medical thresholds have been selected. Domain rules need concrete examples reviewed by the team. Shade and tree data must not be presented as a validated temperature or health-risk measurement.
-
-## Privacy and accessibility
-
-Use public or synthetic demonstration data. Do not require an account, personal health details, or a stored location history for the proposed demo. The meeting's idea of risk-category profiles remains unresolved because categories can disclose health information; the initial proposal uses route preferences instead.
-
-Readable text, touch-friendly controls, non-colour-only explanations, and keyboard access are part of the web demo proposal. A road crossing or step-free route must not be described as accessible unless the relevant data has been checked. Unknown conditions should be visible.
-
-## Deferred ideas
-
-These remain in the backlog for scope review: live weather alerts, public transport alternatives, community reports of closures or fountain outages, phone-call guidance, kiosk mode, cold/ice/heavy-rain routing, volunteer matching, errands or rides, smartwatch monitoring, and on-device language models.
-
-Arbitrary departure-time shade simulation also remains deferred; the proposed initial PET comparison does not support live or time-specific heat estimates.
-
-The phone channel is an important accessibility goal from the meeting, but its service flow, operations, and technical approach are not decided. Volunteer features likewise require a separate operational design before a pilot.
-
-## Open decisions
-
-- Confirm the demo area, destination, and first user journey with the team.
-- Agree the smallest demo scope and how the non-smartphone journey will be represented.
-- Verify source coverage, licences, freshness, and accessible crossing information.
-- Choose the stack and route-generation approach after the first data audit.
-- Agree route-comparison rules and how stale or missing observations affect recommendations.
-- Confirm the public project/team name: this draft uses the existing repository name; the meeting mentioned a different team name.
-- Assign task owners by GitHub username; meeting speaker labels are not identities.
+## Who does what
+Owners remain unassigned until contributors choose tasks by GitHub username. Domain review owns walking constraints, acceptable detours, drinking-water interpretation and the concrete examples that route explanations must satisfy. Visual style can be explored together with hack-design before or after the first map works.
 
 ## Risks and fallback
-
-Incomplete or stale data can produce misleading routes. Display unknowns and source timestamps, avoid promising a "safest" route, and distinguish a demonstrated comparison from validated real-world guidance.
-
-If live sources or map services are unavailable, show a labelled local sample scenario and saved screenshots of the same flow. Keep any recording local and prepare a short explanation of what was simulated.
+Check complete city tile coverage, cross-border occluders, raster access, memory/calculate time, geometric alignment and current walking-network validity early. Keep a licensed bounded snapshot and computed masks for an explicitly dated scenario. If current calculations fail, show that saved scenario without a Now label. Unsupported geography stays unknown; map/source failure must not change unknown into low exposure.
