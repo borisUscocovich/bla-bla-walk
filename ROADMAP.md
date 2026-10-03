@@ -68,7 +68,7 @@ These are role slots, not assigned people. Replace A–F with contributors' GitH
 | **A · Sources and observations** | T0 source and city-wide feasibility; T4 temperature and fountain adapters | `docs/SOURCES.md`, `data/source-manifest.json`, `data/tile-inventory.json`, observation adapters, fixtures, and tests | 9–15 h |
 | **B · Domain rules and evaluation** | T2 demo walk, cases, and comparison rules; T5 route metrics and explanation | `docs/routing-rules.md`, `data/scenarios.json`, `backend/bla_bla_walk/evaluation.py`, `config/routing-rules.json`, evaluation tests | 8–13 h |
 | **C · Map design and walking routes** | T3 screen design; T9 checked route alternatives | `docs/style-guide.md`, `backend/bla_bla_walk/adapters/routes.py`, `data/routes/demo.geojson`, route tests | 5–9 h |
-| **D · Map foundation and screen** | T1 runnable foundation; screen portion of T6 | Vite/package setup, `src/map.ts`, `src/comparison.ts`, `src/theme.css`, generated client types, contract tests | 7–11 h |
+| **D · Map foundation and screen** | T1 runnable foundation; screen portion of T6 | Python/browser asset setup, `src/map.js`, `src/main.js`, comparison screen, `src/theme.css`, generated client declarations/schema, API and browser checks | 7–11 h |
 | **E · Geometry and shade calculation** | T8 reusable city geometry; calculation portion of T10 | `backend/bla_bla_walk/geometry.py`, `backend/bla_bla_walk/shade.py`, geometry and shade calculation tests, generated geometry metadata | 12–22 h |
 | **F · Integration and demo** | Cache/API and performance portion of T10; end-to-end wiring and journey checks in T6; T7 demo and fallback | `backend/bla_bla_walk/shade_cache.py`, API/UI wiring after foundation, journey checks, `README.md`, `docs/demo.md` | 7–13 h |
 
