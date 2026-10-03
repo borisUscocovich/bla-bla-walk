@@ -18,6 +18,10 @@ Notes: use the prioritized sources in [the source register](SOURCES.md) first wh
 
 For construction obstacles, inspect dataset 100335 (`Baustellen`) for usable geometry, dates, closure semantics, update frequency, coverage and reuse terms. Treat worksite presence as an obstacle only when the data confirms that the route segment is blocked; otherwise show it as a caution or unknown.
 
+For optional bus and tram alternatives, check the 2026 GTFS timetable for BVB/BLT coverage and stops. Verify operator coverage in GTFS-RT Service Alerts; use alerts as service warnings unless they provide enough detail to route the detour. API access requires a key.
+
+For broader emergency notices, check Alertswiss separately from MeteoSwiss weather data. MeteoSwiss relays Alertswiss alarm-level messages through its app, but this does not confirm that its open-data feed carries the full Alertswiss stream. Verify whether a machine-readable Alertswiss feed is currently available and reusable before integration.
+
 #### T2 Agree the example and route rules
 
 Owner: unassigned
