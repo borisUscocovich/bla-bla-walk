@@ -1,13 +1,13 @@
 # Bla Bla Walk
 
 Track: Social impact · Updated: 2026-10-03
-Status: revised design draft. The team selected two-route comparison with time-dependent shade and accepted IWB fountains for noncommercial use. City-wide shade coverage is confirmed. Demo endpoints, implementation approach and domain rules still need agreement.
+Status: revised design draft. The team selected two-route comparison with time-dependent shade and accepted IWB fountains for noncommercial use. City-wide shade coverage and user-led comparison of route tradeoffs are confirmed. Demo endpoints, implementation approach and domain rules still need agreement.
 
 ## Problem
 People affected by heat, and caregivers planning on their behalf, need to understand shade, water and walking distance together. A short route can leave someone exposed; a longer shaded route may still be impractical. The current workaround and a concrete domain pitfall need confirmation with the team.
 
 ## What we build
-A mobile-friendly Basel map with independently selectable data layers, followed by a comparison of two walking routes that accounts for shade at the time of the walk.
+A mobile-friendly Basel map with independently selectable data layers and two walking routes compared side by side. Show walking time/distance, shade at the time of the walk, exposed and unknown sections, and fountains; the user chooses the route. Do not collapse these dimensions into a score or automatically recommend a winner.
 
 ### Demo flow (three minutes)
 1. Open Basel, toggle temperature observations, fountains and computed shade; inspect a feature's source, age and uncertainty.

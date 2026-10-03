@@ -17,7 +17,7 @@ Notes: existing audit is a starting point, not completion. Accept IWB only withi
 Owner: unassigned
 Needs: nothing
 Files: docs/routing-rules.md, data/scenarios.json (proposed)
-Done when: the team selects one demo area/start/destination, explains the current workaround and one domain pitfall, and approves examples for shade-vs-distance, water access, blocked segments, and unknown data. Specify walking-speed/stop assumptions, acceptable detours, metrics and denominator rules. Do not invent health thresholds or shade cooling degrees.
+Done when: the team selects one demo area/start/destination, explains the current workaround and one domain pitfall, and approves examples for shade-vs-distance, water access, blocked segments, and unknown data. Specify walking-speed/stop assumptions, acceptable detours, metrics and denominator rules. The user chooses from side-by-side tradeoffs; do not implement a weighted score, route ranking or automatic winner. Do not invent health thresholds or shade cooling degrees.
 
 #### T3 Define the map and comparison screen
 Owner: unassigned
@@ -71,7 +71,7 @@ Notes: sun geometry changes with time; surveyed geometry does not. Benchmark fiv
 Owner: unassigned
 Needs: T10, T9, T2
 Files: route evaluation module, rule config and tests (paths set by T1)
-Done when: approved examples give shaded/unshaded/unknown metres and explicit percentages, evaluating at departure plus cumulative walking time. Explain distance/water tradeoffs and keep unknown/blocked handling explicit. A change in departure time can change shade results without altering recorded sensor observations.
+Done when: approved examples give shaded/unshaded/unknown metres and explicit percentages, evaluating at departure plus cumulative walking time. Present distance, estimated duration, shade, exposed/unknown sections and fountains side by side; let the user choose. No combined score, ranking or automatic recommendation. Keep unknown/blocked handling explicit. A change in departure time can change shade results without altering recorded sensor observations.
 
 ## M3: complete journey and repeatable demonstration
 
