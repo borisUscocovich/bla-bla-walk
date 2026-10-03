@@ -13,7 +13,9 @@ The upload hook blocked the main-merge ancestry because existing upstream author
 names fail local push checks. Shared history was left intact: the exact verified
 T8 diff is carried on feat/t8-city-geometry-complete, based on main 1e043f5.
 Original feat/t8-city-geometry and pushed checkpoint 14b31b3 remain available.
-Completed branch upload and browser PR creation/merge follow.
+Completed branch is committed/pushed as 80bf175; both privacy hooks passed.
+The filled browser PR form was opened successfully. Browser-authenticated
+creation remains pending; ask before merging once the PR exists.
 Never merge without the user's explicit yes.
 
 ## Done
