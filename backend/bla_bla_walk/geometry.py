@@ -229,6 +229,7 @@ def load_or_create_metadata(
         metadata = load_json(metadata_path)
         if metadata.get("geometry_version") != expected:
             raise ValueError("metadata geometry_version does not match tile inventory")
+        metadata["source_manifest"]["sha256"] = sha256_path(manifest_path)
         sources = {tile["tile"]: tile for tile in load_json(inventory_path)["tiles"]}
         for tile_id, tile in metadata["tiles"].items():
             tile["t10_flag_policy"] = per_tile_flag_policy(sources[tile_id])

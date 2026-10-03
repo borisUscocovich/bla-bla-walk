@@ -12,7 +12,7 @@
   },
   "source_manifest": {
     "path": "data/source-manifest.json",
-    "sha256": "7b516c34b82f372816b02879f4a1d3c65792152aaef16c1dcff18df1d5658861"
+    "sha256": "8ab85faed50732955a95ae05d77d39189c9bd8799a04cea7d01d15c26f60f44b"
   },
   "boundary": {
     "name": "Basel-Stadt canton",
@@ -30796,7 +30796,7 @@
     }
   ],
   "verification_summary": {
-    "verified_at": "2026-10-03T14:23:53.640124Z",
+    "verified_at": "2026-10-03T14:35:08.664768Z",
     "coverage": {
       "prepared_pair": 96,
       "prepared_partial_buffer_gap": 33,

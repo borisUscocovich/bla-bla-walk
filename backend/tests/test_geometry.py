@@ -17,6 +17,7 @@ from bla_bla_walk.geometry import (
     build_metadata,
     grid_gap,
     rounded_measurements,
+    sha256_path,
     tile_status,
 )
 from bla_bla_walk.geometry_io import (
@@ -188,6 +189,7 @@ def test_committed_geometry_metadata_covers_city_and_buffer():
     summary = metadata["verification_summary"]
 
     assert metadata["status"] == "prepared"
+    assert metadata["source_manifest"]["sha256"] == sha256_path(DEFAULT_MANIFEST)
     assert metadata["coverage"] == {
         "prepared_pair": 96,
         "prepared_partial_buffer_gap": 33,

@@ -1,19 +1,22 @@
 # Bla Bla Walk
 
 Track: Social impact · Updated: 2026-10-03
-Status: agreed direction and scope; [demo endpoints and domain defaults](routing-rules.md) are specified for T2. T1's runnable map foundation and T0's source/geometry inventory are merged to `main`. T8 prepares the pinned native geometry and explicit gaps; shade accuracy and performance remain for T10. See task handoffs for implementation state.
+Status: agreed direction and scope; the grocery-first multimodal journey below is a proposal for team review. [Demo endpoints and domain defaults](routing-rules.md) are specified for T2. T1's runnable map foundation and T0's source/geometry inventory are merged to `main`. T8 prepares the pinned native geometry and explicit gaps; shade accuracy and performance remain for T10. See task handoffs for implementation state.
 
 ## Problem
 People affected by heat, and caregivers planning on their behalf, need to understand shade, drinking water and walking effort together. A short route can leave someone exposed; a shaded detour may be impractical. The [routing rules](routing-rules.md) describe the selected demo walk, assumed current workaround and one concrete domain pitfall; the workaround is a scenario assumption rather than an observed participant habit.
 
 ## What we build
-A mobile-friendly Basel map with independent data layers, city-wide calculated shade, and two walking alternatives. Recommend a route using adjustable weights, explain the tradeoffs, and allow the user to choose either eligible route.
+Proposed user experience: a mobile-friendly Basel map with independent data layers, city-wide calculated shade, and walking alternatives. The user chooses Fastest overall or More shade, sees the tradeoffs, and selects an eligible option. A transit-assisted option appears only when its sources and trip times pass admission checks.
 
-### Demo flow (three minutes)
+The user scenario proposed for review is an older person travelling to a grocery store, such as a selected Migros. Show shade from trees and buildings, benches, refill fountains, and confirmed construction closures. Offer transit when door-to-door evidence makes it a useful alternative. Do not promise overall safety; show evidence and unknowns.
+
+### Proposed journey flow (three minutes)
 1. Open Basel, toggle sensor temperatures, fountains and calculated shade. Inspect a feature's source, timestamp and uncertainty.
-2. Select the agreed start/destination pair. Compare two checked routes: walking time/distance, shaded, exposed and unknown lengths, and nearby drinking-water opportunities.
-3. Choose Now or another departure time. Recalculate shade along the walk; adjust preference weights and see the recommendation and explanation change.
-4. Disconnect a source: show retained observations as stale and saved shade results with their original effective time.
+2. Search for a grocery store and compare eligible trips. Keep the existing Basel SBB–Marktplatz walk as the current checked example; do not imply a specific Migros route is verified.
+3. Choose Fastest overall or More shade. Show walking time/distance, shaded/exposed/unknown lengths, benches, fountains and confirmed closures. If transit is admitted, show walking access, wait, ride, transfers and schedule/live status separately.
+4. Choose Now or another departure time. Recalculate shade along outdoor walking legs; show the recommendation and its evidence.
+5. Disconnect a source: show retained observations as stale and saved shade results with their original effective time.
 
 - Start with a mobile-friendly web map focused on heat in Basel.
 - Explore routes to cooler destinations using shade, fountains, and known closures or accessibility barriers.
@@ -33,6 +36,7 @@ The [source register](SOURCES.md) is authoritative for endpoints, licensing, att
 | Tree context | Basel 100052 | Canton CC BY terms and OSM incorporation notice; locations alone do not establish shade |
 | Basemap and walking alternatives | Basel map service / OSM candidate | Verify basemap mapping/access; OSM attribution and database obligations apply |
 | Optional context | Historical PET, MeteoSwiss forecasts, construction feed | Separate scenario, forecast and caution states; source admission remains required |
+| Public transport | BVB/BLT GTFS and GTFS-RT | Proposed; scheduled times and live alerts need separate admission and freshness checks |
 
 ## How it is built
 Chosen stack: OpenLayers browser UI and a Python FastAPI API/worker. At the T1 user's request, serve browser-native JavaScript modules directly from FastAPI without a JavaScript package manager or build step. Python models remain canonical, with generated TypeScript declarations for editor/JSDoc use and a generated browser validation schema. Pin browser distribution URLs/checksums and Python requirements. T8 uses Rasterio for bounded, native-grid decoding; the shadow algorithm still needs validation. Keep geometry processing and versioned caches outside the browser. Hosting must support a worker and persistent geometry storage.
@@ -42,7 +46,9 @@ Browser code lives under src; adapters, geometry, shade and evaluation under bac
 Build the basemap and a fixture API round trip first; add verified observations, geometry and routes independently. Use LV95 metres for geometry, checked coordinate conversion for display, terrain-level receivers and buffered surface heights for shadows. Preserve unknown cells and off-screen occluders. Evaluate shade at departure plus cumulative walking time. Cache versioned results; five-minute buckets require benchmarking. Validate canopy receivers, low sun, tile seams, bridges and borders.
 
 ## Recommendation rules
-Expose preferences for shade/exposure, walking duration and water access. The [routing rules](routing-rules.md) define measurable criteria, fixed normalization ranges, defaults and evidence-completeness rules; raw minutes and percentages cannot simply be added. Show raw metrics and each criterion's score contribution. Known access/blocking constraints remain outside weights. Missing shade or stale fountain status must not improve a score. Handle ties, all-zero weights and insufficient evidence. Weight changes rescore existing metrics without repeating shadow calculations.
+Offer Fastest overall and More shade choices, with manual route selection retained. Compare public transport only when its source and trip-time evidence pass admission. Include walking access, waiting, transfers and riding in door-to-door duration; do not treat vehicle time as walking time or vehicle interiors as measured shade. The [routing rules](routing-rules.md) define walking metrics, weights and evidence completeness. Cross-mode ranking still needs team agreement. Show raw metrics and evidence; missing or stale data must not improve a score. Known access/blocking constraints stay outside preferences.
+
+Waiting outdoors has unknown heat exposure unless stop shade or shelter data are available. Store search and arbitrary-endpoint routing are proposals; the current checked routes remain the fixed T9 pair until a destination and route source are verified.
 
 ## Later extension: shared user reports
 Let users report a broken fountain, a temporarily closed place, or a blocked path. Reports appear as shared map alerts with a category, location, submission time and status; a short note is optional. Users can confirm, resolve or flag reports. Show report age and confirmation state so unverified reports are clear. Define expiry, moderation and rate limits before launch. Start without accounts or stored reporter identities. Do not label any reported place as safe. Choose persistent storage and abuse controls when this extension is designed; it is outside the core demo.
