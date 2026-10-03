@@ -1,7 +1,7 @@
 # Bla Bla Walk
 
 Track: Social impact · Updated: 2026-10-03
-Status: agreed direction and stack; domain defaults, demo endpoints and performance settings remain implementation prerequisites. No application exists yet.
+Status: agreed direction and scope; domain defaults, demo endpoints and geometry performance settings remain prerequisites for later tasks. See task handoffs for implementation state.
 
 ## Problem
 People affected by heat, and caregivers planning on their behalf, need to understand shade, drinking water and walking effort together. A short route can leave someone exposed; a shaded detour may be impractical. T2 must confirm the current workaround and one concrete domain pitfall with the team before setting recommendation defaults.
@@ -35,7 +35,7 @@ The [source register](SOURCES.md) is authoritative for endpoints, licensing, att
 | Optional context | Historical PET, MeteoSwiss forecasts, construction feed | Separate scenario, forecast and caution states; source admission remains required |
 
 ## How it is built
-Chosen stack: TypeScript + OpenLayers browser UI and a Python API/worker. Use Vite, FastAPI and Rasterio as foundation tools, with versions/licences pinned in T1. Rasterio provides chunked raster access; the shadow algorithm still needs validation. Keep geometry processing and versioned caches outside the browser. Hosting must support a worker and persistent geometry storage.
+Chosen stack: OpenLayers browser UI and a Python FastAPI API/worker. At the T1 user's request, serve browser-native JavaScript modules directly from FastAPI without a JavaScript package manager or build step. Python models remain canonical, with generated TypeScript declarations for editor/JSDoc use and a generated browser validation schema. Pin browser distribution URLs/checksums and Python requirements. Rasterio is deferred to geometry work; it provides chunked raster access and the shadow algorithm still needs validation. Keep geometry processing and versioned caches outside the browser. Hosting must support a worker and persistent geometry storage.
 
 Browser code lives under src; adapters, geometry, shade and evaluation under backend/bla_bla_walk; domain values under config; licensed manifests under data. Large rasters and caches stay outside Git. T1 defines one authored Python interface, generates browser types, and checks cross-language fixtures. Actual interface edits include decision lines in the same commit. File ownership lives in the [plan](plan.md).
 

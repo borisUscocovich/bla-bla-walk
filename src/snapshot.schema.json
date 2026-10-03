@@ -1,0 +1,459 @@
+{
+  "$defs": {
+    "LineGeometry": {
+      "additionalProperties": false,
+      "description": "A walking line in display coordinates; does not imply eligibility.",
+      "properties": {
+        "type": {
+          "const": "LineString",
+          "title": "Type",
+          "type": "string"
+        },
+        "coordinates": {
+          "items": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "maximum": 180,
+                "minimum": -180,
+                "type": "number"
+              },
+              {
+                "maximum": 90,
+                "minimum": -90,
+                "type": "number"
+              }
+            ],
+            "type": "array"
+          },
+          "minItems": 2,
+          "title": "Coordinates",
+          "type": "array"
+        }
+      },
+      "required": [
+        "type",
+        "coordinates"
+      ],
+      "title": "LineGeometry",
+      "type": "object"
+    },
+    "MapFeature": {
+      "additionalProperties": false,
+      "description": "One display feature, with explicit evidence and unknown values.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "observation",
+            "fountain",
+            "shade",
+            "route"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "geometry": {
+          "discriminator": {
+            "mapping": {
+              "LineString": "#/$defs/LineGeometry",
+              "Point": "#/$defs/PointGeometry",
+              "Polygon": "#/$defs/PolygonGeometry"
+            },
+            "propertyName": "type"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/PointGeometry"
+            },
+            {
+              "$ref": "#/$defs/LineGeometry"
+            },
+            {
+              "$ref": "#/$defs/PolygonGeometry"
+            }
+          ],
+          "title": "Geometry"
+        },
+        "availability": {
+          "enum": [
+            "current",
+            "stale",
+            "missing",
+            "unknown",
+            "unsupported"
+          ],
+          "title": "Availability",
+          "type": "string"
+        },
+        "explanation": {
+          "title": "Explanation",
+          "type": "string"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unit"
+        },
+        "drinking_water": {
+          "anyOf": [
+            {
+              "enum": [
+                "yes",
+                "no",
+                "unknown"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Drinking Water"
+        },
+        "shade": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ShadeMetadata"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "route": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RouteMetrics"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "kind",
+        "geometry",
+        "availability",
+        "explanation",
+        "provenance"
+      ],
+      "title": "MapFeature",
+      "type": "object"
+    },
+    "MapLayer": {
+      "additionalProperties": false,
+      "description": "Independently toggleable layer; empty is distinct from a failed layer.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "observation",
+            "fountain",
+            "shade",
+            "route"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "availability": {
+          "enum": [
+            "current",
+            "stale",
+            "missing",
+            "unknown",
+            "unsupported"
+          ],
+          "title": "Availability",
+          "type": "string"
+        },
+        "explanation": {
+          "title": "Explanation",
+          "type": "string"
+        },
+        "features": {
+          "items": {
+            "$ref": "#/$defs/MapFeature"
+          },
+          "title": "Features",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "kind",
+        "availability",
+        "explanation",
+        "features"
+      ],
+      "title": "MapLayer",
+      "type": "object"
+    },
+    "PointGeometry": {
+      "additionalProperties": false,
+      "description": "A known point location, even when its measured value is missing.",
+      "properties": {
+        "type": {
+          "const": "Point",
+          "title": "Type",
+          "type": "string"
+        },
+        "coordinates": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "maximum": 180,
+              "minimum": -180,
+              "type": "number"
+            },
+            {
+              "maximum": 90,
+              "minimum": -90,
+              "type": "number"
+            }
+          ],
+          "title": "Coordinates",
+          "type": "array"
+        }
+      },
+      "required": [
+        "type",
+        "coordinates"
+      ],
+      "title": "PointGeometry",
+      "type": "object"
+    },
+    "PolygonGeometry": {
+      "additionalProperties": false,
+      "description": "GeoJSON rings for later calculated shade coverage.",
+      "properties": {
+        "type": {
+          "const": "Polygon",
+          "title": "Type",
+          "type": "string"
+        },
+        "coordinates": {
+          "items": {
+            "items": {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "maximum": 180,
+                  "minimum": -180,
+                  "type": "number"
+                },
+                {
+                  "maximum": 90,
+                  "minimum": -90,
+                  "type": "number"
+                }
+              ],
+              "type": "array"
+            },
+            "minItems": 4,
+            "type": "array"
+          },
+          "title": "Coordinates",
+          "type": "array"
+        }
+      },
+      "required": [
+        "type",
+        "coordinates"
+      ],
+      "title": "PolygonGeometry",
+      "type": "object"
+    },
+    "Provenance": {
+      "additionalProperties": false,
+      "description": "Provider, reuse terms and distinct observation/retrieval timestamps.",
+      "properties": {
+        "provider": {
+          "title": "Provider",
+          "type": "string"
+        },
+        "source_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Url"
+        },
+        "attribution": {
+          "title": "Attribution",
+          "type": "string"
+        },
+        "licence": {
+          "title": "Licence",
+          "type": "string"
+        },
+        "fixture": {
+          "title": "Fixture",
+          "type": "boolean"
+        },
+        "observed_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Observed At"
+        },
+        "retrieved_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Retrieved At"
+        }
+      },
+      "required": [
+        "provider",
+        "attribution",
+        "licence",
+        "fixture"
+      ],
+      "title": "Provenance",
+      "type": "object"
+    },
+    "RouteMetrics": {
+      "additionalProperties": false,
+      "description": "Basic walking effort; comparison rules and scoring come from T2/T5.",
+      "properties": {
+        "distance_m": {
+          "minimum": 0,
+          "title": "Distance M",
+          "type": "number"
+        },
+        "duration_s": {
+          "minimum": 0,
+          "title": "Duration S",
+          "type": "number"
+        }
+      },
+      "required": [
+        "distance_m",
+        "duration_s"
+      ],
+      "title": "RouteMetrics",
+      "type": "object"
+    },
+    "ShadeMetadata": {
+      "additionalProperties": false,
+      "description": "Calculation context, independent of sensor observations.",
+      "properties": {
+        "requested_time": {
+          "format": "date-time",
+          "title": "Requested Time",
+          "type": "string"
+        },
+        "effective_time": {
+          "format": "date-time",
+          "title": "Effective Time",
+          "type": "string"
+        },
+        "geometry_version": {
+          "title": "Geometry Version",
+          "type": "string"
+        },
+        "resolution_m": {
+          "exclusiveMinimum": 0,
+          "title": "Resolution M",
+          "type": "number"
+        }
+      },
+      "required": [
+        "requested_time",
+        "effective_time",
+        "geometry_version",
+        "resolution_m"
+      ],
+      "title": "ShadeMetadata",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "API envelope shared by observations, fountains, shade and route layers.",
+  "properties": {
+    "generated_at": {
+      "format": "date-time",
+      "title": "Generated At",
+      "type": "string"
+    },
+    "layers": {
+      "items": {
+        "$ref": "#/$defs/MapLayer"
+      },
+      "title": "Layers",
+      "type": "array"
+    }
+  },
+  "required": [
+    "generated_at",
+    "layers"
+  ],
+  "title": "MapSnapshot",
+  "type": "object"
+}

@@ -1,18 +1,30 @@
-import Feature from 'ol/Feature.js';
-import GeoJSON from 'ol/format/GeoJSON.js';
-import Map from 'ol/Map.js';
-import View from 'ol/View.js';
-import TileLayer from 'ol/layer/Tile.js';
-import VectorLayer from 'ol/layer/Vector.js';
-import { fromLonLat, transformExtent } from 'ol/proj.js';
-import VectorSource from 'ol/source/Vector.js';
-import XYZ from 'ol/source/XYZ.js';
-import CircleStyle from 'ol/style/Circle.js';
-import Fill from 'ol/style/Fill.js';
-import RegularShape from 'ol/style/RegularShape.js';
-import Stroke from 'ol/style/Stroke.js';
-import Style from 'ol/style/Style.js';
-import type { MapFeature, MapLayer } from './api';
+const {
+  Feature,
+  Map,
+  View
+} = window.ol;
+const {
+  GeoJSON
+} = window.ol.format;
+const {
+  Tile: TileLayer,
+  Vector: VectorLayer
+} = window.ol.layer;
+const {
+  fromLonLat,
+  transformExtent
+} = window.ol.proj;
+const {
+  Vector: VectorSource,
+  XYZ
+} = window.ol.source;
+const {
+  Circle: CircleStyle,
+  Fill,
+  RegularShape,
+  Stroke,
+  Style
+} = window.ol.style;
 
 // Official 3857_17 matrix set has the standard XYZ grid, levels 0–17.
 const BASEMAP_URL =
@@ -22,17 +34,16 @@ const BASEL_CENTRE = [7.5886, 47.5596];
 
 /** Build the real basemap; fixture layers can be replaced independently. */
 export function createMap(
-  target: HTMLElement,
-  onSelect: (feature: MapFeature) => void,
-  onBasemapStatus: (message: string) => void,
+  target,
+  onSelect,
+  onBasemapStatus,
 ) {
   const source = new XYZ({
     url: BASEMAP_URL,
     maxZoom: 17,
     crossOrigin: 'anonymous',
     wrapX: false,
-    attributions:
-      '<a href="https://api.geo.bs.ch/stac/v1/collections/VSBS">Geodaten Kanton Basel-Stadt</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>',
+    attributions: '<a href="https://api.geo.bs.ch/stac/v1/collections/VSBS">Geodaten Kanton Basel-Stadt</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>',
   });
   let hadTileError = false;
   source.on('tileloadend', () => {
@@ -57,8 +68,13 @@ export function createMap(
       maxZoom: 17,
     }),
   });
-  const layers = new globalThis.Map<string, VectorLayer>();
-  const features = new globalThis.Map<string, MapFeature>();
+  const layers = new globalThis.Map();
+  map.getControls().forEach((control) => {
+    if (control instanceof window.ol.control.Attribution) {
+      control.setCollapsible(false);
+    }
+  });
+  const features = new globalThis.Map();
   map.on('singleclick', (event) => {
     map.forEachFeatureAtPixel(event.pixel, (feature) => {
       const selected = features.get(String(feature.getId()));
@@ -67,7 +83,7 @@ export function createMap(
     });
   });
 
-  function replaceLayers(snapshotLayers: MapLayer[]) {
+  function replaceLayers(snapshotLayers) {
     layers.forEach((layer) => map.removeLayer(layer));
     layers.clear();
     features.clear();
@@ -82,9 +98,19 @@ export function createMap(
       });
       const radius = Number(theme.getPropertyValue('--marker-radius'));
       const image =
-        layer.kind === 'observation'
-          ? new RegularShape({ points: 4, radius, angle: Math.PI / 4, fill, stroke })
-          : new CircleStyle({ radius, fill, stroke });
+        layer.kind === 'observation' ?
+        new RegularShape({
+          points: 4,
+          radius,
+          angle: Math.PI / 4,
+          fill,
+          stroke
+        }) :
+        new CircleStyle({
+          radius,
+          fill,
+          stroke
+        });
       const vector = new VectorLayer({
         source: new VectorSource({
           features: layer.features.map((feature) => {
@@ -93,12 +119,18 @@ export function createMap(
               dataProjection: 'EPSG:4326',
               featureProjection: 'EPSG:3857',
             });
-            const marker = new Feature({ geometry });
+            const marker = new Feature({
+              geometry
+            });
             marker.setId(feature.id);
             return marker;
           }),
         }),
-        style: new Style({ image, stroke, fill }),
+        style: new Style({
+          image,
+          stroke,
+          fill
+        }),
       });
       layers.set(layer.id, vector);
       map.addLayer(vector);
@@ -107,13 +139,17 @@ export function createMap(
 
   return {
     replaceLayers,
-    setVisible: (id: string, visible: boolean) => layers.get(id)?.setVisible(visible),
-    focus: (feature: MapFeature) => {
+    setVisible: (id, visible) => layers.get(id)?.setVisible(visible),
+    focus: (feature) => {
       const geometry = new GeoJSON().readGeometry(feature.geometry, {
         dataProjection: 'EPSG:4326',
         featureProjection: 'EPSG:3857',
       });
-      map.getView().fit(geometry, { maxZoom: 16, duration: 0, padding: [60, 60, 60, 60] });
+      map.getView().fit(geometry, {
+        maxZoom: 16,
+        duration: 0,
+        padding: Array(4).fill(Number(getComputedStyle(document.documentElement).getPropertyValue("--map-focus-padding")))
+      });
     },
   };
 }

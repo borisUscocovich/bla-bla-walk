@@ -7,6 +7,7 @@ import pytest
 from fastapi.testclient import TestClient
 from pydantic import ValidationError
 
+from bla_bla_walk.contract_types import typescript_contract
 from bla_bla_walk.demo_fixture import fixture_snapshot
 from bla_bla_walk.interfaces import MapFeature, MapSnapshot
 from bla_bla_walk.main import app
@@ -60,6 +61,23 @@ def test_timestamps_require_timezones():
 def test_generated_schema_matches_canonical_models():
     generated = json.loads((ROOT / "src/snapshot.schema.json").read_text())
     assert generated == MapSnapshot.model_json_schema()
+
+
+def test_generated_types_and_browser_schema_match_canonical_models():
+    schema = MapSnapshot.model_json_schema()
+    assert (ROOT / "src/interfaces.ts").read_text() == typescript_contract(schema)
+    module = (ROOT / "src/snapshot.schema.js").read_text()
+    assert (
+        json.loads(module.split("export const snapshotSchema = ", 1)[1][:-2]) == schema
+    )
+
+
+def test_static_page_and_assets_are_served_without_a_build():
+    client = TestClient(app)
+    assert client.get("/").status_code == 200
+    assert client.get("/src/main.js").status_code == 200
+    assert client.get("/src/theme.css").status_code == 200
+    assert client.get("/vendor/ol.js").status_code == 200
 
 
 @pytest.mark.parametrize(

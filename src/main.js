@@ -1,9 +1,11 @@
-import 'ol/ol.css';
-import './theme.css';
-import { loadSnapshot, type MapFeature, type MapLayer } from './api';
-import { createMap } from './map';
+import {
+  loadSnapshot
+} from './api.js';
+import {
+  createMap
+} from './map.js';
 
-const app = document.querySelector<HTMLDivElement>('#app')!;
+const app = document.querySelector('#app');
 app.innerHTML = `
   <header>
     <div><p class="eyebrow">Bla Bla Walk</p><h1>Explore Basel</h1></div>
@@ -34,21 +36,22 @@ app.innerHTML = `
     </section>
   </main>`;
 
-const status = document.querySelector<HTMLParagraphElement>('#api-status')!;
-const layerControls = document.querySelector<HTMLDivElement>('#layers')!;
-const featureList = document.querySelector<HTMLDivElement>('#features')!;
-const details = document.querySelector<HTMLElement>('#details')!;
-const reload = document.querySelector<HTMLButtonElement>('#reload')!;
+const status = document.querySelector('#api-status');
+const layerControls = document.querySelector('#layers');
+const featureList = document.querySelector('#features');
+const details = document.querySelector('#details');
+const reload = document.querySelector('#reload');
 const map = createMap(
-  document.querySelector<HTMLElement>('#map')!,
+  document.querySelector('#map'),
   showFeature,
   (message) => {
-    document.querySelector('#basemap-status')!.textContent = message;
+    document.querySelector('#basemap-status').textContent = message;
   },
 );
 
 /** Render untrusted feature text as text nodes, including timestamps and gaps. */
-function showFeature(feature: MapFeature) {
+/** @param {import('./interfaces').MapFeature} feature */
+function showFeature(feature) {
   details.replaceChildren();
   const title = document.createElement('h2');
   title.textContent = feature.label;
@@ -83,11 +86,14 @@ function showFeature(feature: MapFeature) {
   }
 }
 
-function formatTime(value: string | null | undefined): string {
-  return value ? new Date(value).toLocaleString('en-GB', { timeZone: 'UTC' }) + ' UTC' : 'Unknown / not supplied';
+function formatTime(value) {
+  return value ? new Date(value).toLocaleString('en-GB', {
+    timeZone: 'UTC'
+  }) + ' UTC' : 'Unknown / not supplied';
 }
 
-function renderLayers(layers: MapLayer[]) {
+/** @param {import('./interfaces').MapLayer[]} layers */
+function renderLayers(layers) {
   layerControls.replaceChildren();
   featureList.replaceChildren();
   layers.forEach((layer) => {

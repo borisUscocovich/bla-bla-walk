@@ -3,6 +3,7 @@
 import json
 from pathlib import Path
 
+from bla_bla_walk.contract_types import typescript_contract
 from bla_bla_walk.demo_fixture import fixture_snapshot
 from bla_bla_walk.interfaces import MapSnapshot
 from bla_bla_walk.main import app
@@ -17,8 +18,19 @@ def write_json(path: Path, value: object) -> None:
 
 
 if __name__ == "__main__":
+    schema = MapSnapshot.model_json_schema()
     write_json(ROOT / ".cache/openapi.json", app.openapi())
-    write_json(ROOT / "src/snapshot.schema.json", MapSnapshot.model_json_schema())
+    write_json(ROOT / "src/snapshot.schema.json", schema)
+    (ROOT / "src/snapshot.schema.js").write_text(
+        "// Generated from canonical Python models. Do not edit by hand.\n"
+        + "export const snapshotSchema = "
+        + json.dumps(schema, indent=2)
+        + ";\n",
+        encoding="utf-8",
+    )
+    (ROOT / "src/interfaces.ts").write_text(
+        typescript_contract(schema), encoding="utf-8"
+    )
     write_json(
         ROOT / ".cache/fixture-snapshot.json",
         fixture_snapshot().model_dump(mode="json"),
