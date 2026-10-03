@@ -1,0 +1,136 @@
+{
+  "status": "draft_awaiting_team_input",
+  "purpose": "T2 discussion fixture; not a shared application contract",
+  "walk": {
+    "status": "candidate_not_selected",
+    "start": "Basel SBB, Centralbahnplatz",
+    "destination": "Marktplatz",
+    "proposed_purpose": "Reach the city market",
+    "team_confirmed_purpose": null,
+    "current_workaround": null,
+    "team_domain_pitfall": null,
+    "geometry_status": "not_checked",
+    "endpoint_coordinates": null
+  },
+  "comparison": {
+    "id": "shade-versus-walking-time",
+    "evidence": "synthetic_not_measured_on_candidate_walk",
+    "approval": "pending",
+    "assumptions": {
+      "walking_speed_m_per_s": 1,
+      "planned_stop_minutes": 0,
+      "water_detour_metres": 0,
+      "eligibility": "Assume both fictional routes pass all constraints for this arithmetic example only",
+      "completeness": "Assume all fictional shade and access evidence is current and complete",
+      "default_status": "Illustrative values only; no approved route-planning defaults"
+    },
+    "fixed_benefit_ranges": {
+      "shade_fraction": [
+        0,
+        1
+      ],
+      "walking_duration_minutes": [
+        0,
+        40
+      ],
+      "water_opportunity": [
+        0,
+        1
+      ]
+    },
+    "routes": [
+      {
+        "id": "A",
+        "label": "Shorter illustrative route",
+        "distance_metres": 1200,
+        "shaded_metres": 300,
+        "unshaded_metres": 900,
+        "unknown_metres": 0,
+        "water_evidence": "synthetic_verified_absence",
+        "expected": {
+          "walking_minutes": 20,
+          "shade_fraction": 0.25,
+          "unshaded_fraction": 0.75,
+          "unknown_fraction": 0,
+          "duration_benefit": 0.5,
+          "water_benefit": 0
+        }
+      },
+      {
+        "id": "B",
+        "label": "Longer illustrative route with more shade",
+        "distance_metres": 1500,
+        "shaded_metres": 900,
+        "unshaded_metres": 600,
+        "unknown_metres": 0,
+        "water_evidence": "synthetic_fresh_accessible_drinking_water",
+        "expected": {
+          "walking_minutes": 25,
+          "shade_fraction": 0.6,
+          "unshaded_fraction": 0.4,
+          "unknown_fraction": 0,
+          "duration_benefit": 0.375,
+          "water_benefit": 1
+        }
+      }
+    ],
+    "expected_detour": {
+      "extra_metres": 300,
+      "extra_walking_minutes": 5,
+      "extra_distance_fraction_of_shorter_route": 0.25,
+      "acceptability": "pending_team_agreement"
+    },
+    "preference_examples": [
+      {
+        "id": "more_shade",
+        "weights": {
+          "shade": 0.5,
+          "duration": 0.4,
+          "water": 0.1
+        },
+        "expected_contributions": {
+          "A": {
+            "shade": 0.125,
+            "duration": 0.2,
+            "water": 0
+          },
+          "B": {
+            "shade": 0.3,
+            "duration": 0.15,
+            "water": 0.1
+          }
+        },
+        "expected_scores": {
+          "A": 0.325,
+          "B": 0.55
+        },
+        "expected_winner_in_example": "B"
+      },
+      {
+        "id": "less_walking_time",
+        "weights": {
+          "shade": 0.1,
+          "duration": 0.9,
+          "water": 0
+        },
+        "expected_contributions": {
+          "A": {
+            "shade": 0.025,
+            "duration": 0.45,
+            "water": 0
+          },
+          "B": {
+            "shade": 0.06,
+            "duration": 0.3375,
+            "water": 0
+          }
+        },
+        "expected_scores": {
+          "A": 0.475,
+          "B": 0.3975
+        },
+        "expected_winner_in_example": "A"
+      }
+    ]
+  }
+}
