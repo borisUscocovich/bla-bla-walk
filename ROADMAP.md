@@ -4,6 +4,8 @@ This roadmap visualizes the tasks in [the build plan](docs/plan.md). [Pick a tas
 
 ## Tasks, effort, and sequence
 
+**Completed and merged:** ~~T0~~, ~~T1~~, ~~T2~~ and ~~T9~~. Their task labels stay visible in the chart and plan.
+
 ```mermaid
 flowchart LR
   subgraph Prep["M1 · Preparation and foundation"]
@@ -43,7 +45,37 @@ flowchart LR
   T5 --> T6
   T3 --> T6
   T6 --> T7
+  subgraph Phone["M4 · Phone access simulation"]
+    T11["T11 · Validate landmarks and barriers"]
+    T12["T12 · Agree spoken instruction format"]
+    T13["T13 · Generate backend spoken steps"]
+    T14["T14 · Simulate call and map request"]
+  end
+
+  subgraph Reports["M5 · Shared map reports"]
+    T15["T15 · Define report rules"]
+    T16["T16 · Store and serve reports"]
+    T17["T17 · Add reports to the map"]
+  end
+
+  T7 --> T11
+  T9 --> T11
+  T11 --> T12
+  T12 --> T13
+  T5 --> T13
+  T9 --> T13
+  T13 --> T14
+  T6 --> T14
+  T1 --> T15
+  T2 --> T15
+  T15 --> T16
+  T1 --> T16
+  T16 --> T17
+  T6 --> T17
 ```
+
+
+**After the core demo:** M4 phone access is the first extension, followed by M5 shared reports. These tasks are not included in the 48–83 hour core estimate. Live telephony, actual map delivery, and volunteer accompaniment need a later re-plan.
 
 **Effort key:** S = 1–2 h, M = 3–6 h, L = 5+ h; task-specific hour ranges are shown on each card. Dashed arrows mean the plan calls for relevant T0 data checks, rather than making all source research a blanket prerequisite.
 
