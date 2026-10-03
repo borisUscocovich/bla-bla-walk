@@ -92,10 +92,10 @@ Continue T6 integration for Slot F. Use $hack-build. Follow TASK_START.md's shar
 
 ### F · T7 · Demo and fallback
 
-**Start:** after T6 fully merges. **Suggested model:** GPT-6.1 Sol. **Effort:** Light.
+**Start:** after T6 fully merges. **Suggested model:** GPT-6.1 Sol. **Effort:** Light. The team submission form is due before the Sunday 4 October 2026 build cutoff at 14:59.
 
 ```text
-Start T7 for Slot F. Use $hack-demo and $hack-build. Follow TASK_START.md's shared metaprompt. Read T7 in docs/plan.md. Prepare the three-minute demo and offline fallback, rehearse with external requests blocked, and distinguish local calculations from dated saved output. Explain sources, geometry encoding/coverage and stale or missing information.
+Start T7 for Slot F. Use $hack-demo and $hack-build. Follow TASK_START.md's shared metaprompt. Read T7 in docs/plan.md and build the deliverables in docs/pitch.md and docs/demo.md. Write in the presenters' chosen language. Prepare exactly five minutes for the solution followed by exactly 42 seconds about what the team learned, what surprised them, what broke, or what they will remember from HackAmRhein. Cover the problem, what we built, how it works, what is interesting, and a live demo if possible; include concise sources/licences, AI assistance, limitations and likely jury answers. Rehearse the full 5:42 twice with a timer and trim after the first run. Prepare and test a fallback; label dated saved output as saved, never live. Remind the team to complete its submission form before 14:59 on Sunday 4 October 2026. Arrive at FHNW Dreispitz, Dornacherstrasse 394. Doors open 13:30; building stops at 14:59; the introduction is 15:00–15:30; presentations begin at 15:30 in random order.
 ```
 
 ## Conditional transit proposal prompts

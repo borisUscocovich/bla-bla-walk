@@ -28,7 +28,7 @@ flowchart LR
 
   subgraph Demo["M3 · Complete demo"]
     T6["T6 · Connect and verify the journey<br/>5–8 h · L · D/F"]
-    T7["T7 · Three-minute demo and fallback<br/>1–2 h · S · F"]
+    T7["T7 · Five-minute pitch + 42-second reflection<br/>2–3 h · M · F"]
   end
 
   T0 -. "source admission" .-> T4
@@ -88,7 +88,7 @@ flowchart LR
 ```
 
 
-**After the core demo:** M4 phone access is the first extension, followed by M5 shared reports. These tasks are not included in the 48–83 hour core estimate. Live telephony, actual map delivery, and volunteer accompaniment need a later re-plan.
+**After the core demo:** M4 phone access is the first extension, followed by M5 shared reports. These tasks are not included in the 49–84 hour core estimate. Live telephony, actual map delivery, and volunteer accompaniment need a later re-plan.
 
 The conditional transit proposal uses T18/T19; these tasks also remain outside the core effort estimate. Walking comparison stays usable if transit sources are not admitted. Offline transit needs saved timetable/candidate evidence or an explicit unavailable state, as defined in T6.
 
@@ -96,17 +96,17 @@ The conditional transit proposal uses T18/T19; these tasks also remain outside t
 
 ## Estimated development time
 
-These are original total-effort estimates, including completed work; they are not remaining hours. T8 ingestion and provider/offline modes are already merged.
+These are total-effort estimates, including completed work; they are not remaining hours. T8 ingestion and provider/offline modes are already merged. The expanded T7 pitch, reflection and rehearsal scope is included.
 
 | Roadmap stage | Tasks | Estimated team effort | Dependencies / overlap |
 |---|---|---:|---|
 | Preparation and foundation | T0, T1, T2, T3 | 15–25 h total | Completed; historical original estimate. |
 | Data and route layers | T4, T8, T9 | 14–24 h total | T4/T9 complete; T8 ingestion complete, spatial acceptance remains. |
 | Shade and comparison | T10, T5 | 13–24 h total | T10 follows T8; T5 also needs T9 and T2. |
-| Complete demo | T6, T7 | 6–10 h total | T6 follows T4, T5, and T3; T7 follows T6. |
-| **Core plan** | **T0–T10** | **48–83 h total** | **About 33–58 focused hours on the critical path if parallel tasks have owners.** |
+| Complete demo and presentation | T6, T7 | 7–11 h total | T6 follows T4, T5, and T3; T7 follows T6. |
+| **Core plan** | **T0–T10** | **49–84 h total** | **About 34–60 focused hours on the critical path if parallel tasks have owners.** |
 
-The 33–58 hour critical-path figure and 48–83 serial figure are original planning estimates, not a current forecast: T0–T4 and T9 are complete, and T8 ingestion has been done. Open-work hours need re-estimation after T8 scene acceptance and T10 validation.
+The critical-path and serial figures are rough planning estimates, not a current forecast: T0–T4 and T9 are complete, and T8 ingestion has been done. Open-work hours need re-estimation after T8 scene acceptance and T10 validation.
 
 ## Proposed split for six contributors
 
