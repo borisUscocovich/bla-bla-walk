@@ -6,6 +6,25 @@ Every dataset, API, notable library and AI tool used, with licence. Feeds the so
 |---|---|---|---|
 | Codex (OpenAI) | chatgpt.com/codex | Tool, AI-assisted development | Coding assistant |
 
+## Prioritized project resources
+
+Use the sources in this list first whenever they fulfil the project's needs. Prefer these listed sources over alternatives for the same need, while checking that the specific data is suitable, current enough, accessible, and reusable for the intended use. For the first-demo heat indicator, Basel-Stadt Geoportal daytime PET remains the recommended source, subject to the checks in the section below. A source being listed here does not by itself verify a dataset's licence, quality, or availability; record those details before using or redistributing data.
+
+| Title | Description | URL | Licence or permission / notes |
+|---|---|---|---|
+| Heat and health Basel-Stadt | Cool public rooms, the heat hotline, first aid and heat advice in 14 languages. | [bs.ch — Heat and health](https://www.bs.ch/themen/gesundheit/gesundheitsfoerderung/praeventionsangebote/hitze) | Official public guidance; check content and service availability before presenting it. |
+| Heat action plan Basel-Stadt | What the canton does before and during a heatwave, and what happens at each warning level. | [Basel-Stadt heat action plan (PDF)](https://media.bs.ch/original_file/cf38be8695e1cb3e0aefcaf832b4b89c65863658/hitzemassnahmenplan-basel-stadt.pdf) | Official publication; check reuse and attribution terms before reproducing content. |
+| Climate maps on MapBS | Modelled heat, night cooling and felt temperature across the canton. | [MapBS Stadtklima](https://www.geo.bs.ch/stadtklima) | Map/catalogue reference; verify whether underlying data can be accessed and reused. |
+| City temperature sensors | Hourly street-level air temperature from sensors across Basel, raw values. | [data.bs.ch dataset 100009](https://data.bs.ch/explore/dataset/100009/) | Verify dataset-specific licence, sensor coverage, units, quality and update frequency. |
+| Public fountains | Locations of drinking, bathing and decorative fountains in Basel. | [data.bs.ch dataset 100008](https://data.bs.ch/explore/dataset/100008/) | Verify dataset-specific licence, fountain type, access and availability information. |
+| Tree register | Position and species of every city-maintained tree, a starting point for shade. | [data.bs.ch dataset 100052](https://data.bs.ch/explore/dataset/100052/) | Verify dataset-specific licence and coverage; tree locations do not establish measured shade. |
+| Population by age and quarter | Residents by age, sex and nationality for each quarter, updated yearly. | [data.bs.ch dataset 100128](https://data.bs.ch/explore/dataset/100128/) | Verify dataset-specific licence, aggregation, update date and relevance before use. |
+| Quarter key figures | Selected social indicators for Basel's 19 quarters, Riehen and Bettingen. | [data.bs.ch dataset 100011](https://data.bs.ch/explore/dataset/100011/) | Verify dataset-specific licence, definitions and update date before use. |
+| MeteoSwiss open data | Official measurements and forecasts, the basis for every heat warning. | [MeteoSwiss Open Data](https://opendatadocs.meteoswiss.ch) | Check the product's access, licence, attribution, coverage and update schedule. |
+| Heat-related deaths in Switzerland | Yearly federal estimates of deaths caused by heat, with data to download. | [Federal indicators — KL077](https://www.indikatoren.admin.ch/public/v2/detail?ind=KL077&lng=de) | Check the dataset's terms, definitions, time range and attribution before reuse. |
+| swissSURFACE3D Raster | Surface model at 0.5 m including buildings and trees, for calculating shade. | [swisstopo swissSURFACE3D Raster](https://www.swisstopo.admin.ch/de/hoehenmodell-swisssurface3d-raster) | Check current access, licence, attribution and dataset coverage before use. |
+| OpenStreetMap via Overpass | Benches, pharmacies, public toilets and streets, queryable in the browser. | [Overpass Turbo](https://overpass-turbo.eu) | OpenStreetMap data is under ODbL 1.0; follow attribution and applicable share-alike requirements. |
+
 ## Recommended heat source: Basel-Stadt Geoportal daytime PET
 
 Documentation checked: 2026-10-03. Recommend the Basel-Stadt Geoportal's daytime PET layer as the first demo's heat indicator, subject to verifying data access in T0. Nothing has been downloaded or integrated yet.
