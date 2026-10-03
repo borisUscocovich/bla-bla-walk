@@ -1,10 +1,10 @@
 # Bla Bla Walk
 
 Track: Social impact · Updated: 2026-10-03
-Status: agreed direction and scope; domain defaults, demo endpoints and geometry performance settings remain prerequisites for later tasks. See task handoffs for implementation state.
+Status: agreed direction and scope; [demo endpoints and domain defaults](routing-rules.md) are specified for T2. Geometry processing and shade accuracy/performance remain to validate in later tasks. See task handoffs for implementation state.
 
 ## Problem
-People affected by heat, and caregivers planning on their behalf, need to understand shade, drinking water and walking effort together. A short route can leave someone exposed; a shaded detour may be impractical. T2 must confirm the current workaround and one concrete domain pitfall with the team before setting recommendation defaults.
+People affected by heat, and caregivers planning on their behalf, need to understand shade, drinking water and walking effort together. A short route can leave someone exposed; a shaded detour may be impractical. The [routing rules](routing-rules.md) describe the selected demo walk, assumed current workaround and one concrete domain pitfall; the workaround is a scenario assumption rather than an observed participant habit.
 
 ## What we build
 A mobile-friendly Basel map with independent data layers, city-wide calculated shade, and two walking alternatives. Recommend a route using adjustable weights, explain the tradeoffs, and allow the user to choose either eligible route.
@@ -42,7 +42,7 @@ Browser code lives under src; adapters, geometry, shade and evaluation under bac
 Build the basemap and a fixture API round trip first; add verified observations, geometry and routes independently. Use LV95 metres for geometry, checked coordinate conversion for display, terrain-level receivers and buffered surface heights for shadows. Preserve unknown cells and off-screen occluders. Evaluate shade at departure plus cumulative walking time. Cache versioned results; five-minute buckets require benchmarking. Validate canopy receivers, low sun, tile seams, bridges and borders.
 
 ## Recommendation rules
-Expose preferences for shade/exposure, walking duration and water access. T2 defines measurable criteria, fixed normalization ranges and defaults; raw minutes and percentages cannot simply be added. Show raw metrics and each criterion's score contribution. Known access/blocking constraints remain outside weights. Define evidence-completeness rules; missing shade or stale fountain status must not improve a score. Handle ties, all-zero weights and insufficient evidence. Weight changes rescore existing metrics without repeating shadow calculations.
+Expose preferences for shade/exposure, walking duration and water access. The [routing rules](routing-rules.md) define measurable criteria, fixed normalization ranges, defaults and evidence-completeness rules; raw minutes and percentages cannot simply be added. Show raw metrics and each criterion's score contribution. Known access/blocking constraints remain outside weights. Missing shade or stale fountain status must not improve a score. Handle ties, all-zero weights and insufficient evidence. Weight changes rescore existing metrics without repeating shadow calculations.
 
 ## Later extension: shared user reports
 Let users report a broken fountain, a temporarily closed place, or a blocked path. Reports appear as shared map alerts with a category, location, submission time and status; a short note is optional. Users can confirm, resolve or flag reports. Show report age and confirmation state so unverified reports are clear. Define expiry, moderation and rate limits before launch. Start without accounts or stored reporter identities. Do not label any reported place as safe. Choose persistent storage and abuse controls when this extension is designed; it is outside the core demo.
