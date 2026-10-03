@@ -137,3 +137,17 @@ Foundation tooling: [Vite](https://vite.dev/guide/) for the TypeScript browser b
 ## Construction source added by the team — checked 2026-10-03
 
 [100335 metadata](https://data.bs.ch/api/explore/v2.1/catalog/datasets/100335) lists CC BY 4.0, publisher Tiefbauamt, with project name/descriptions, start/end dates, project/document links and an Allmend permit reference. The inspected schema has **no geometry fields and no structured pedestrian-closure field**. Therefore the feed alone cannot place construction zones on the map or exclude walking edges. T0 must find a separately checked spatial permit layer and verify join/closure meaning, or leave this as linked caution information. Do not infer coordinates from a street name or treat every worksite as impassable. No records or attached documents have been imported; linked documents need independent rights/content checks.
+
+## Basel wayfinding research — checked 2026-10-03
+
+Research for the deferred phone-access feature; these sources inform design and do not represent integrated data or validated Basel route guidance.
+
+| Topic | Source | Use and limits |
+|---|---|---|
+| Mental maps | Kevin Lynch, [*The Image of the City*](https://mitpress.mit.edu/9780262620017/the-image-of-the-city/) (MIT Press) | Framework of paths, edges, districts, nodes, and landmarks. Lynch's perceived edges are not verified physical barriers. |
+| Spoken and visual route instructions | Anacta et al., [“Orientation information in wayfinding instructions”](https://link.springer.com/article/10.1007/s10708-016-9703-5) (2016) | Supports studying how local and global orientation cues and landmarks work in instructions; findings do not make a landmark universally familiar. |
+| Landmark versus street-name directions | Tom, [“Language and spatial cognition”](https://onlinelibrary.wiley.com/doi/abs/10.1002/acp.1045) (2004) | Reports better route-drawing memory after landmark-based than street-name instructions in the studied task; do not generalize to every caller. |
+| Landmark selection | [Review of the existing literature](https://pmc.ncbi.nlm.nih.gov/articles/PMC8324579/) | Background on communicable, visible, decision-point, and negative landmarks; validate each cue with actual users and routes. |
+| Basel street-name cues | [Basel-Stadt street names dataset 100189](https://data.bs.ch/explore/dataset/100189/) | Candidate spoken street-name fallback; check the current dataset schema and terms before integration. |
+| Basel sights and transit orientation | Basel-Stadt, [Geoinformation / MapBS](https://www.bs.ch/en/node/28629) | Official MapBS description mentions sights and tram stops; it does not establish that a feature is visible, familiar, accessible, or suitable for a particular route. |
+| Construction and barriers | [Dataset 100335 metadata](https://data.bs.ch/api/explore/v2.1/catalog/datasets/100335) | Inspected metadata/schema has no geometry or structured pedestrian-closure field. A construction record alone cannot prove a walking route is blocked or passable. |
