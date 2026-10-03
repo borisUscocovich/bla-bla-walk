@@ -14,7 +14,7 @@ Owner: unassigned
 Needs: nothing
 Files: docs/SOURCES.md
 Done when: the team can identify one usable source for each required demo layer, or an explicitly synthetic fallback, with exact dataset URLs, licences, coverage, coordinate systems, timestamps, and attribution requirements recorded.
-Notes: prioritise Basel-Stadt Geoportal daytime PET (`HumanbioklimSituation`) as recommended in [the source register](SOURCES.md). Verify the actual endpoint/download, dataset licence, delivered resolution, units or class ranges, missing-data encoding, and a usable numeric sampling/query method. Distinguish the 2019 analysis baseline from the 2030 projection and record model scenario time separately from publication and retrieval times. If only a rendered map or no usable values are available, record that limitation and use a labelled synthetic fallback.
+Notes: use the prioritized sources in [the source register](SOURCES.md) first wherever they fulfil a need, and prioritise Basel-Stadt Geoportal daytime PET (`HumanbioklimSituation`) for the heat layer. Verify the actual endpoint/download, dataset licence, delivered resolution, units or class ranges, missing-data encoding, and a usable numeric sampling/query method. Distinguish the 2019 analysis baseline from the 2030 projection and record model scenario time separately from publication and retrieval times. If only a rendered map or no usable values are available, record that limitation and use a labelled synthetic fallback.
 
 #### T2 Agree the example and route rules
 
@@ -51,7 +51,7 @@ Owner: unassigned
 Needs: T1
 Files: data adapters, data fixtures, adapter tests, docs/SOURCES.md
 Done when: at least one verified dataset appears in the demo with source and freshness labels; failed requests fall back visibly to sample data. Coordinate conversions, when needed, pass a known reference example.
-Notes: attempt the verified Basel daytime PET integration first. Sampling must preserve numeric values or documented class ranges and distinguish missing cells from low heat stress. Display the model scenario and data provenance; use a labelled synthetic PET fallback if access cannot be verified.
+Notes: attempt the verified Basel daytime PET integration first and use the prioritized sources in [the source register](SOURCES.md) for other layers whenever they meet the need. Sampling must preserve numeric values or documented class ranges and distinguish missing cells from low heat stress. Display the model scenario and data provenance; use a labelled synthetic PET fallback if access cannot be verified.
 
 #### T5 Implement route comparison rules
 
