@@ -20,7 +20,7 @@ People who are more affected by heat, including older adults, children, pregnant
 Use one small Basel demonstration area and a fixed pair of route alternatives, with clearly labelled sample data where sources have not been verified.
 
 1. Choose a sample start and a cooler destination.
-2. See two walking alternatives on a map, with distance and available shade, water, and obstacle information.
+2. See two walking alternatives on a map, with distance, modelled daytime heat stress (PET), water, and obstacle information; use labelled synthetic PET if data access is not verified.
 3. Compare the tradeoffs and see why one route is suggested under the demonstrated rules.
 4. Inspect source labels, update times, missing information, and the demo's limitations.
 
@@ -29,6 +29,8 @@ The proposal demonstrates route comparison before attempting city-wide route gen
 ## Data and components
 
 The [source register](SOURCES.md) is the home for candidate providers, availability checks, licences, and attribution. No dataset has been downloaded or validated as part of this documentation update.
+
+Recommend Basel-Stadt Geoportal daytime PET for the initial heat comparison, pending T0's endpoint, licence, and data-access checks. The source register documents the evidence that PET includes shade effects, its 14:00 summer scenario, and its limitations. Compare routes within that scenario; do not apply another assumed shade cooling adjustment to PET. Time-specific shadow modelling is deferred, and PET aggregation rules still need team agreement in T2.
 
 Expected components are a map and route-comparison screen, data adapters, and route evaluation rules. The foundation task will choose the stack and define a single shared interface for locations, route segments, observations, timestamps, and missing-data states. Data adapters must handle coordinate systems explicitly, including LV95 to WGS84 conversion when required by a source.
 
@@ -43,6 +45,8 @@ Readable text, touch-friendly controls, non-colour-only explanations, and keyboa
 ## Deferred ideas
 
 These remain in the backlog for scope review: live weather alerts, public transport alternatives, community reports of closures or fountain outages, phone-call guidance, kiosk mode, cold/ice/heavy-rain routing, volunteer matching, errands or rides, smartwatch monitoring, and on-device language models.
+
+Arbitrary departure-time shade simulation also remains deferred; the proposed initial PET comparison does not support live or time-specific heat estimates.
 
 The phone channel is an important accessibility goal from the meeting, but its service flow, operations, and technical approach are not decided. Volunteer features likewise require a separate operational design before a pilot.
 
