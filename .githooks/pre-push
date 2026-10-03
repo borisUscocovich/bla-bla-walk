@@ -1,2 +1,4 @@
 #!/bin/sh
-exec bash "$(git rev-parse --show-toplevel)/scripts/hack-guard.sh" --push
+ROOT="$(git rev-parse --show-toplevel)"
+cd "$ROOT" || exit 1
+exec bash scripts/hack-guard.sh --push
