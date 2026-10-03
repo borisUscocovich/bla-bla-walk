@@ -62,7 +62,9 @@ Use the sources in this list first whenever they fulfil the project's needs. Pre
 
 ## T0 basemap request checkpoint — 2026-10-03
 
-The advertised `VS_Vektorstadtplan_grau` WMTS tile at zoom 16, row 22900, column 34149 returned HTTP 200 and a nonblank 256 × 256 PNG showing central Basel. The request included `Origin: http://localhost:5173`; the response returned `Access-Control-Allow-Origin: *` and `Cache-Control: max-age=86400`. This establishes a successful tile request and compatible image CORS headers; browser rendering is still untested. Exact request, checksum, extent and zoom evidence live in [the source manifest](../data/source-manifest.json).
+The advertised `VS_Vektorstadtplan_grau` WMTS tile at zoom 16, row 22900, column 34149 returned HTTP 200 and a nonblank 256 × 256 PNG showing central Basel. The request included `Origin: http://localhost:5173`; the response returned `Access-Control-Allow-Origin: *` and `Cache-Control: max-age=86400`. This establishes a successful tile request and compatible image CORS headers; application embedding is still untested. Exact request, checksum, extent and zoom evidence live in [the source manifest](../data/source-manifest.json).
+
+Follow-up: the same PNG rendered successfully in the Codex in-app browser. This is a direct image check, not an OpenLayers integration check. The [official geoservices page](https://www.bs.ch/en/node/28694) describes free WMTS use in GIS/websites; no numeric request quota was found on that page. VSBS's STAC item advertises vector download assets, but does not explicitly associate the grey WMTS layer with those assets. Keep that layer-to-licence mapping pending.
 
 [VSBS STAC metadata](https://api.geo.bs.ch/stac/v1/collections/VSBS) identifies CC-BY-4.0. The layer is a candidate match to this vector-city-map dataset; confirm its exact mapping and notices plus the WMTS usage policy before full admission. Retain attribution **Geodaten Kanton Basel-Stadt**. The response's tile modification time is not a verified underlying survey/update date. A centre tile does not establish city-wide coverage. This checkpoint does not complete T0 or admit the geometry pipeline.
 
@@ -133,6 +135,16 @@ The team requested shade for the current time alongside two-route comparison. Th
 - Proposed serving approach for confirmed city-wide coverage: preprocess geometry once into reusable tiles; compute requested viewports and route corridors on demand rather than every city cell per request; calculate/cache shade for time buckets (tentatively five minutes, accuracy/latency to benchmark). Preserve requested time, effective calculation time, geometry version and resolution. Do not imply exact instantaneous results or measured cooling. Keep clouds as separately labelled weather context, never erase geometry shadows based on a coarse forecast.
 
 City-wide discovery is not complete: the four-item bounding-box queries above only establish example asset availability. T0 must follow pagination, select appropriate versions and establish boundary/occluder coverage, including any surrounding areas outside Switzerland. Unsupported border geometry must remain unknown.
+
+## T0 raster download checkpoint — 2026-10-03
+
+Two actual OGD GeoTIFF assets for tile `2610-1266` downloaded successfully: swissSURFACE3D Raster nominal year 2023 and swissALTI3D nominal year 2019. Both SHA-256 hashes match the STAC multihash values. A bounded surface request returned HTTP 206 and precisely 16,384 bytes. These are production OGD assets, not the product pages' test-only samples. [Swisstopo terms](https://www.swisstopo.admin.ch/en/faq-free-geodata) permit reuse with **© swisstopo** attribution.
+
+Both files contain 2000 × 2000 float32 cells, 0.5 m resolution, matching LV95/EPSG:2056 grid bounds and NoData `-9999`. The inspected tile has no NoData cells. Product documentation identifies LN02 heights in metres; asset identifiers include vertical EPSG:5728, but the inspected GeoTIFF keys do not explicitly encode a vertical CRS. Preserve the documented reference rather than assuming all rasters advertise it internally. See [surface product details](https://www.swisstopo.admin.ch/de/hoehenmodell-swisssurface3d-raster) and [terrain product details](https://www.swisstopo.admin.ch/de/hoehenmodell-swissalti3d).
+
+The surface/terrain pair uses different nominal years. Direct subtraction found 5,608 of 4,000,000 cells with surface more than 1 m below terrain (about 0.14%; minimum difference −8.56 m). This identifies a scene-consistency issue requiring investigation; it does not prove its cause. Do not silently clamp these cells or interpret them as verified ground-level shade. Nominal January 1 catalog dates are not exact survey dates.
+
+Single-file local decode measurements were about 0.12 s and 0.07 s using bundled Pillow/NumPy. The compressed pair totals 29,106,348 bytes; two decoded arrays total 32,000,000 bytes before masks, decoder buffers and other overhead. These are one-run sample observations, not shadow latency or a full-city estimate. Exact hashes, requests, timings, method and limitations are in [the source manifest](../data/source-manifest.json). City inventory, other sample environments, processing benchmarks and acceptance budgets remain open.
 
 ## Selected implementation tools — documentation checked 2026-10-03
 

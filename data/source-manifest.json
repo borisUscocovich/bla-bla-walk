@@ -14,9 +14,20 @@
       "tile_url_template": "https://wmts.geo.bs.ch/mapcache/wmts/1.0.0/VS_Vektorstadtplan_grau/default/3857/{TileMatrix}/{TileRow}/{TileCol}.png",
       "crs": "EPSG:3857",
       "format": "image/png",
-      "tile_size_pixels": [256, 256],
-      "advertised_zoom_levels": [0, 17],
-      "advertised_bbox_wgs84": [7.544814498, 47.508699688, 7.704595246, 47.607375471],
+      "tile_size_pixels": [
+        256,
+        256
+      ],
+      "advertised_zoom_levels": [
+        0,
+        17
+      ],
+      "advertised_bbox_wgs84": [
+        7.544814498,
+        47.508699688,
+        7.704595246,
+        47.607375471
+      ],
       "candidate_license": "CC-BY-4.0",
       "attribution": "Geodaten Kanton Basel-Stadt",
       "verification": {
@@ -30,14 +41,161 @@
         "request_origin": "http://localhost:5173",
         "access_control_allow_origin": "*",
         "visual_check": "Nonblank labelled map around Mittlere Rheinbruecke and Marktplatz in central Basel",
-        "transformation": "WGS84 reference point 7.5886,47.5596 converted to Web Mercator tile indices at zoom 16; downloaded PNG unchanged"
+        "transformation": "WGS84 reference point 7.5886,47.5596 converted to Web Mercator tile indices at zoom 16; downloaded PNG unchanged",
+        "browser_check": "Direct PNG rendered in Codex in-app browser; application layer integration remains untested"
       },
       "remaining_checks": [
         "Confirm exact WMTS layer-to-VSBS dataset mapping and applicable notices",
-        "Confirm service usage policy and limits",
-        "Verify browser rendering and representative edge coverage",
+        "Verify application embedding and representative edge coverage",
         "Distinguish tile modification time from underlying survey/update time"
+      ],
+      "service_policy_url": "https://www.bs.ch/en/node/28694",
+      "service_policy_finding": "Official WMTS page permits free GIS/web use; no numeric request quota found on inspected page"
+    },
+    {
+      "id": "swisstopo-surface-sample",
+      "status": "sample_download_verified_city_admission_pending",
+      "checked_at": "2026-10-03T11:22:59.996854+00:00",
+      "provider": "swisstopo",
+      "item_id": "swisssurface3d-raster_2023_2610-1266",
+      "asset_url": "https://data.geo.admin.ch/ch.swisstopo.swisssurface3d-raster/swisssurface3d-raster_2023_2610-1266/swisssurface3d-raster_2023_2610-1266_0.5_2056_5728.tif",
+      "catalog_item_url": "https://data.geo.admin.ch/api/stac/v1/collections/ch.swisstopo.swisssurface3d-raster/items/swisssurface3d-raster_2023_2610-1266",
+      "terms_url": "https://www.swisstopo.admin.ch/en/faq-free-geodata",
+      "permission": "Swiss federal OGD terms; free reuse for all purposes with attribution",
+      "attribution": "© swisstopo",
+      "crs": "EPSG:2056",
+      "vertical_reference": "LN02, EPSG:5728 from asset identifier and product documentation; GeoTIFF keys do not encode vertical CRS",
+      "horizontal_units": "metres",
+      "height_units": "metres, product documentation",
+      "nominal_item_datetime": "2023-01-01T00:00:00Z",
+      "asset_updated": "2025-03-13T09:33:50.661919Z",
+      "grid": {
+        "shape": [
+          2000,
+          2000
+        ],
+        "resolution_metres": 0.5,
+        "bounds_epsg2056": [
+          2610000,
+          1266000,
+          2611000,
+          1267000
+        ],
+        "dtype": "float32",
+        "nodata": -9999,
+        "nodata_cells": 0,
+        "compression": "LZW",
+        "internal_tile_pixels": [
+          512,
+          512
+        ]
+      },
+      "verification": {
+        "http_status": 200,
+        "bytes": 13337851,
+        "sha256": "7e2f118c72b6b3813a0342fcc276b5842f894673be913d7a37e64d353dc01d03",
+        "catalog_checksum_matches": true,
+        "download_seconds": 3.982865,
+        "local_full_decode_seconds": 0.12036049999915122,
+        "decoded_array_bytes": 16000000,
+        "min_height_metres": 260.8999938964844,
+        "max_height_metres": 340.1199951171875,
+        "range_request": {
+          "http_status": 206,
+          "requested_bytes": [
+            0,
+            16383
+          ],
+          "received_bytes": 16384,
+          "content_range": "bytes 0-16383/13337851"
+        }
+      },
+      "remaining_checks": [
+        "Complete versioned buffered city inventory and missing/cross-border coverage",
+        "Inspect vegetation, tall-building and boundary samples",
+        "Resolve nominal survey mismatch and negative surface-minus-terrain cells",
+        "Benchmark actual shadow processing and agree latency/memory budgets"
+      ]
+    },
+    {
+      "id": "swisstopo-terrain-sample",
+      "status": "sample_download_verified_city_admission_pending",
+      "checked_at": "2026-10-03T11:22:59.996854+00:00",
+      "provider": "swisstopo",
+      "item_id": "swissalti3d_2019_2610-1266",
+      "asset_url": "https://data.geo.admin.ch/ch.swisstopo.swissalti3d/swissalti3d_2019_2610-1266/swissalti3d_2019_2610-1266_0.5_2056_5728.tif",
+      "catalog_item_url": "https://data.geo.admin.ch/api/stac/v1/collections/ch.swisstopo.swissalti3d/items/swissalti3d_2019_2610-1266",
+      "terms_url": "https://www.swisstopo.admin.ch/en/faq-free-geodata",
+      "permission": "Swiss federal OGD terms; free reuse for all purposes with attribution",
+      "attribution": "© swisstopo",
+      "crs": "EPSG:2056",
+      "vertical_reference": "LN02, EPSG:5728 from asset identifier and product documentation; GeoTIFF keys do not encode vertical CRS",
+      "horizontal_units": "metres",
+      "height_units": "metres, product documentation",
+      "nominal_item_datetime": "2019-01-01T00:00:00Z",
+      "asset_updated": "2025-01-15T03:48:12.158214Z",
+      "grid": {
+        "shape": [
+          2000,
+          2000
+        ],
+        "resolution_metres": 0.5,
+        "bounds_epsg2056": [
+          2610000,
+          1266000,
+          2611000,
+          1267000
+        ],
+        "dtype": "float32",
+        "nodata": -9999,
+        "nodata_cells": 0,
+        "compression": "LZW",
+        "internal_tile_pixels": [
+          128,
+          128
+        ]
+      },
+      "verification": {
+        "http_status": 200,
+        "bytes": 15768497,
+        "sha256": "7076c1589bd3c686fafd10b3fc8ca737786da20bf0931fbe3717ca7ae7ed479b",
+        "catalog_checksum_matches": true,
+        "download_seconds": 5.8115479,
+        "local_full_decode_seconds": 0.06983310000032361,
+        "decoded_array_bytes": 16000000,
+        "min_height_metres": 260.5256042480469,
+        "max_height_metres": 282.4234619140625
+      },
+      "remaining_checks": [
+        "Complete versioned buffered city inventory and missing/cross-border coverage",
+        "Inspect vegetation, tall-building and boundary samples",
+        "Resolve nominal survey mismatch and negative surface-minus-terrain cells",
+        "Benchmark actual shadow processing and agree latency/memory budgets"
       ]
     }
-  ]
+  ],
+  "raster_pair_checkpoint": {
+    "tile": "2610-1266",
+    "same_grid": true,
+    "nominal_years": {
+      "surface": 2023,
+      "terrain": 2019
+    },
+    "comparison": {
+      "comparison": "surface_minus_terrain",
+      "valid_cells": 4000000,
+      "negative_below_minus_1m": 5608,
+      "min": -8.556884765625,
+      "max": 59.49224853515625,
+      "median": 2.368865966796875,
+      "note": "Different nominal survey years; no alignment or scene-consistency acceptance implied"
+    },
+    "method": "Full local TIFF decode via bundled Pillow/NumPy; float32 arrays; exclude nonfinite/-9999 cells; subtract terrain from surface without resampling or clamping. One timing per file, without controlled cache or hardware benchmarking.",
+    "storage": {
+      "compressed_pair_bytes": 29106348,
+      "two_float32_arrays_bytes": 32000000,
+      "one_float32_array_and_two_inputs_bytes": 48000000
+    },
+    "limits": "Array sizes exclude decoder buffers, masks, temporary copies and runtime overhead. Local decode time is not shadow-processing latency. One tile cannot support a full-city workload estimate."
+  }
 }
