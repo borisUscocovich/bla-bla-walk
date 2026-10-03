@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "id": "basel-vector-grey-wmts",
+      "status": "request_verified_admission_pending",
+      "checked_at": "2026-10-03T11:12:26Z",
+      "provider": "Kanton Basel-Stadt",
+      "dataset_candidate": "VSBS",
+      "metadata_url": "https://api.geo.bs.ch/stac/v1/collections/VSBS",
+      "capabilities_url": "https://wmts.geo.bs.ch/EPSG/3857/1.0.0/WMTSCapabilities.xml",
+      "layer": "VS_Vektorstadtplan_grau",
+      "tile_matrix_set": "3857_17",
+      "tile_url_template": "https://wmts.geo.bs.ch/mapcache/wmts/1.0.0/VS_Vektorstadtplan_grau/default/3857/{TileMatrix}/{TileRow}/{TileCol}.png",
+      "crs": "EPSG:3857",
+      "format": "image/png",
+      "tile_size_pixels": [256, 256],
+      "advertised_zoom_levels": [0, 17],
+      "advertised_bbox_wgs84": [7.544814498, 47.508699688, 7.704595246, 47.607375471],
+      "candidate_license": "CC-BY-4.0",
+      "attribution": "Geodaten Kanton Basel-Stadt",
+      "verification": {
+        "request_url": "https://wmts.geo.bs.ch/mapcache/wmts/1.0.0/VS_Vektorstadtplan_grau/default/3857/16/22900/34149.png",
+        "http_status": 200,
+        "content_type": "image/png",
+        "bytes": 20218,
+        "sha256": "c3cb16aea03d8771fb49dc9bfaf97b797436196af7839d4d6262570874ec04bd",
+        "last_modified": "2026-08-24T07:22:18Z",
+        "cache_max_age_seconds": 86400,
+        "request_origin": "http://localhost:5173",
+        "access_control_allow_origin": "*",
+        "visual_check": "Nonblank labelled map around Mittlere Rheinbruecke and Marktplatz in central Basel",
+        "transformation": "WGS84 reference point 7.5886,47.5596 converted to Web Mercator tile indices at zoom 16; downloaded PNG unchanged"
+      },
+      "remaining_checks": [
+        "Confirm exact WMTS layer-to-VSBS dataset mapping and applicable notices",
+        "Confirm service usage policy and limits",
+        "Verify browser rendering and representative edge coverage",
+        "Distinguish tile modification time from underlying survey/update time"
+      ]
+    }
+  ]
+}

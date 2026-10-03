@@ -60,6 +60,12 @@ Use the sources in this list first whenever they fulfil the project's needs. Pre
 | swissSURFACE3D Raster | Surface model at 0.5 m including buildings and trees, for calculating shade. | [swisstopo swissSURFACE3D Raster](https://www.swisstopo.admin.ch/de/hoehenmodell-swisssurface3d-raster) | Check current access, licence, attribution and dataset coverage before use. |
 | OpenStreetMap via Overpass | Parks (`leisure=park`), benches (`amenity=bench`), pharmacies, public toilets and streets, queryable by area. | [Swiss Overpass API](https://overpass.osm.ch/) · [Overpass Turbo](https://overpass-turbo.osm.ch) · [OSM bench tag](https://wiki.openstreetmap.org/wiki/Tag:amenity%3Dbench) · [OSM park tag](https://wiki.openstreetmap.org/wiki/Tag:leisure%3Dpark) | OpenStreetMap data is under ODbL 1.0; follow attribution and applicable share-alike requirements. Coverage and optional details such as backrests, wheelchair access or covering vary; verify important stops. |
 
+## T0 basemap request checkpoint — 2026-10-03
+
+The advertised `VS_Vektorstadtplan_grau` WMTS tile at zoom 16, row 22900, column 34149 returned HTTP 200 and a nonblank 256 × 256 PNG showing central Basel. The request included `Origin: http://localhost:5173`; the response returned `Access-Control-Allow-Origin: *` and `Cache-Control: max-age=86400`. This establishes a successful tile request and compatible image CORS headers; browser rendering is still untested. Exact request, checksum, extent and zoom evidence live in [the source manifest](../data/source-manifest.json).
+
+[VSBS STAC metadata](https://api.geo.bs.ch/stac/v1/collections/VSBS) identifies CC-BY-4.0. The layer is a candidate match to this vector-city-map dataset; confirm its exact mapping and notices plus the WMTS usage policy before full admission. Retain attribution **Geodaten Kanton Basel-Stadt**. The response's tile modification time is not a verified underlying survey/update date. A centre tile does not establish city-wide coverage. This checkpoint does not complete T0 or admit the geometry pipeline.
+
 ## Historical heat scenario: Basel-Stadt Geoportal daytime PET
 
 Documentation checked: 2026-10-03. PET is a candidate historical context layer, not the live-temperature foundation. Numeric access and dataset-specific open licensing still need verification; no application integration exists.
