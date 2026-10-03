@@ -1,1 +1,1 @@
-"""Adapters for admitted external data sources."""
+"""Adapters that turn checked source data into canonical map layers."""
