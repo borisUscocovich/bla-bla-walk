@@ -43,8 +43,8 @@
         "browser_check": "Direct PNG rendered in Codex in-app browser; application layer integration remains untested"
       },
       "remaining_checks": [
-        "T1 must verify OpenLayers embedding and boundary views; browser PNG and CORS already verified",
-        "Tile modification time is not underlying survey date; cache and monitor service errors"
+        "T1 verifies OpenLayers embedding and boundary views; tile freshness remains distinct from survey date",
+        "Cache and monitor service errors"
       ],
       "service_policy_url": "https://www.bs.ch/en/node/28694",
       "service_policy_finding": "Official WMTS page permits free GIS/web use; no numeric request quota found on inspected page",
@@ -193,6 +193,42 @@
         "air_temperature_celsius": 19.39,
         "query_url": "https://data.bs.ch/api/explore/v2.1/catalog/datasets/100009/records?where=name_original%3D%270020F940%27&order_by=dates_max_date+desc&limit=1",
         "station_catalog_time_matches": true
+      },
+      "adapter": {
+        "module": "backend/bla_bla_walk/adapters/temperature.py",
+        "join_key": "name_original",
+        "station_dataset": "100082",
+        "selected_fields": [
+          "name_original",
+          "name_custom",
+          "dates_max_date",
+          "meta_airtemp",
+          "coords"
+        ],
+        "station_page_size": 100,
+        "observation_export_url": "https://data.bs.ch/api/explore/v2.1/catalog/datasets/100009/exports/json",
+        "observation_export_limit": 5000,
+        "maximum_recent_records": 5000,
+        "station_limit": 250,
+        "maximum_station_pages": 3,
+        "live_export_check": {
+          "checked_at": "2026-10-03",
+          "http_status": 200,
+          "records": 5000,
+          "bytes": 903383
+        },
+        "refresh_seconds": 3600,
+        "stale_after_seconds": 5400,
+        "request_timeout_seconds": 8,
+        "maximum_response_bytes": 2000000,
+        "map_bounds_wgs84": [
+          7.544814498,
+          47.508699688,
+          7.704595246,
+          47.607375471
+        ],
+        "fixture": "data/fixtures/observations.json",
+        "integrated_into_api": false
       }
     },
     {
@@ -211,7 +247,8 @@
       ],
       "cadence": "irregular",
       "limitations": "Join name_original; regional coverage includes sites outside canton.",
-      "verification": "HTTP 200 metadata and bounded record sample; never imported personal/contact/media fields"
+      "verification": "HTTP 200 metadata and bounded record sample; never imported personal/contact/media fields",
+      "adapter_join_key": "name_original"
     },
     {
       "id": "iwb-fountains",
@@ -229,7 +266,25 @@
       ],
       "cadence": "irregular",
       "limitations": "Names and coordinates only; no structured drinking/operational status. Exclude photos/media/unsanitised free text.",
-      "verification": "HTTP 200 metadata and bounded record sample; never imported personal/contact/media fields"
+      "verification": "HTTP 200 metadata and bounded record sample; never imported personal/contact/media fields",
+      "adapter": {
+        "module": "backend/bla_bla_walk/adapters/fountains.py",
+        "selected_fields": [
+          "name",
+          "geo_point_2d"
+        ],
+        "record_limit": 350,
+        "page_size": 100,
+        "maximum_pages": 4,
+        "refresh_seconds": 86400,
+        "request_timeout_seconds": 8,
+        "maximum_response_bytes": 2000000,
+        "fixture": "data/fixtures/fountains.json",
+        "drinking_water_status": "unknown",
+        "operational_status": "unknown",
+        "access": "unknown",
+        "integrated_into_api": false
+      }
     },
     {
       "id": "managed-trees",
@@ -794,5 +849,11 @@
     "T8: all cell validity/seams, nominal survey mismatch, real terrain relief/occluder reach, rendered alignment and missing buffer provenance",
     "T10: full halo kernel, solar conventions/independent reference, canopy/bridge receivers, cold/warm p95 budgets and concurrent worker memory",
     "Optional transit stays excluded until static BVB/BLT stops and live operator coverage verified; cool room hours remain manual/dated; canopy header is verified, but full raster value/class semantics remain to validate."
-  ]
+  ],
+  "t4_adapter_runtime": {
+    "last_good_cache": "process memory",
+    "failed_refresh_retry_seconds": 60,
+    "cold_source_failure": "missing layer",
+    "api_integration_owner": "T6"
+  }
 }
