@@ -1,0 +1,17 @@
+[project]
+name = "bla-bla-walk"
+version = "0.1.0"
+requires-python = ">=3.12"
+description = "Basel walking map API and later geometry worker"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+markers = ["browser: Chromium interaction checks"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]

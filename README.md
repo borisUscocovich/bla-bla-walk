@@ -10,7 +10,7 @@ The shortest walk may involve exposed streets, few places to rest, or inaccessib
 
 ## Project status
 
-This repository contains the source audit, revised design and build plan. The agreed direction is a layered Basel map, city-wide calculated shade and two-route comparison with adjustable recommendation weights. The selected stack is TypeScript/OpenLayers plus a Python API/worker. There is no runnable application yet.
+The T1 foundation runs a real Basel basemap with two labelled synthetic layers. Toggle temperature and fountain samples, inspect provenance and timestamps, and see stale, missing and unknown states. FastAPI serves both the browser modules and API; no JavaScript package manager or build step is required. Live observations, calculated shade and route comparison are later tasks. See [T1's handoff](handoff/t1-map-foundation.md) for validation and review state.
 
 - [Design and demo proposal](docs/design.md)
 - [Build tasks and acceptance checks](docs/plan.md)
@@ -22,9 +22,39 @@ This repository contains the source audit, revised design and build plan. The ag
 - [Team collaboration guide](TEAMWORK.md)
 - [Original meeting notes](notes/261002-001_Meeting_Heat-_and_Safety-Aware_Routing_Map_App-Summary.md) (historical source; see the design and plan for current proposals)
 
-## How to run it
+## Run locally
 
-Run and test commands will be added and verified when the foundation task creates the application. For participant setup, use [HACKAMRHEIN.md](HACKAMRHEIN.md).
+Use Python 3.12 or newer. From the repository root:
+
+```sh
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r backend/requirements.txt
+python scripts/fetch_browser_assets.py
+python backend/export_contract.py
+python -m uvicorn bla_bla_walk.main:app --app-dir backend --host 127.0.0.1 --port 8000
+```
+
+Open [the local map](http://127.0.0.1:8000). On Windows, use `python -m venv .venv` and run the Activate.ps1 script inside the environment's Scripts folder in PowerShell instead of the first two commands.
+
+The browser assets are pinned by URL and SHA-256 in [config/browser-assets.json](config/browser-assets.json). The setup script downloads them into an ignored local cache, verifies their bytes and retains licence notices. Subsequent setup runs reuse matching files. An internet connection is needed for initial setup and real basemap tiles; fixture data and browser libraries are served locally.
+
+## Development checks
+
+Activate the environment and run from the repository root:
+
+```sh
+python backend/export_contract.py
+python -m pytest -c backend/pyproject.toml backend/tests
+python -m ruff check backend scripts/fetch_browser_assets.py scripts/format_browser.py
+python -m ruff format --check backend scripts/fetch_browser_assets.py scripts/format_browser.py
+python scripts/format_browser.py --check
+bash scripts/doc-check.sh --strict
+```
+
+Browser checks use an installed Chromium; set `CHROMIUM_PATH` to its executable if it is not on PATH. These checks skip with a visible reason when no browser is available. Run only the API/model checks with `python -m pytest -c backend/pyproject.toml backend/tests -m 'not browser'`. No Node.js installation is required.
+
+Format Python with `python -m ruff format backend scripts/fetch_browser_assets.py scripts/format_browser.py` and browser code with `python scripts/format_browser.py`. [backend/bla_bla_walk/interfaces.py](backend/bla_bla_walk/interfaces.py) is canonical; regeneration writes [src/interfaces.ts](src/interfaces.ts) for editor/JSDoc use and the browser validation schema. Include a decision line with model changes and never edit generated files by hand. Consumer ownership is listed in [ROADMAP.md](ROADMAP.md); the map modules now use .js filenames.
 
 ## Data sources
 
@@ -32,7 +62,7 @@ See [docs/SOURCES.md](docs/SOURCES.md).
 
 ## Limits
 
-Official metadata, licences and small data samples have been inspected; integration, route validation and shade accuracy/performance remain untested. No safety claims have been validated. This is a planning-stage prototype, not a navigation or emergency service. Proposed scope, unknowns, and demo fallback are documented in the [design brief](docs/design.md).
+Only the basemap is provider data in this foundation. Overlay locations and values are invented, visibly labelled fixtures. No safety claims, route validation or shade accuracy/performance have been established. This prototype is not a navigation or emergency service. Scope, unknowns, and demo fallback are documented in the [design brief](docs/design.md).
 
 ## Team
 
