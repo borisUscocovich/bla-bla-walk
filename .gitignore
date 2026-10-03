@@ -96,3 +96,6 @@ temp/
 
 # ---------- Package managers ----------
 .pixi/
+
+# Generated T8 raster assets and preparation outputs stay local.
+data/geometry/

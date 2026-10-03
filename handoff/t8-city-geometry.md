@@ -4,7 +4,8 @@ Status: in progress · Slot E / @Derriick · Branch: feat/t8-city-geometry
 
 ## State
 
-First checkpoint complete: inventory validation and deterministic preparation plan.
+Inventory checkpoint pushed as 08114c9. Continued with checksum-verified, atomic
+asset acquisition; raster decoding awaits dependency approval.
 T1 and T0 are merged into the starting main (9fa2a35). No existing T8 ownership
 was found in handoff/. No raster is prepared yet; T8's acceptance check is pending.
 
@@ -20,7 +21,12 @@ was found in handoff/. No raster is prepared yet; T8's acceptance check is pendi
 - Estimate compressed assets plus native float32 arrays against the existing
   8 GiB budget. Remaining space excludes derived grids, metadata and temporary
   files; one pair uses 32,000,000 array bytes before masks/decoder overhead.
-- No new packages installed or shared wire contracts changed.
+- Added geometry_assets.py: bounded streaming, full checksum/size verification,
+  verified-file reuse, atomic replacement and cleanup on failure. Synthetic
+  download tests cover corrupted local files and truncated remote responses.
+- Generated data/geometry/ outputs are ignored before any raster download.
+- No new packages installed or shared wire contracts changed. Rasterio, NumPy,
+  Pillow and PyProj are all absent. Approval question for Rasterio/NumPy is pending.
 
 ## Reproduce this checkpoint
 
@@ -40,7 +46,7 @@ resume; its resume field specifies the requirement for the next checkpoint.
 
 ## Checks
 
-12 geometry tests pass, including incorrect origin/grid/CRS/NoData, receiver gaps,
+14 geometry tests pass, including incorrect origin/grid/CRS/NoData, receiver gaps,
 duplicate tiles, summary drift, survey flags, budget overflow and fixture drift.
 Python formatting and lint pass; all 36 non-browser backend tests pass (3 browser
 checks deselected). doc-check and diff whitespace checks pass. The sandboxed
@@ -50,12 +56,12 @@ Privacy guard must pass before this checkpoint is committed and pushed.
 
 ## Next
 
-1. Choose a raster decoder with the user before installing software. Rasterio
+1. Await the pending Rasterio/NumPy dependency approval before installation. Rasterio
    is a candidate for georeferenced window reads; NumPy arrays are another new
    dependency. Declare and pin approved packages in the project manifests.
-2. Build checksum-verified streaming downloads and atomic per-tile outputs,
-   with a versioned resumable manifest. Keep generated rasters local under
-   `data/geometry/` with an ignore rule before creating them. No local T0 sample
+2. Wire the checked asset downloader into the batch CLI and add atomic prepared
+   outputs with a versioned resumable manifest. Generated rasters stay local under
+   ignored `data/geometry/`. No local T0 sample
    assets were present in this clone; the inventory contains their pinned URLs.
 3. Decode the four T0 scenes first: urban centre, vegetation, tall building,
    border (see source manifest). Measure memory and disk against T0 budgets.

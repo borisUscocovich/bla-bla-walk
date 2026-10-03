@@ -94,3 +94,62 @@ def test_budget_rejected(inputs):
 def test_metadata_fixture_matches_pinned_inventory(inputs):
     fixture = json.loads((ROOT / "data/fixtures/geometry-metadata.json").read_text())
     assert fixture == plan_preparation(*inputs)
+
+
+def test_asset_resume_verifies_content_and_replaces_corruption(tmp_path, monkeypatch):
+    import hashlib
+    import io
+
+    from bla_bla_walk.geometry_assets import acquire_asset
+
+    content = b"synthetic raster download"
+    asset = {
+        "asset_url": "https://data.geo.admin.ch/synthetic.tif",
+        "catalog_checksum": "1220" + hashlib.sha256(content).hexdigest(),
+        "header": {"asset_bytes": len(content)},
+    }
+    calls = []
+
+    def download(*args, **kwargs):
+        calls.append(True)
+        response = io.BytesIO(content)
+        response.status = 200
+        return response
+
+    monkeypatch.setattr("urllib.request.urlopen", download)
+    target = acquire_asset(asset, tmp_path)
+    assert target.read_bytes() == content
+    assert acquire_asset(asset, tmp_path) == target
+    assert len(calls) == 1
+    target.write_bytes(b"x" * len(content))
+    acquire_asset(asset, tmp_path)
+    assert len(calls) == 2
+    assert target.read_bytes() == content
+    assert not list(tmp_path.glob("*.part"))
+
+
+def test_failed_download_preserves_existing_file(tmp_path, monkeypatch):
+    import hashlib
+    import io
+
+    from bla_bla_walk.geometry_assets import acquire_asset
+
+    content = b"expected raster"
+    asset = {
+        "asset_url": "https://data.geo.admin.ch/synthetic.tif",
+        "catalog_checksum": "1220" + hashlib.sha256(content).hexdigest(),
+        "header": {"asset_bytes": len(content)},
+    }
+    target = tmp_path / "synthetic.tif"
+    target.write_bytes(b"previous file")
+
+    def download(*args, **kwargs):
+        response = io.BytesIO(b"truncated")
+        response.status = 200
+        return response
+
+    monkeypatch.setattr("urllib.request.urlopen", download)
+    with pytest.raises(ValueError, match="checksum mismatch"):
+        acquire_asset(asset, tmp_path)
+    assert target.read_bytes() == b"previous file"
+    assert not list(tmp_path.glob("*.part"))
