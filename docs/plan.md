@@ -16,6 +16,8 @@ Files: docs/SOURCES.md
 Done when: the team can identify one usable source for each required demo layer, or an explicitly synthetic fallback, with exact dataset URLs, licences, coverage, coordinate systems, timestamps, and attribution requirements recorded.
 Notes: use the prioritized sources in [the source register](SOURCES.md) first wherever they fulfil a need, and prioritise Basel-Stadt Geoportal daytime PET (`HumanbioklimSituation`) for the heat layer. Verify the actual endpoint/download, dataset licence, delivered resolution, units or class ranges, missing-data encoding, and a usable numeric sampling/query method. Distinguish the 2019 analysis baseline from the 2030 projection and record model scenario time separately from publication and retrieval times. If only a rendered map or no usable values are available, record that limitation and use a labelled synthetic fallback.
 
+For construction obstacles, inspect dataset 100335 (`Baustellen`) for usable geometry, dates, closure semantics, update frequency, coverage and reuse terms. Treat worksite presence as an obstacle only when the data confirms that the route segment is blocked; otherwise show it as a caution or unknown.
+
 #### T2 Agree the example and route rules
 
 Owner: unassigned
