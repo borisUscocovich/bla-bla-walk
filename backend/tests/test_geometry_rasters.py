@@ -5,9 +5,8 @@ from pathlib import Path
 import numpy as np
 import pytest
 import rasterio
-from rasterio.transform import from_origin
-
 from bla_bla_walk.geometry_rasters import decode_native, pair_evidence
+from rasterio.transform import from_origin
 
 
 def write_raster(path: Path, values, *, origin=(2610000, 1266002), mask=None):

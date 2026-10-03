@@ -45,6 +45,17 @@ flowchart LR
   T5 --> T6
   T3 --> T6
   T6 --> T7
+  subgraph Transit["Proposed · transit after source admission"]
+    T18["T18 · Verify transit feasibility"]
+    T19["T19 · Transit-assisted candidate"]
+  end
+  T0 -. "source follow-up" .-> T18
+  T2 -. "routing proposal" .-> T18
+  T18 --> T19
+  T1 --> T19
+  T9 --> T19
+  T19 -. "if admitted" .-> T5
+  T19 -. "if admitted" .-> T6
   subgraph Phone["M4 · Phone access simulation"]
     T11["T11 · Validate landmarks and barriers"]
     T12["T12 · Agree spoken instruction format"]
@@ -77,6 +88,8 @@ flowchart LR
 
 **After the core demo:** M4 phone access is the first extension, followed by M5 shared reports. These tasks are not included in the 48–83 hour core estimate. Live telephony, actual map delivery, and volunteer accompaniment need a later re-plan.
 
+The conditional transit proposal uses T18/T19; these tasks also remain outside the core effort estimate. Walking comparison stays usable if transit sources are not admitted. Offline transit needs saved timetable/candidate evidence or an explicit unavailable state, as defined in T6.
+
 **Effort key:** S = 1–2 h, M = 3–6 h, L = 5+ h; task-specific hour ranges are shown on each card. Dashed arrows mean the plan calls for relevant T0 data checks, rather than making all source research a blanket prerequisite.
 
 ## Estimated development time
@@ -101,8 +114,8 @@ These are role slots, not assigned people. Replace A–F with contributors' GitH
 | **B · Domain rules and evaluation** | T2 demo walk, cases, and comparison rules; T5 route metrics and explanation | `docs/routing-rules.md`, `data/scenarios.json`, `backend/bla_bla_walk/evaluation.py`, `config/routing-rules.json`, evaluation tests | 8–13 h |
 | **C · Map design and walking routes** | T3 screen design; T9 checked route alternatives | `docs/style-guide.md`, `backend/bla_bla_walk/adapters/routes.py`, `data/routes/demo.geojson`, route tests | 5–9 h |
 | **D · Map foundation and screen** | T1 runnable foundation; screen portion of T6 | Python/browser asset setup, `src/map.js`, `src/main.js`, comparison screen, `src/theme.css`, generated client declarations/schema, API and browser checks | 7–11 h |
-| **E · Geometry and shade calculation** | T8 reusable city geometry; calculation portion of T10 | `backend/bla_bla_walk/geometry.py`, `backend/bla_bla_walk/shade.py`, geometry and shade calculation tests, generated geometry metadata | 12–22 h |
-| **F · Integration and demo** | Cache/API and performance portion of T10; end-to-end wiring and journey checks in T6; T7 demo and fallback | `backend/bla_bla_walk/shade_cache.py`, API/UI wiring after foundation, journey checks, `README.md`, `docs/demo.md` | 7–13 h |
+| **E · Geometry and shade calculation** | T8 reusable city geometry; calculation portion of T10 | `backend/bla_bla_walk/geometry.py`, `backend/bla_bla_walk/shade.py`, `scripts/prepare_geometry.py`, `config/geometry.json`, geometry/shade tests and preparation evidence | 12–22 h |
+| **F · Integration and demo** | Cache/API and performance portion of T10; end-to-end wiring and journey checks in T6; T7 demo and fallback | `backend/bla_bla_walk/shade_cache.py`, `backend/bla_bla_walk/snapshots.py`, offline basemap preparation/verification scripts, API/UI wiring, journey checks, `README.md`, `docs/demo.md` | 7–13 h |
 
 ### One repository, parallel work
 

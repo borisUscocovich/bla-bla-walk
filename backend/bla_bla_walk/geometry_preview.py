@@ -17,6 +17,7 @@ from rasterio.warp import (
     transform_geom,
 )
 
+from bla_bla_walk.geometry import geometry_settings, read_heights
 from bla_bla_walk.geometry_rasters import valid_cells
 
 PALETTE = np.array(
@@ -33,18 +34,22 @@ PALETTE = np.array(
 )
 
 
-def preview_raster(root: Path, tile: str, directory: Path) -> list[float]:
+def preview_raster(root: Path, tile: str, directory: Path, cell: float) -> list[float]:
     """Reproject native relative-height evidence for display only, not calculation."""
     east, north = map(int, tile.split("-"))
     bounds = [east * 1000, north * 1000, (east + 1) * 1000, (north + 1) * 1000]
-    s = np.load(root / "arrays" / f"{tile}-surface.npy", allow_pickle=False)
-    t = np.load(root / "arrays" / f"{tile}-terrain.npy", allow_pickle=False)
+    if cell == 0.5:
+        s = np.load(root / "arrays" / f"{tile}-surface.npy", allow_pickle=False)
+        t = np.load(root / "arrays" / f"{tile}-terrain.npy", allow_pickle=False)
+    else:
+        s = read_heights(root / f"{tile}-surface.tif").filled(-9999)
+        t = read_heights(root / f"{tile}-terrain.tif").filled(-9999)
     valid = valid_cells(s) & valid_cells(t)
     relative = s - t
     relative[~valid] = -9999
-    src_transform = from_origin(bounds[0], bounds[3], 0.5, 0.5)
+    src_transform = from_origin(bounds[0], bounds[3], cell, cell)
     dst_transform, width, height = calculate_default_transform(
-        "EPSG:2056", "EPSG:3857", 2000, 2000, *bounds, resolution=2
+        "EPSG:2056", "EPSG:3857", s.shape[1], s.shape[0], *bounds, resolution=2
     )
     warped = np.full((height, width), -9999, dtype="float32")
     reproject(
@@ -81,7 +86,9 @@ def preview_raster(root: Path, tile: str, directory: Path) -> list[float]:
     ]
 
 
-def render_preview(root: Path, inventory: dict, directory: Path) -> dict:
+def render_preview(
+    root: Path, inventory: dict, directory: Path, cell: float = 1
+) -> dict:
     """Build a local review page with centre/boundary pixel-centre references."""
     directory.mkdir(parents=True, exist_ok=True)
     # Centre: the same location used by the T1 map. Boundary: pinned western vertex.
@@ -95,12 +102,12 @@ def render_preview(root: Path, inventory: dict, directory: Path) -> dict:
         east, north = ref["point_epsg2056"]
         tile = f"{int(east // 1000)}-{int(north // 1000)}"
         ref["tile"] = tile
-        ref["image_extent_3857"] = preview_raster(root, tile, directory)
-        row = int(((int(north // 1000) + 1) * 1000 - north) / 0.5)
-        col = int((east - int(east // 1000) * 1000) / 0.5)
+        ref["image_extent_3857"] = preview_raster(root, tile, directory, cell)
+        row = int(((int(north // 1000) + 1) * 1000 - north) / cell)
+        col = int((east - int(east // 1000) * 1000) / cell)
         pixel = [
-            int(east // 1000) * 1000 + (col + 0.5) * 0.5,
-            (int(north // 1000) + 1) * 1000 - (row + 0.5) * 0.5,
+            int(east // 1000) * 1000 + (col + 0.5) * cell,
+            (int(north // 1000) + 1) * 1000 - (row + 0.5) * cell,
         ]
         ref["native_pixel_row_column"] = [row, col]
         ref["point_to_native_centre_m"] = math.dist([east, north], pixel)
@@ -117,7 +124,11 @@ def render_preview(root: Path, inventory: dict, directory: Path) -> dict:
     # Copy the existing checksum-pinned browser assets; no new browser dependency.
     shutil.copyfile(Path(".cache/browser-assets/ol.js"), directory / "ol.js")
     shutil.copyfile(Path(".cache/browser-assets/ol.css"), directory / "ol.css")
-    payload = {"references": references, "boundary": boundary_3857}
+    payload = {
+        "references": references,
+        "boundary": boundary_3857,
+        "resolution_m": cell,
+    }
     (directory / "alignment.json").write_text(json.dumps(payload, indent=2) + "\n")
     (directory / "index.html").write_text(_html(payload))
     return payload
@@ -129,7 +140,7 @@ def _html(payload):
 <title>T8 native geometry alignment</title><link rel="stylesheet" href="ol.css">
 <style>body{font:16px sans-serif;margin:20px}section{display:inline-block;width:48%}
 .map{height:620px}button{padding:8px}#status{white-space:pre-wrap}</style>
-<h1>T8 geometry alignment</h1><p>Native surface minus terrain, display reprojected.
+<h1>T8 geometry alignment</h1><p>Scaled surface minus terrain, display reprojected.
 Grey: negative differences. Teal: increasing relative height. This is not shade.
 © swisstopo · Basemap: Geodaten Kanton Basel-Stadt, CC BY 4.0.</p>
 <button id="toggle">Toggle geometry overlay</button><p id="status"></p>
@@ -166,7 +177,7 @@ for (const ref of evidence.references) {
  view:new ol.View({center:ref.point_3857,zoom:17,maxZoom:19})});
  window.maps.push(map);
  document.getElementById('status').textContent += ref.id+': '+ref.tile+
- '; reference to native pixel centre '+
+ '; reference to grid cell centre '+
  ref.point_to_native_centre_m.toFixed(3)+' m\\n';
 }
 document.getElementById('toggle').onclick=()=>{window.overlayLayers.forEach(l=>l.setVisible(!l.getVisible()))};
@@ -177,10 +188,16 @@ document.getElementById('toggle').onclick=()=>{window.overlayLayers.forEach(l=>l
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=Path("data/geometry"))
+    parser.add_argument(
+        "--native", action="store_true", help="Display native validation references"
+    )
     parser.add_argument("--output", type=Path, default=Path(".hack/t8/alignment"))
     args = parser.parse_args()
     render_preview(
-        args.root, json.loads(Path("data/tile-inventory.json").read_text()), args.output
+        args.root,
+        json.loads(Path("data/tile-inventory.json").read_text()),
+        args.output,
+        0.5 if args.native else geometry_settings()["cell_size_metres"],
     )
     print(f"Alignment preview: {args.output / 'index.html'}")
 

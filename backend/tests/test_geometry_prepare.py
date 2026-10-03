@@ -6,10 +6,9 @@ from pathlib import Path
 import numpy as np
 import pytest
 import rasterio
-from rasterio.transform import from_origin
-
 from bla_bla_walk.geometry_prepare import prepare_batch
 from bla_bla_walk.geometry_rasters import file_digest
+from rasterio.transform import from_origin
 
 ROOT = Path(__file__).resolve().parents[2]
 

@@ -20,8 +20,9 @@ if TYPE_CHECKING:
 class GeometryWindow:
     """A bounded native tile window for T10, never a shade coverage promise.
 
-    Arrays are north-first at 0.5m in EPSG:2056; heights are LN02/EPSG:5728
-    metres. Missing elevations are -9999. Valid masks describe samples only.
+    Arrays are north-first in EPSG:2056; heights are scaled LN02/EPSG:5728
+    metres. Resolution/height step distinguish compact production from native
+    reference arrays. Missing elevations are -9999. Masks describe samples only.
     Mixed survey years and negative relative heights retain scene uncertainty.
     Receiver elevations on bridges, under canopy or in tunnels are unknown.
     Halo/ray reach must be checked separately; stream neighbouring tiles.
@@ -37,6 +38,7 @@ class GeometryWindow:
     nominal_year_mismatch: bool | None
     resolution_m: float = 0.5
     vertical_reference: str = "LN02 / EPSG:5728"
+    height_step_m: float = 0.0
 
 
 Longitude = Annotated[float, Field(ge=-180, le=180)]
@@ -136,3 +138,4 @@ class MapSnapshot(ContractModel):
 
     generated_at: AwareDatetime
     layers: list[MapLayer]
+    mode: Literal["fixture", "online", "offline"] = "fixture"

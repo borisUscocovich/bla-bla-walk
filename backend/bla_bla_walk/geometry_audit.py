@@ -7,8 +7,14 @@ from pathlib import Path
 
 import numpy as np
 
-from bla_bla_walk.geometry import GIB, MIB, PIPELINE_VERSION, PRODUCTS, plan_preparation
 from bla_bla_walk.geometry_assets import verified_asset
+from bla_bla_walk.geometry_inventory import (
+    GIB,
+    MIB,
+    PIPELINE_VERSION,
+    PRODUCTS,
+    plan_preparation,
+)
 from bla_bla_walk.geometry_prepare import process_peak_bytes, storage_bytes, write_json
 from bla_bla_walk.geometry_rasters import pair_evidence, valid_cells
 
@@ -214,7 +220,9 @@ def audit_prepared(inventory: dict, manifest: dict, root: Path) -> dict:
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--root", type=Path, default=Path("data/geometry"))
+    parser.add_argument(
+        "--root", type=Path, default=Path("data/geometry/native-reference")
+    )
     parser.add_argument("--output", type=Path, default=Path(".hack/t8/acceptance.json"))
     args = parser.parse_args()
     try:

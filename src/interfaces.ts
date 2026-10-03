@@ -65,4 +65,5 @@ export interface ShadeMetadata {
 export interface MapSnapshot {
   generated_at: string;
   layers: (MapLayer)[];
+  mode?: "fixture" | "online" | "offline";
 }

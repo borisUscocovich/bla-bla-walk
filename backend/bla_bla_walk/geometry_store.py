@@ -6,9 +6,11 @@ from pathlib import Path
 from typing import Literal
 
 import numpy as np
+from rasterio.windows import Window
 
-from bla_bla_walk.geometry import PIPELINE_VERSION
+from bla_bla_walk.geometry import geometry_settings, read_heights
 from bla_bla_walk.geometry_assets import verified_asset
+from bla_bla_walk.geometry_inventory import PIPELINE_VERSION
 from bla_bla_walk.geometry_rasters import NODATA, valid_cells
 from bla_bla_walk.interfaces import GeometryWindow
 
@@ -123,4 +125,86 @@ class GeometryStore:
             terrain_valid,
             receiver_valid,
             record.get("nominal_year_mismatch"),
+        )
+
+
+class CompactGeometryStore:
+    """Read configured compact production tiles in metres, never raw int16 codes."""
+
+    def __init__(self, root: Path):
+        self.root = root
+        self.ledger = json.loads((root / "manifest.json").read_text())
+        self.settings = geometry_settings()
+        if self.ledger.get("settings") != self.settings:
+            raise ValueError("Compact geometry settings differ from configuration")
+        self.version = self.ledger["preparation_version"]
+
+    def read_window(
+        self,
+        tile: str,
+        rows: tuple[int, int] = (0, 1000),
+        columns: tuple[int, int] = (0, 1000),
+        *,
+        receiver_kind: Literal["ground", "bridge", "canopy", "tunnel"] = "ground",
+    ) -> GeometryWindow:
+        """Bound reads to one configured tile; preserve masks and receiver unknowns."""
+        if receiver_kind not in ("ground", "bridge", "canopy", "tunnel"):
+            raise ValueError("Unknown receiver kind")
+        cell = self.settings["cell_size_metres"]
+        size = int(1000 / cell)
+        if not all(0 <= start < stop <= size for start, stop in (rows, columns)):
+            raise ValueError("Window must lie inside one compact tile")
+        east, north = map(int, tile.split("-"))
+        if tile != f"{east}-{north}":
+            raise ValueError("Invalid tile identifier")
+        arrays, mismatch = {}, None
+        for product in ("surface", "terrain"):
+            record = self.ledger["assets"].get(f"{tile}-{product}")
+            if record is None:
+                values = np.full(
+                    (rows[1] - rows[0], columns[1] - columns[0]),
+                    NODATA,
+                    dtype="float32",
+                )
+            else:
+                path = self.root / f"{tile}-{product}.tif"
+                if record["preparation_version"] != self.version or not verified_asset(
+                    path, record["bytes"], record["sha256"]
+                ):
+                    raise ValueError(
+                        "Compact geometry checksum/version failed; resume preparation"
+                    )
+                values = read_heights(
+                    path,
+                    Window(
+                        columns[0], rows[0], columns[1] - columns[0], rows[1] - rows[0]
+                    ),
+                ).filled(NODATA)
+                mismatch = record["survey_year_mismatch"]
+            arrays[product] = values
+        surface_valid, terrain_valid = (
+            valid_cells(arrays[p]) for p in ("surface", "terrain")
+        )
+        receiver_valid = (
+            surface_valid & terrain_valid & (arrays["surface"] >= arrays["terrain"])
+        )
+        if receiver_kind != "ground":
+            receiver_valid[:] = False
+        bounds = (
+            east * 1000 + columns[0] * cell,
+            (north + 1) * 1000 - rows[1] * cell,
+            east * 1000 + columns[1] * cell,
+            (north + 1) * 1000 - rows[0] * cell,
+        )
+        return GeometryWindow(
+            self.version,
+            bounds,
+            arrays["surface"],
+            arrays["terrain"],
+            surface_valid,
+            terrain_valid,
+            receiver_valid,
+            mismatch,
+            resolution_m=cell,
+            height_step_m=self.settings["height_step_metres"],
         )

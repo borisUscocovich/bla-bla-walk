@@ -42,6 +42,7 @@
   --sidebar: 22rem;
   --map-height: 36rem;
   --map-min-height: 26rem;
+  --feature-list-height: 16rem;
   --text-label: 0.875rem;
   --text-body: 1rem;
   --text-heading: 1.75rem;
@@ -164,6 +165,11 @@ button:disabled {
   width: 100%;
   margin-top: var(--space-sm);
   text-align: left;
+}
+
+#features {
+  max-height: var(--feature-list-height);
+  overflow-y: auto;
 }
 
 :focus-visible {

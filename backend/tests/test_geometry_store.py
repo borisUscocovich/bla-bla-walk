@@ -4,8 +4,7 @@ import json
 
 import numpy as np
 import pytest
-
-from bla_bla_walk.geometry import PIPELINE_VERSION
+from bla_bla_walk.geometry_inventory import PIPELINE_VERSION
 from bla_bla_walk.geometry_prepare import process_peak_bytes
 from bla_bla_walk.geometry_rasters import file_digest
 from bla_bla_walk.geometry_store import GeometryStore, halo_supported

@@ -1,7 +1,6 @@
 """Seams use correct north-first edges and preserve unknown cells."""
 
 import numpy as np
-
 from bla_bla_walk.geometry_audit import seam_evidence
 
 

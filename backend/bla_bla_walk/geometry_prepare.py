@@ -11,8 +11,14 @@ from pathlib import Path
 
 from rasterio.errors import RasterioError
 
-from bla_bla_walk.geometry import GIB, MIB, PIPELINE_VERSION, PRODUCTS, plan_preparation
 from bla_bla_walk.geometry_assets import acquire_asset, verified_asset
+from bla_bla_walk.geometry_inventory import (
+    GIB,
+    MIB,
+    PIPELINE_VERSION,
+    PRODUCTS,
+    plan_preparation,
+)
 from bla_bla_walk.geometry_rasters import decode_native, pair_evidence
 
 
@@ -179,7 +185,9 @@ def main() -> None:
     parser.add_argument(
         "--manifest", type=Path, default=Path("data/source-manifest.json")
     )
-    parser.add_argument("--root", type=Path, default=Path("data/geometry"))
+    parser.add_argument(
+        "--root", type=Path, default=Path("data/geometry/native-reference")
+    )
     parser.add_argument(
         "--batch", choices=("scenes", "receivers", "buffer", "all"), default="scenes"
     )

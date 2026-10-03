@@ -1,7 +1,7 @@
 # Walking and multimodal comparison rules
 
 T2 baseline specification for T9, T5 and T6. The multimodal section is a
-follow-up proposal for T14, T15, T5 and T6. The demo walk and defaults were
+follow-up proposal for T18, T19, T5 and T6. The demo walk and defaults were
 selected under the user's 2026-10-03 instruction to continue until T2 is
 finished. The workaround is an explicit demo assumption, not a participant
 interview. All numerical examples are synthetic; no shade cooling degrees or

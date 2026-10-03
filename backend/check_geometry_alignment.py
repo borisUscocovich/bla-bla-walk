@@ -8,9 +8,8 @@ import shutil
 import threading
 from pathlib import Path
 
+from bla_bla_walk.geometry_store import CompactGeometryStore
 from playwright.sync_api import sync_playwright
-
-from bla_bla_walk.geometry_store import GeometryStore
 
 
 def main():
@@ -67,10 +66,9 @@ def main():
             # Basel basemap, northeast of the centre reference (Mittlere Brücke).
             # This identifies a test location, never a verified deck elevation.
             root = Path("data/geometry")
-            ledger = json.loads((root / "manifest.json").read_text())
-            store = GeometryStore(root, ledger["inventory_sha256"])
+            store = CompactGeometryStore(root)
             bridge = store.read_window(
-                "2611-1267", (589, 591), (709, 711), receiver_kind="bridge"
+                "2611-1267", (294, 296), (354, 356), receiver_kind="bridge"
             )
             assert not bridge.receiver_valid.any()
             report["bridge_check"] = {

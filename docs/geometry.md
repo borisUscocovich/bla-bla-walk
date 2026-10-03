@@ -1,6 +1,51 @@
-# Native city geometry
+# City geometry acceptance and native references
 
-T8 prepares the pinned [T0 inventory](../data/tile-inventory.json) using the
+Production uses the merged compact configuration in `config/geometry.json`:
+1m horizontal cells, 2m height steps, native 0.5m surface max aggregation and
+native 2m terrain nearest repetition. `geometry.py` retains that preparation
+and scaled reader. `geometry_inventory.py` contains the native inventory planner;
+the native pipeline supplies independent aggregation/alignment diagnostics.
+
+```sh
+.venv/bin/python scripts/prepare_geometry.py --workers 2
+PYTHONPATH=backend .venv/bin/python -m bla_bla_walk.geometry_compact_audit
+```
+
+The audit needs prepared native references as described below. If they already
+exist, add `--native-reference data/geometry/native-reference` to the compact
+preparation command to borrow matching full-checksum-verified surface TIFFs.
+Borrowed files remain intact. Native 2m terrain is resolved and checksum-pinned
+separately; native 0.5m terrain is not substituted. Compact and native manifests
+occupy different directories. Production deployments need the compact files;
+the larger reference cache is optional diagnostic evidence.
+
+All 225 configured compact assets and all 65 receiver pairs were verified in
+this clone. Five compact surface cells remain unknown, with the same 53 catalogue
+gaps. Every surface tile retains native 2×2 block maxima within 1m rounding error;
+all terrain 2×2 repeated cells match. Scaling is applied before subtraction.
+397 product seams were measured; 105 seam gaps remain unknown. Mixed surveys,
+negative differences and a 388m maximum relative-height anomaly remain explicit.
+Quantization can hide small negative differences or move shadow edges; neither
+native nor compact data certifies scene consistency or walking shade. T10 must
+validate these effects before using them as known route evidence.
+
+Compact rasters occupy 35.36 MiB (compression bytes can differ across runtimes).
+This clone, including native references and metadata, occupies 6.47 GiB, below
+8 GiB. The full compact/native audit peaked around 155 MiB. Two independent
+compact-window workers peaked at 126.57/126.64 MiB (sum about 253.21 MiB), below
+768 MiB each and 1536 MiB combined. Full halo/shade/API performance is T10 work.
+Compact centre/boundary reference offsets are 0.484m/0.105m and
+0.600px/0.131px. Live-basemap screenshots were inspected; bridge walking
+elevation remains unknown despite valid scaled raster samples.
+
+T10 uses `CompactGeometryStore` and the canonical `GeometryWindow`, whose
+resolution and height step identify the representation. `GeometryStore` reads
+native diagnostic windows only. Missing/corrupt files and unsupported receiver
+types retain explicit masks, never inferred ground height on bridges.
+
+## Native diagnostic evidence
+
+T8 retains full-resolution validation references for the pinned [T0 inventory](../data/tile-inventory.json) using the
 sources, attribution and engineering envelope in [SOURCES.md](SOURCES.md).
 The [recorded acceptance metadata](../data/fixtures/geometry-metadata.json)
 describes verified local output; it does not distribute rasters or certify live
@@ -28,7 +73,7 @@ Corruption is repaired; inventory or pipeline version changes invalidate resume.
 Each failed tile is recorded explicitly, while verified neighbours survive.
 
 Generated raw TIFFs, native arrays and the versioned manifest live under ignored
-`data/geometry/`; `--root` selects another local output directory. One process
+`data/geometry/native-reference/`; `--root` selects another local output directory. One process
 holds a POSIX writer lock. Normal failures remove temporary files. A killed
 process can leave an abandoned `.part` file; remove it only after the writer
 has stopped. Temporary output never becomes a prepared array. Preparation and
@@ -86,6 +131,9 @@ PYTHONPATH=backend .venv/bin/python -m bla_bla_walk.geometry_preview
 .venv/bin/python backend/check_geometry_memory.py
 ```
 
+The default preview/memory commands above now check compact production geometry.
+For native display, add `--native --root data/geometry/native-reference` to the
+preview command. The remaining figures below describe the earlier native run.
 Preview requires the existing pinned OpenLayers assets; the browser check needs
 installed Chromium and access to the admitted Basel basemap. Local PNGs, review
 page and screenshots are written under `.hack/t8/alignment/`. Display reprojection
