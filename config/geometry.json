@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "cell_size_metres": 1,
+  "height_step_metres": 2,
+  "terrain_source_cell_size_metres": 2,
+  "surface_resampling": "max",
+  "terrain_resampling": "nearest",
+  "nodata_code": -32768,
+  "horizontal_crs": "EPSG:2056",
+  "vertical_reference": "LN02 / EPSG:5728",
+  "geometry_directory": "data/geometry"
+}

@@ -102,17 +102,60 @@ def test_layers_provenance_and_missing_states(browser_page):
     assert not errors
 
 
+def test_offline_mode_uses_only_same_origin_requests(browser_page):
+    if (
+        not (ROOT / ".cache/basemap/manifest.json").exists()
+        or not (ROOT / ".cache/provider-snapshot.json").exists()
+    ):
+        pytest.skip("Offline browser check needs scripts/prepare_offline.py downloads")
+    page = browser_page
+    external = []
+    page.on(
+        "request",
+        lambda request: (
+            external.append(request.url) if request.url.startswith("https://") else None
+        ),
+    )
+    page.goto(page.base_url + "/?mode=offline")
+    page.wait_for_function(
+        "document.querySelector('#basemap-status').textContent"
+        ".includes('downloaded offline')"
+    )
+    page.wait_for_function(
+        "document.querySelector('#api-status').textContent.includes('Saved data API')"
+    )
+    page.locator("#features button").first.click()
+    assert "Provider data" in page.locator("#details").inner_text()
+    assert "Offline mode" in page.locator("#mode-notice").inner_text()
+    assert (
+        page.locator("#features").bounding_box()["height"]
+        < page.viewport_size["height"]
+    )
+    assert not external
+
+
+def test_missing_offline_tiles_explain_saved_coverage(browser_page):
+    page = browser_page
+    page.route("**/tiles/**", lambda route: route.fulfill(status=404))
+    page.goto(page.base_url + "/?mode=offline")
+    page.wait_for_function(
+        "document.querySelector('#basemap-status').textContent"
+        ".includes('not downloaded')"
+    )
+    page.unroute("**/tiles/**")
+
+
 def test_api_failure_and_recovery(browser_page):
     page = browser_page
     page.route(
-        "**/api/map", lambda route: route.fulfill(status=503, body="Unavailable")
+        "**/api/map**", lambda route: route.fulfill(status=503, body="Unavailable")
     )
     page.goto(page.base_url)
     page.wait_for_function(
         "document.querySelector('#api-status').textContent.includes('Layers missing')"
     )
     assert page.locator("#features button").count() == 0
-    page.unroute("**/api/map")
+    page.unroute("**/api/map**")
     page.get_by_role("button", name="Reload layers").click()
     page.wait_for_function(
         "document.querySelector('#api-status').textContent.includes('connected')"
@@ -130,6 +173,9 @@ def test_narrow_screen_and_browser_contract(browser_page):
       const {parseSnapshot} = await import('/src/api.js');
       const fixture = await (await fetch('/api/map')).json();
       parseSnapshot(fixture);
+      const older = structuredClone(fixture);
+      delete older.mode;
+      if (parseSnapshot(older).mode !== 'fixture') return false;
       const bad = structuredClone(fixture);
       bad.layers[0].features[0].geometry.coordinates = [181, 47];
       try { parseSnapshot(bad); return false; } catch { return true; }

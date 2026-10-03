@@ -75,6 +75,8 @@ Start T4 for Slot A. Use $hack-build. Follow TASK_START.md's shared metaprompt. 
 
 **Start:** after T1 merges. T0's boundary and inventory must also merge. **Model:** GPT-6.1 Sol. **Effort:** Medium.
 
+Read [the compact preparation handoff](handoff/data-compact-offline.md) first: ingestion and offline resources already exist. Continue the remaining T8 spatial/scene/bridge checks using the configured encoding; do not repeat source downloads when matching prepared files can be verified and reused.
+
 ```text
 Start T8 for Slot E. Use $hack-build. Follow TASK_START.md's shared metaprompt. Read T8 in docs/plan.md. Check T1 and T0 inventory first.
 ```

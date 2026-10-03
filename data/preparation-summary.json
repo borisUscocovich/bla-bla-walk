@@ -1,0 +1,311 @@
+{
+  "checked_at": "2026-10-03T14:07:23.978621+00:00",
+  "encoding_config": "config/geometry.json",
+  "geometry": {
+    "preparation_version": "24ad154a7892949493bb2865387ce18f35c44ed8c5130cb12dfb6fbc399cb568",
+    "inventory_sha256": "1b68962360a84b243cbe949b03cd67e49c6bb22a917dcd34f6f14fae7a8ee568",
+    "available_assets_prepared": {
+      "terrain": 96,
+      "surface": 129
+    },
+    "all_available_assets_prepared": true,
+    "source_download_bytes": {
+      "terrain": 102346349,
+      "surface": 1722456383
+    },
+    "prepared_raster_bytes": {
+      "terrain": 3796342,
+      "surface": 33856232
+    },
+    "prepared_raster_total_bytes": 37652574,
+    "manifest_bytes": 204707,
+    "unknown_cells_in_available_rasters": {
+      "terrain": 0,
+      "surface": 5
+    },
+    "missing_inventory_assets": [
+      {
+        "tile": "2607-1268",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2607-1269",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2607-1270",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2608-1270",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2608-1271",
+        "role": "occluder_buffer",
+        "kind": "surface"
+      },
+      {
+        "tile": "2608-1271",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2609-1270",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2609-1271",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2609-1272",
+        "role": "occluder_buffer",
+        "kind": "surface"
+      },
+      {
+        "tile": "2609-1272",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2610-1271",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2610-1272",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2611-1272",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2612-1271",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2612-1272",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2613-1271",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2613-1272",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2613-1273",
+        "role": "occluder_buffer",
+        "kind": "surface"
+      },
+      {
+        "tile": "2613-1273",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2614-1272",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2614-1273",
+        "role": "occluder_buffer",
+        "kind": "surface"
+      },
+      {
+        "tile": "2614-1273",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2615-1272",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2615-1273",
+        "role": "occluder_buffer",
+        "kind": "surface"
+      },
+      {
+        "tile": "2615-1273",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2616-1272",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2616-1273",
+        "role": "occluder_buffer",
+        "kind": "surface"
+      },
+      {
+        "tile": "2616-1273",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2617-1266",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2617-1267",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2617-1272",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2617-1273",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2618-1266",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2618-1267",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2618-1273",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2619-1266",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2619-1267",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2619-1268",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2619-1269",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2619-1270",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2619-1273",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2620-1266",
+        "role": "occluder_buffer",
+        "kind": "surface"
+      },
+      {
+        "tile": "2620-1266",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2620-1267",
+        "role": "occluder_buffer",
+        "kind": "surface"
+      },
+      {
+        "tile": "2620-1267",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2620-1268",
+        "role": "occluder_buffer",
+        "kind": "surface"
+      },
+      {
+        "tile": "2620-1268",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2620-1269",
+        "role": "occluder_buffer",
+        "kind": "surface"
+      },
+      {
+        "tile": "2620-1269",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2620-1270",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2620-1271",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2620-1272",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      },
+      {
+        "tile": "2620-1273",
+        "role": "occluder_buffer",
+        "kind": "terrain"
+      }
+    ],
+    "validation": "All output hashes, shapes, bounds, CRS, scales and NoData counts checked; this does not validate shade, bridges, scene consistency or survey alignment."
+  },
+  "basemap": {
+    "tiles_verified": 4418,
+    "image_bytes": 57026146,
+    "manifest_bytes": 634502,
+    "downloaded_at": "2026-10-03T13:54:26.136909+00:00",
+    "configuration": "config/basemap.json"
+  },
+  "provider_snapshot": {
+    "saved_at": "2026-10-03T14:06:21.371037+00:00",
+    "layers": {
+      "observations-meteoblue": 177,
+      "fountains-iwb": 305
+    },
+    "bytes": 509090,
+    "status": "Offline saved data; timestamps and unknowns retained, previously current entries stale"
+  }
+}

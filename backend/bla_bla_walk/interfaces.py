@@ -106,3 +106,4 @@ class MapSnapshot(ContractModel):
 
     generated_at: AwareDatetime
     layers: list[MapLayer]
+    mode: Literal["fixture", "online", "offline"] = "fixture"
