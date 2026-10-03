@@ -10,8 +10,10 @@ Based on [design](design.md). Draft: the team confirmed two-route comparison and
 Owner: unassigned
 Needs: nothing
 Files: docs/SOURCES.md, data/source-manifest.json, data/tile-inventory.json
-Done when: one basemap request and representative licensed raster downloads succeed; a pinned Basel boundary and full surface/terrain tile inventory record versions, units, NoData, terms and surrounding occluder coverage. Include urban centre, vegetation, tall-building and border samples. Identify mismatched surveys, missing tiles, cross-border gaps and service constraints. Measure sample processing cost and estimate full-city storage/workload; define an acceptance latency and memory budget before choosing execution approach.
-Notes: existing audit is a starting point, not completion. Accept IWB only within agreed noncommercial terms, omit photos. Verify tree licence notice. PET and forecasts are optional; they do not block the core map.
+Done when: one basemap request and representative licensed raster downloads succeed; a pinned Basel boundary and full surface/terrain tile inventory record versions, units, NoData, terms and surrounding occluder coverage. Include urban centre, vegetation, tall-building and border samples. Identify mismatched surveys, missing tiles, cross-border gaps and service constraints. Measure sample processing cost and estimate full-city storage/workload; define an acceptance latency and memory budget before building the full-city processing pipeline.
+Notes: existing audit is a starting point, not completion. Accept IWB only within agreed noncommercial terms, omit photos. Tree licence notice is inspected; verify feature access. PET and forecasts are optional; they do not block the core map.
+
+For construction obstacles, inspect dataset 100335 for usable geometry, dates, closure semantics, update frequency and coverage. A worksite is blocked only when authoritative data confirms it; otherwise display a caution or unknown.
 
 #### T2 Agree one walk and comparison rules
 Owner: unassigned

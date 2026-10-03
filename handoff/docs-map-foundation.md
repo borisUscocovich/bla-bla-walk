@@ -6,7 +6,7 @@ Status: done
 Improve the design and plan around a Basel map with prioritised data layers, current observations and defensible approximations, before application code.
 
 ## State
-Branch: docs/design. Source audit saved in docs/SOURCES.md; design and plan are revised drafts with a map foundation followed by geometry, time-dependent shade and route metrics. No implementation yet. Documentation checkpoints are saved locally; the agreed stack and scope are recorded, with domain defaults and feasibility checks left as explicit build prerequisites. PR publication is next. The team chose two-route comparison and requested current-time shade. The team confirmed shade across all Basel and a weighted route recommendation with editable weights, visible tradeoffs and manual choice; TypeScript/OpenLayers plus Python API/worker is selected; administrative boundary and measured performance remain pending.
+Branch: docs/design. Source audit saved in docs/SOURCES.md; design and plan are revised drafts with a map foundation followed by geometry, time-dependent shade and route metrics. No implementation yet. Documentation checkpoints are saved locally; the agreed stack and scope are recorded, with domain defaults and feasibility checks left as explicit build prerequisites. Branch is being updated with the latest main (construction-source addition); PR publication is next. The team chose two-route comparison and requested current-time shade. The team confirmed shade across all Basel and a weighted route recommendation with editable weights, visible tradeoffs and manual choice; TypeScript/OpenLayers plus Python API/worker is selected; administrative boundary and measured performance remain pending.
 
 ## Done
 - Official metadata and current small samples checked for temperature 100009; station metadata 100082 also checked (both CC BY 4.0).
@@ -24,3 +24,5 @@ Branch: docs/design. Source audit saved in docs/SOURCES.md; design and plan are 
 
 ## Resume prompt
 Continue hack-brainstorm on docs/design. Read docs/SOURCES.md and this handoff; finish agreed map-first design and task plan without application code. Keep live temperature, historical PET, forecasts and approximations distinct. Prefer unrestricted open data; dataset 100008 is explicitly accepted for noncommercial use with attribution and its restriction preserved.
+
+Construction source 100335 was checked after the team added it: CC BY 4.0, but no geometry or structured closure field in its schema. Preserve the team's construction preflight and avoid treating worksites as blocked routes without further evidence.
