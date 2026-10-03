@@ -1,6 +1,7 @@
-# Walk and comparison rules
+# Walking and multimodal comparison rules
 
-T2 domain specification for T9, T5 and T6. The demo walk and defaults were
+T2 baseline specification for T9, T5 and T6. The multimodal section is a
+follow-up proposal for T18, T19, T5 and T6. The demo walk and defaults were
 selected under the user's 2026-10-03 instruction to continue until T2 is
 finished. The workaround is an explicit demo assumption, not a participant
 interview. All numerical examples are synthetic; no shade cooling degrees or
@@ -28,6 +29,44 @@ authoritative, segment-specific closure evidence blocks a path. A caution does
 not itself establish a closure or prove that a path is open. Checked access is
 required independently. A shaded route or a mapped fountain also does not prove
 that water or shade will be available at the person's arrival time.
+
+## User-facing route choice proposal
+
+The intended journey is an older person going to a grocery store, such as a
+selected Migros. The person chooses the destination, then chooses between
+**Fastest overall** and **More shade**. Keep the route cards and final choice
+with the person. The current checked example remains Centralbahnplatz to
+Marktplatz; a specific Migros and its checked routes have not been selected.
+
+- **Fastest overall** compares eligible walking and transit candidates by
+  door-to-door duration. Include walking access and egress, waiting, riding,
+  transfers and planned stops. Do not estimate transit riding time using the
+  configured walking speed. If required time evidence is missing, label the
+  estimate incomplete and withhold a fastest recommendation.
+- **More shade** prioritizes measured shade on outdoor walking segments. Show
+  total duration, exposed and unknown metres, benches, water opportunities,
+  construction cautions and evidence status. Do not treat a transit ride as
+  measured shade. A transit candidate can be described as reducing outdoor
+  walking only when its walking legs are known and comparable. Time spent
+  waiting outdoors remains unknown unless stop shade or shelter is evidenced.
+- Offer a selectable **five-minute extra-time limit** for the shadier option.
+  This is a user preference, not a health threshold. The configured 30% distance
+  and 10-minute duration limits remain absolute prototype limits; the person's
+  selected limit can make them stricter.
+- A confirmed pedestrian closure remains ineligible in every mode. Unknown
+  access remains unverified. A construction caution is not a confirmed closure.
+  A confirmed stop closure or service cancellation makes that transit itinerary
+  ineligible. Transit stop access and service status need their own evidence.
+- Avoid the label **Safe route**. Show measured shade, known closures, stop
+  status and uncertainty. These data cannot establish overall or personal
+  safety.
+
+Public transport is not yet admitted for application use. T0 records that GTFS
+coverage and access, plus GTFS-RT alert access, still need verification. A
+verified timetable can support a **scheduled** estimate; it must not appear as
+live service status. Show live disruption information only after its source,
+coverage and freshness are verified. If admission fails, retain walking-only
+comparison and say transit data are unavailable.
 
 ## Defaults and adjustable assumptions
 

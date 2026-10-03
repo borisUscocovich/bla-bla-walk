@@ -45,6 +45,17 @@ flowchart LR
   T5 --> T6
   T3 --> T6
   T6 --> T7
+  subgraph Transit["Proposed · transit after source admission"]
+    T18["T18 · Verify transit feasibility"]
+    T19["T19 · Transit-assisted candidate"]
+  end
+  T0 -. "source follow-up" .-> T18
+  T2 -. "routing proposal" .-> T18
+  T18 --> T19
+  T1 --> T19
+  T9 --> T19
+  T19 -. "if admitted" .-> T5
+  T19 -. "if admitted" .-> T6
   subgraph Phone["M4 · Phone access simulation"]
     T11["T11 · Validate landmarks and barriers"]
     T12["T12 · Agree spoken instruction format"]
@@ -76,6 +87,8 @@ flowchart LR
 
 
 **After the core demo:** M4 phone access is the first extension, followed by M5 shared reports. These tasks are not included in the 48–83 hour core estimate. Live telephony, actual map delivery, and volunteer accompaniment need a later re-plan.
+
+The conditional transit proposal uses T18/T19; these tasks also remain outside the core effort estimate. Walking comparison stays usable if transit sources are not admitted. Offline transit needs saved timetable/candidate evidence or an explicit unavailable state, as defined in T6.
 
 **Effort key:** S = 1–2 h, M = 3–6 h, L = 5+ h; task-specific hour ranges are shown on each card. Dashed arrows mean the plan calls for relevant T0 data checks, rather than making all source research a blanket prerequisite.
 
